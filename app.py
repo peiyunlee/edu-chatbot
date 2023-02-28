@@ -2,6 +2,8 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from router import test, linebot
+from db import database
+
 
 app = FastAPI(
     title="EduChatbot API",
@@ -23,6 +25,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
+
+@app.on_event("shutdown")
+def shutdown_db_client():
+    database.client.close()
 
 if __name__ == "__main__":
     uvicorn.run("app:app",host="0.0.0.0", port=5000, reload=True)
