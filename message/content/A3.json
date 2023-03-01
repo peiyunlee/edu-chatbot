@@ -1,0 +1,22 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "我知道期中專題要做什麼了！",
+          "text": "我知道期中專題要做什麼了！"
+        },
+        "margin": "none",
+        "height": "sm",
+        "style": "primary",
+        "gravity": "center"
+      }
+    ],
+    "margin": "none"
+  }
+}

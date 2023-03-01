@@ -1,0 +1,265 @@
+{
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "任務成果回饋",
+            "color": "#1DB446",
+            "size": "lg",
+            "weight": "bold",
+            "align": "center",
+            "offsetBottom": "none",
+            "flex": 0
+          },
+          {
+            "type": "text",
+            "text": "ＸＸ任務",
+            "size": "lg",
+            "weight": "bold",
+            "align": "center",
+            "offsetBottom": "none",
+            "flex": 0,
+            "margin": "xl"
+          },
+          {
+            "type": "text",
+            "text": "負責人：李大明",
+            "size": "lg",
+            "weight": "bold",
+            "align": "center",
+            "offsetBottom": "none",
+            "flex": 0,
+            "margin": "xl",
+            "color": "#aaaaaa"
+          }
+        ],
+        "justifyContent": "center",
+        "alignItems": "center"
+      }
+    },
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "成員回饋",
+            "weight": "bold",
+            "color": "#1DB446",
+            "size": "sm"
+          },
+          {
+            "type": "text",
+            "text": "李二明",
+            "weight": "bold",
+            "size": "xxl",
+            "margin": "md"
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "有哪些地方你覺得可以修改？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "你有什麼建議呢？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "spacing": "none",
+            "contents": [
+              {
+                "type": "text",
+                "text": "你對該成果的滿意程度？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "8分 / 10分",
+                "size": "sm",
+                "color": "#555555",
+                "align": "end"
+              }
+            ]
+          }
+        ]
+      },
+      "styles": {
+        "footer": {
+          "separator": true
+        }
+      }
+    },
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "負責人",
+            "weight": "bold",
+            "color": "#1DB446",
+            "size": "sm"
+          },
+          {
+            "type": "text",
+            "text": "李大明",
+            "weight": "bold",
+            "size": "xxl",
+            "margin": "md"
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "遇到什麼困難？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "可以怎麼改善？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "spacing": "none",
+            "contents": [
+              {
+                "type": "text",
+                "text": "執行成果的滿意程度？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "8分 / 10分",
+                "size": "sm",
+                "color": "#555555",
+                "align": "end"
+              }
+            ]
+          }
+        ]
+      },
+      "styles": {
+        "footer": {
+          "separator": true
+        }
+      }
+    }
+  ]
+}

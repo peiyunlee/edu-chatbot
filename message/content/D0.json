@@ -1,0 +1,32 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "text",
+        "text": "新增「ＸＸＸ」任務。",
+        "weight": "regular",
+        "size": "md",
+        "contents": [
+          {
+            "type": "span",
+            "text": "新增「ＸＸＸ」任務。"
+          },
+          {
+            "type": "span",
+            "text": "請大家討論確認任務的負責人之後，點擊「我要認領」按鈕認領工作～",
+            "weight": "bold",
+            "color": "#1DB446"
+          },
+          {
+            "type": "span",
+            "text": "確保每個任務都有人執行喔！"
+          }
+        ],
+        "wrap": true
+      }
+    ]
+  }
+}

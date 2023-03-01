@@ -1,0 +1,39 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "size": "md",
+        "margin": "none",
+        "wrap": true,
+        "contents": [
+          {
+            "type": "span",
+            "text": "大家可以針對未完成的規範與團隊的回饋進行討論",
+            "color": "#1DB446",
+            "weight": "bold"
+          },
+          {
+            "type": "span",
+            "text": "，如果需要可以繼續新增任務完成作業喔！",
+            "weight": "regular"
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "繳交此階段作業",
+          "text": "繳交此階段作業"
+        },
+        "style": "primary",
+        "height": "sm",
+        "margin": "xl"
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "口頭報告",
+          "weight": "bold",
+          "size": "lg",
+          "margin": "sm",
+          "color": "#1DB446"
+        },
+        {
+          "type": "text",
+          "text": "包含企劃書與demo實作網站",
+          "size": "md",
+          "color": "#111111",
+          "align": "start",
+          "wrap": true,
+          "margin": "lg"
+        },
+        {
+          "type": "separator",
+          "margin": "xxl"
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "margin": "lg",
+          "contents": [
+            {
+              "type": "text",
+              "text": "繳交日期",
+              "size": "md",
+              "flex": 0,
+              "weight": "bold",
+              "align": "start",
+              "color": "#aaaaaa"
+            },
+            {
+              "type": "text",
+              "text": "2023/03/28",
+              "size": "md",
+              "color": "#aaaaaa",
+              "align": "end"
+            }
+          ]
+        }
+      ]
+    },
+    "styles": {
+      "footer": {
+        "separator": true
+      }
+    }
+  }

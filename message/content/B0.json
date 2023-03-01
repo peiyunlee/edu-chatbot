@@ -1,0 +1,32 @@
+{
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "horizontal",
+      "contents": [
+        {
+          "type": "text",
+          "text": "現在根據老師公布的作業規範，",
+          "weight": "regular",
+          "size": "md",
+          "contents": [
+            {
+              "type": "span",
+              "text": "現在根據老師公布的作業規範，"
+            },
+            {
+              "type": "span",
+              "text": "你們覺得完成此階段的作業需要進行哪些任務？",
+              "weight": "bold",
+              "color": "#1DB446"
+            },
+            {
+              "type": "span",
+              "text": "請點擊規劃任務按鈕進行計畫吧！"
+            }
+          ],
+          "wrap": true
+        }
+      ]
+    }
+  }

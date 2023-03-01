@@ -1,0 +1,33 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "size": "md",
+        "margin": "none",
+        "wrap": true,
+        "contents": [
+          {
+            "type": "span",
+            "text": "請於此貼上",
+            "weight": "regular"
+          },
+          {
+            "type": "span",
+            "text": "雲端word連結",
+            "weight": "bold",
+            "color": "#1DB446"
+          },
+          {
+            "type": "span",
+            "text": "繳交作業",
+            "weight": "regular"
+          }
+        ]
+      }
+    ]
+  }
+}

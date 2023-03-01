@@ -1,0 +1,41 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "ＸＸ 認領了「ＸＸＸ」任務！",
+        "color": "#1DB446",
+        "weight": "bold",
+        "style": "normal"
+      },
+      {
+        "type": "text",
+        "text": "hello, world",
+        "size": "md",
+        "margin": "xl",
+        "contents": [
+          {
+            "type": "span",
+            "text": "以下是團隊完成此階段的作業需要進行的任務，"
+          },
+          {
+            "type": "span",
+            "text": "但現在還有任務尚未被認領，請大家討論負責人之後",
+            "color": "#1DB446",
+            "weight": "bold"
+          },
+          {
+            "type": "span",
+            "text": "，點擊「我要認領」按鈕認領工作～",
+            "weight": "regular"
+          }
+        ],
+        "weight": "regular",
+        "wrap": true
+      }
+    ]
+  }
+}

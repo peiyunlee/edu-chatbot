@@ -1,0 +1,136 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "執行任務回報",
+        "weight": "bold",
+        "color": "#1DB446",
+        "size": "sm"
+      },
+      {
+        "type": "text",
+        "text": "ＸＸ任務",
+        "weight": "bold",
+        "size": "xxl",
+        "margin": "md"
+      },
+      {
+        "type": "text",
+        "text": "李大明",
+        "size": "xs",
+        "color": "#aaaaaa",
+        "wrap": true,
+        "margin": "sm"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "text",
+            "text": "進度",
+            "size": "sm",
+            "color": "#555555",
+            "flex": 0
+          },
+          {
+            "type": "text",
+            "text": "80%",
+            "size": "sm",
+            "color": "#111111",
+            "align": "end"
+          }
+        ],
+        "margin": "md"
+      },
+      {
+        "type": "separator",
+        "margin": "lg"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "lg",
+        "spacing": "md",
+        "contents": [
+          {
+            "type": "text",
+            "text": "遇到什麼困難？",
+            "size": "sm",
+            "color": "#555555",
+            "flex": 0,
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "我覺得....",
+            "size": "sm",
+            "color": "#555555",
+            "flex": 0
+          }
+        ]
+      },
+      {
+        "type": "separator",
+        "margin": "lg"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "lg",
+        "spacing": "md",
+        "contents": [
+          {
+            "type": "text",
+            "text": "可以怎麼改善？",
+            "size": "sm",
+            "color": "#555555",
+            "flex": 0,
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "我覺得....",
+            "size": "sm",
+            "color": "#555555",
+            "flex": 0
+          }
+        ]
+      },
+      {
+        "type": "separator",
+        "margin": "lg"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "margin": "lg",
+        "contents": [
+          {
+            "type": "text",
+            "text": "預計繳交日期",
+            "size": "xs",
+            "color": "#aaaaaa",
+            "flex": 0
+          },
+          {
+            "type": "text",
+            "text": "04/01",
+            "color": "#aaaaaa",
+            "size": "xs",
+            "align": "end"
+          }
+        ]
+      }
+    ]
+  },
+  "styles": {
+    "footer": {
+      "separator": true
+    }
+  }
+}

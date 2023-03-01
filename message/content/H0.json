@@ -1,0 +1,28 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "text",
+        "text": "記得點擊「執行任務」的按鈕",
+        "weight": "regular",
+        "size": "md",
+        "contents": [
+          {
+            "type": "span",
+            "text": "而當你執行任務的時候，"
+          },
+          {
+            "type": "span",
+            "text": "記得點擊「執行任務」的按鈕，讓組員知道你有做作業囉！",
+            "weight": "bold",
+            "color": "#1DB446"
+          }
+        ],
+        "wrap": true
+      }
+    ]
+  }
+}
