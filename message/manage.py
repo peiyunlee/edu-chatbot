@@ -48,7 +48,6 @@ class MessageId(IntEnum):
 
 def get_flex_messages(id:int):
     _messages = []
-    print(MessageId(id).name)
     count = counts[id]
     name = MessageId(id).name
 

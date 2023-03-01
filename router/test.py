@@ -1,17 +1,15 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter
 from fastapi import Body, status
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from db.database import client
-from db.model import StudentModel
+from db.database import db
+from db.models.m_student import StudentModel
 from config import header
 
 router = APIRouter(
     prefix='/test',
     tags=['test']
 )
-
-db = client['test']
 
 @router.post("/", response_description="Add new student", response_model=StudentModel)
 def create_student(student: StudentModel = Body(...)):
