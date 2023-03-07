@@ -1,32 +1,55 @@
 {
-    "type": "bubble",
-    "body": {
-      "type": "box",
-      "layout": "horizontal",
-      "contents": [
-        {
-          "type": "text",
-          "text": "現在根據老師公布的作業規範，",
-          "weight": "regular",
-          "size": "md",
-          "contents": [
-            {
-              "type": "span",
-              "text": "現在根據老師公布的作業規範，"
-            },
-            {
-              "type": "span",
-              "text": "你們覺得完成此階段的作業需要進行哪些任務？",
-              "weight": "bold",
-              "color": "#1DB446"
-            },
-            {
-              "type": "span",
-              "text": "請點擊規劃任務按鈕進行計畫吧！"
-            }
-          ],
-          "wrap": true
-        }
-      ]
-    }
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "現在根據老師公布的作業規範，你可以與團隊開始討論以下問題：",
+        "wrap": true
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "1. 你們覺得完成此階段的作業需要進行哪些工作？",
+            "wrap": true,
+            "color": "#1DB446",
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "2. 進行這些工作需要什麼工具？進行的方式是什麼？",
+            "wrap": true,
+            "color": "#1DB446",
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "3. 完成的時間要多久？",
+            "wrap": true,
+            "color": "#1DB446",
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "4. 完成的東西要繳交到哪裡？",
+            "wrap": true,
+            "color": "#1DB446",
+            "weight": "bold"
+          }
+        ],
+        "spacing": "xs"
+      },
+      {
+        "type": "text",
+        "text": "討論之後，請點擊規劃工作按鈕進行計畫吧！",
+        "wrap": true
+      }
+    ],
+    "spacing": "lg"
   }
+}

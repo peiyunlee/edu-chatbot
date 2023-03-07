@@ -27,27 +27,6 @@
         "margin": "sm"
       },
       {
-        "type": "box",
-        "layout": "horizontal",
-        "contents": [
-          {
-            "type": "text",
-            "text": "進度",
-            "size": "sm",
-            "color": "#555555",
-            "flex": 0
-          },
-          {
-            "type": "text",
-            "text": "完成！",
-            "size": "sm",
-            "color": "#111111",
-            "align": "end"
-          }
-        ],
-        "margin": "md"
-      },
-      {
         "type": "separator",
         "margin": "lg"
       },

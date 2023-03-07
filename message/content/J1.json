@@ -34,7 +34,7 @@
         "action": {
           "type": "uri",
           "label": "填寫任務成果回饋",
-          "uri": "http://linecorp.com/"
+          "uri": "https://liff.line.me/1660700459-Dgw33JG5/reflect/task/1"
         },
         "style": "primary",
         "height": "sm",

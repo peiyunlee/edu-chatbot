@@ -6,23 +6,23 @@
     "contents": [
       {
         "type": "text",
-        "text": "新增「ＸＸＸ」任務。",
+        "text": "新增「ＸＸＸ」工作。",
         "weight": "regular",
         "size": "md",
         "contents": [
           {
             "type": "span",
-            "text": "新增「ＸＸＸ」任務。"
+            "text": "新增「ＸＸＸ」工作。"
           },
           {
             "type": "span",
-            "text": "請大家討論確認任務的負責人之後，點擊「我要認領」按鈕認領工作～",
+            "text": "請大家討論該工作的負責人之後，點擊「我要認領」按鈕認領工作～",
             "weight": "bold",
             "color": "#1DB446"
           },
           {
             "type": "span",
-            "text": "確保每個任務都有人執行喔！"
+            "text": "確保每個工作都有人執行喔！"
           }
         ],
         "wrap": true
