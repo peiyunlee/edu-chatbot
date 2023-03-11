@@ -27,92 +27,67 @@
         "layout": "vertical",
         "contents": [
           {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "寫企劃",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "weight": "bold"
-              }
-            ],
-            "flex": 1
+            "type": "text",
+            "text": "寫企劃",
+            "color": "#8C8C8C",
+            "size": "lg",
+            "wrap": true,
+            "weight": "bold"
           },
           {
-            "type": "separator"
+            "type": "separator",
+            "margin": "md"
           },
           {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "怎麼進行",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "weight": "bold",
-                "margin": "sm"
-              },
-              {
-                "type": "text",
-                "text": "先討論要做什麼之後，再把想法打到word上",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm"
-              }
-            ],
-            "flex": 1
+            "type": "text",
+            "text": "怎麼進行",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "weight": "bold",
+            "margin": "lg"
           },
           {
-            "type": "separator"
+            "type": "text",
+            "text": "先討論要做什麼之後，再把想法打到word上",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "sm"
           },
           {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "繳交方式",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm",
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "text": "雲端word",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm"
-              }
-            ],
-            "flex": 1
+            "type": "separator",
+            "margin": "md"
           },
           {
-            "type": "separator"
+            "type": "text",
+            "text": "繳交方式",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "lg",
+            "weight": "bold"
           },
           {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "繳交日期 03/29",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm",
-                "weight": "bold"
-              }
-            ],
-            "flex": 1
+            "type": "text",
+            "text": "雲端word",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "sm"
+          },
+          {
+            "type": "separator",
+            "margin": "md"
+          },
+          {
+            "type": "text",
+            "text": "繳交日期 03/29",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "lg",
+            "weight": "bold"
           },
           {
             "type": "button",
@@ -122,7 +97,9 @@
               "type": "uri",
               "label": "我要認領",
               "uri": "https://liff.line.me/1660700459-XZKAApq7"
-            }
+            },
+            "flex": 1,
+            "gravity": "center"
           }
         ],
         "spacing": "md",
@@ -160,101 +137,67 @@
         "layout": "vertical",
         "contents": [
           {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "寫企劃",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "weight": "bold"
-              }
-            ],
-            "flex": 1
+            "type": "text",
+            "text": "寫企劃",
+            "color": "#8C8C8C",
+            "size": "lg",
+            "wrap": true,
+            "weight": "bold"
           },
           {
-            "type": "separator"
+            "type": "separator",
+            "margin": "md"
           },
           {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "怎麼進行",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "weight": "bold",
-                "margin": "sm"
-              },
-              {
-                "type": "text",
-                "text": "先討論要做什麼之後，再把想法打到word上",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm"
-              }
-            ],
-            "flex": 1
+            "type": "text",
+            "text": "怎麼進行",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "weight": "bold",
+            "margin": "lg"
           },
           {
-            "type": "separator"
+            "type": "text",
+            "text": "先討論要做什麼之後，再把想法打到word上",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "sm"
           },
           {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "繳交方式",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm",
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "text": "雲端word",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm"
-              }
-            ],
-            "flex": 1
+            "type": "separator",
+            "margin": "md"
           },
           {
-            "type": "separator"
+            "type": "text",
+            "text": "繳交方式",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "lg",
+            "weight": "bold"
           },
           {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "繳交日期 03/29",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm",
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "text": "XX的任務",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm",
-                "weight": "bold"
-              }
-            ],
-            "flex": 1
+            "type": "text",
+            "text": "雲端word",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "sm"
+          },
+          {
+            "type": "separator",
+            "margin": "md"
+          },
+          {
+            "type": "text",
+            "text": "繳交日期 03/29",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "lg",
+            "weight": "bold"
           },
           {
             "type": "button",
@@ -264,7 +207,9 @@
               "type": "uri",
               "label": "完成工作",
               "uri": "https://liff.line.me/1660700459-Dgw33JG5"
-            }
+            },
+            "flex": 1,
+            "gravity": "center"
           }
         ],
         "spacing": "md",
@@ -302,107 +247,76 @@
         "layout": "vertical",
         "contents": [
           {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "寫企劃",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "weight": "bold"
-              }
-            ],
-            "flex": 1
+            "type": "text",
+            "text": "寫企劃",
+            "color": "#8C8C8C",
+            "size": "lg",
+            "wrap": true,
+            "weight": "bold"
           },
           {
-            "type": "separator"
+            "type": "separator",
+            "margin": "md"
           },
           {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "怎麼進行",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "weight": "bold",
-                "margin": "sm"
-              },
-              {
-                "type": "text",
-                "text": "先討論要做什麼之後，再把想法打到word上",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm"
-              }
-            ],
-            "flex": 1
+            "type": "text",
+            "text": "怎麼進行",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "weight": "bold",
+            "margin": "lg"
           },
           {
-            "type": "separator"
+            "type": "text",
+            "text": "先討論要做什麼之後，再把想法打到word上",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "sm"
           },
           {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "繳交方式",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm",
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "text": "雲端word",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm"
-              }
-            ],
-            "flex": 1
+            "type": "separator",
+            "margin": "md"
           },
           {
-            "type": "separator"
+            "type": "text",
+            "text": "繳交方式",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "lg",
+            "weight": "bold"
           },
           {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "繳交日期 03/29",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm",
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "text": "XX的任務",
-                "color": "#8C8C8C",
-                "size": "sm",
-                "wrap": true,
-                "margin": "sm",
-                "weight": "bold"
-              }
-            ],
-            "flex": 1
+            "type": "text",
+            "text": "雲端word",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "sm"
           },
           {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [],
-            "height": "40px"
+            "type": "separator",
+            "margin": "md"
+          },
+          {
+            "type": "text",
+            "text": "繳交日期 03/29",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "lg",
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "完成日期 03/29",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "margin": "sm",
+            "weight": "bold"
           }
         ],
         "spacing": "md",
@@ -427,7 +341,7 @@
             "height": "md",
             "action": {
               "type": "uri",
-              "label": "查看任務詳細資訊",
+              "label": "查看更多工作",
               "uri": "https://liff.line.me/1660700459-XZKAApq7"
             }
           }

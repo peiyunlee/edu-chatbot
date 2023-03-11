@@ -10,11 +10,11 @@
         "contents": [
           {
             "type": "span",
-            "text": "太棒了！有人完成任務囉，"
+            "text": "太棒了！有人完成工作囉，"
           },
           {
             "type": "span",
-            "text": "大家可以到繳交的地方去查看任務成果！",
+            "text": "大家可以到繳交的地方去查看工作成果！",
             "color": "#1DB446",
             "weight": "bold"
           }
@@ -24,7 +24,7 @@
       },
       {
         "type": "text",
-        "text": "請每個成員查看成果後，完成任務成果回饋，思考任務哪裡可以修正吧！",
+        "text": "請每個成員查看成果後，完成工作成果回饋，思考工作哪裡可以修正吧！",
         "size": "md",
         "margin": "xl",
         "wrap": true
@@ -33,7 +33,7 @@
         "type": "button",
         "action": {
           "type": "uri",
-          "label": "填寫任務成果回饋",
+          "label": "填寫工作成果回饋",
           "uri": "https://liff.line.me/1660700459-Dgw33JG5/reflect/task/1"
         },
         "style": "primary",

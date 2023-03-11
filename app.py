@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from router import test, linebot
+from router import homework, linebot, task, student
 from db import database
 
 
@@ -15,7 +15,9 @@ origins = [
     "*",
 ]
 
-app.include_router(test.router)
+app.include_router(homework.router)
+app.include_router(task.router)
+app.include_router(student.router)
 app.include_router(linebot.router)
 
 app.add_middleware(
@@ -31,4 +33,4 @@ def shutdown_db_client():
     database.client.close()
 
 if __name__ == "__main__":
-    uvicorn.run("app:app",host="0.0.0.0", port=5000, reload=True)
+    uvicorn.run("app:app",host="0.0.0.0", port=4000, reload=True)

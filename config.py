@@ -6,6 +6,13 @@ load_dotenv()
 CHANNEL_ACCESS_TOKEN = os.environ.get("CHANNEL_ACCESS_TOKEN")
 CHANNEL_SECRET = os.environ.get("CHANNEL_SECRET")
 
+CHANNEL_ACCESS_TOKEN_TEST = os.environ.get("CHANNEL_ACCESS_TOKEN_TEST")
+CHANNEL_SECRET_TEST = os.environ.get("CHANNEL_SECRET_TEST")
+
+LIFF_TASK_TOOL = "https://liff.line.me/1660700459-XZKAApq7"
+LIFF_REFLECT_TASK = "https://liff.line.me/1660700459-Dgw33JG5"
+LIFF_REFLECT_HW = "https://liff.line.me/1660700459-lWN44Az0"
+
 DB_USERNAME = os.environ.get("DB_USERNAME")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
 

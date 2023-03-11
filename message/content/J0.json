@@ -6,14 +6,14 @@
     "contents": [
       {
         "type": "text",
-        "text": "完成任務回報",
+        "text": "完成工作回報",
         "weight": "bold",
         "color": "#1DB446",
         "size": "sm"
       },
       {
         "type": "text",
-        "text": "ＸＸ任務",
+        "text": "ＸＸ工作",
         "weight": "bold",
         "size": "xxl",
         "margin": "md"

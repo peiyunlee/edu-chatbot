@@ -6,13 +6,13 @@
     "contents": [
       {
         "type": "text",
-        "text": "新增「ＸＸＸ」工作。",
+        "text": "新增新的工作囉！",
         "weight": "regular",
         "size": "md",
         "contents": [
           {
             "type": "span",
-            "text": "新增「ＸＸＸ」工作。"
+            "text": "新增新的工作囉！以下是你們討論出完成此階段的作業需要進行的工作，"
           },
           {
             "type": "span",

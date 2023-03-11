@@ -1,484 +1,308 @@
 {
-    "type": "carousel",
-    "contents": [
-      {
-        "type": "bubble",
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "作業 1：繳交企劃書(word)",
-              "weight": "bold",
-              "size": "lg",
-              "margin": "sm",
-              "color": "#1DB446"
-            },
-            {
-              "type": "text",
-              "text": "企劃書內容需包含專案介紹、專案說明、設計概念",
-              "size": "md",
-              "color": "#111111",
-              "align": "start",
-              "wrap": true,
-              "margin": "lg"
-            },
-            {
-              "type": "separator",
-              "margin": "xxl"
-            },
-            {
-              "type": "box",
-              "layout": "vertical",
-              "margin": "xxl",
-              "spacing": "sm",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "一、專案介紹",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "weight": "bold"
-                    },
-                    {
-                      "type": "text",
-                      "text": "專案背景 / 遇到的困難與需求 / 如何解決與改善 / 目標對象 / 使用情境",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    }
-                  ],
-                  "spacing": "md",
-                  "margin": "xs"
-                },
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "二、專案說明",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "weight": "bold"
-                    },
-                    {
-                      "type": "text",
-                      "text": "網站架構 sitemap / 框架圖 wireframe（以首頁為例即可）",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    }
-                  ],
-                  "spacing": "md",
-                  "margin": "lg"
-                },
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "三、設計概念",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "weight": "bold"
-                    },
-                    {
-                      "type": "text",
-                      "text": "創作發想描述 / 設計元素：字型、色彩 / 未來規劃",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    }
-                  ],
-                  "spacing": "md",
-                  "margin": "lg"
-                }
-              ]
-            },
-            {
-              "type": "separator",
-              "margin": "xxl"
-            },
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "margin": "lg",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "繳交方式",
-                  "size": "md",
-                  "flex": 0,
-                  "weight": "bold",
-                  "align": "start",
-                  "color": "#aaaaaa"
-                },
-                {
-                  "type": "text",
-                  "text": "於LINE上繳交檔案連結",
-                  "size": "md",
-                  "color": "#aaaaaa",
-                  "align": "end"
-                }
-              ]
-            },
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "margin": "lg",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "繳交日期",
-                  "size": "md",
-                  "flex": 0,
-                  "weight": "bold",
-                  "align": "start",
-                  "color": "#aaaaaa"
-                },
-                {
-                  "type": "text",
-                  "text": "2023/03/28",
-                  "size": "md",
-                  "color": "#aaaaaa",
-                  "align": "end"
-                }
-              ]
-            }
-          ]
-        },
-        "styles": {
-          "footer": {
-            "separator": true
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "作業 1：繳交企劃書(word)",
+            "weight": "bold",
+            "size": "lg",
+            "margin": "sm",
+            "color": "#1DB446"
+          },
+          {
+            "type": "text",
+            "text": "企劃書內容需包含專案介紹、專案說明、設計概念",
+            "size": "md",
+            "color": "#111111",
+            "align": "start",
+            "wrap": true,
+            "margin": "lg"
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "xxl",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "一、專案介紹",
+                    "size": "md",
+                    "color": "#111111",
+                    "align": "start",
+                    "weight": "bold"
+                  },
+                  {
+                    "type": "text",
+                    "text": "專案背景 / 遇到的困難與需求 / 如何解決與改善 / 目標對象 / 使用情境",
+                    "size": "md",
+                    "color": "#111111",
+                    "align": "start",
+                    "wrap": true
+                  }
+                ],
+                "spacing": "sm"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "二、專案說明",
+                    "size": "md",
+                    "color": "#111111",
+                    "align": "start",
+                    "weight": "bold"
+                  },
+                  {
+                    "type": "text",
+                    "text": "創作發想描述 / 設計元素：字型、色彩 / 未來規劃",
+                    "size": "md",
+                    "color": "#111111",
+                    "align": "start",
+                    "wrap": true
+                  }
+                ],
+                "spacing": "sm"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "三、設計概念",
+                    "size": "md",
+                    "color": "#111111",
+                    "align": "start",
+                    "weight": "bold"
+                  },
+                  {
+                    "type": "text",
+                    "text": "創作發想描述 / 設計元素：字型、色彩 / 未來規劃",
+                    "size": "md",
+                    "color": "#111111",
+                    "align": "start",
+                    "wrap": true
+                  }
+                ],
+                "spacing": "sm"
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "contents": [
+              {
+                "type": "text",
+                "text": "繳交方式",
+                "size": "md",
+                "flex": 0,
+                "weight": "bold",
+                "align": "start",
+                "color": "#aaaaaa"
+              },
+              {
+                "type": "text",
+                "text": "於LINE上繳交檔案連結",
+                "size": "md",
+                "color": "#aaaaaa",
+                "align": "end"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "contents": [
+              {
+                "type": "text",
+                "text": "繳交日期",
+                "size": "md",
+                "flex": 0,
+                "weight": "bold",
+                "align": "start",
+                "color": "#aaaaaa"
+              },
+              {
+                "type": "text",
+                "text": "2023/03/28",
+                "size": "md",
+                "color": "#aaaaaa",
+                "align": "end"
+              }
+            ]
           }
-        }
+        ]
       },
-      {
-        "type": "bubble",
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "作業 2：UIUX設計稿",
-              "weight": "bold",
-              "size": "lg",
-              "margin": "sm",
-              "color": "#1DB446"
-            },
-            {
-              "type": "text",
-              "text": "完成網頁視覺設計稿",
-              "size": "md",
-              "color": "#111111",
-              "align": "start",
-              "wrap": true,
-              "margin": "lg"
-            },
-            {
-              "type": "separator",
-              "margin": "xxl"
-            },
-            {
-              "type": "box",
-              "layout": "vertical",
-              "margin": "xxl",
-              "spacing": "sm",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "設計實作要求",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "weight": "bold"
-                    },
-                    {
-                      "type": "text",
-                      "text": "1. 分析2~3個同質性產品",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    },
-                    {
-                      "type": "text",
-                      "text": "2. 簡易說明研究的產品定位（產品核心）",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    },
-                    {
-                      "type": "text",
-                      "text": "3. 目標服務對象",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    },
-                    {
-                      "type": "text",
-                      "text": "4. 功能流程、主要差異",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    },
-                    {
-                      "type": "text",
-                      "text": "5. 功能優勢、劣勢",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    },
-                    {
-                      "type": "text",
-                      "text": "6. 研究結論（看見了什麼痛點，預計要如何改善）",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    }
-                  ],
-                  "spacing": "md",
-                  "margin": "xs"
-                }
-              ]
-            },
-            {
-              "type": "separator",
-              "margin": "xxl"
-            },
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "margin": "lg",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "繳交方式",
-                  "size": "md",
-                  "flex": 0,
-                  "weight": "bold",
-                  "align": "start",
-                  "color": "#aaaaaa"
-                },
-                {
-                  "type": "text",
-                  "text": "於LINE上繳交Figma連結",
-                  "size": "md",
-                  "color": "#aaaaaa",
-                  "align": "end"
-                }
-              ]
-            },
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "margin": "lg",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "繳交日期",
-                  "size": "md",
-                  "flex": 0,
-                  "weight": "bold",
-                  "align": "start",
-                  "color": "#aaaaaa"
-                },
-                {
-                  "type": "text",
-                  "text": "2023/04/04",
-                  "size": "md",
-                  "color": "#aaaaaa",
-                  "align": "end"
-                }
-              ]
-            }
-          ]
-        },
-        "styles": {
-          "footer": {
-            "separator": true
-          }
-        }
-      },
-      {
-        "type": "bubble",
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "text",
-              "text": "作業 3：實作網站",
-              "weight": "bold",
-              "size": "lg",
-              "margin": "sm",
-              "color": "#1DB446"
-            },
-            {
-              "type": "text",
-              "text": "完成網頁實作",
-              "size": "md",
-              "color": "#111111",
-              "align": "start",
-              "wrap": true,
-              "margin": "lg"
-            },
-            {
-              "type": "separator",
-              "margin": "xxl"
-            },
-            {
-              "type": "box",
-              "layout": "vertical",
-              "margin": "xxl",
-              "spacing": "sm",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "技術實作要求",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "weight": "bold"
-                    },
-                    {
-                      "type": "text",
-                      "text": "1. 用create-react-app建立專案，將專案用MVC架構開發",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    },
-                    {
-                      "type": "text",
-                      "text": "2. 專案必須為動態網頁（記錄操作或有後台功能）",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    },
-                    {
-                      "type": "text",
-                      "text": "3. CSS用BEM命名，RWD設計UI（至少有Mobile/Desktop兩種版型）",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    },
-                    {
-                      "type": "text",
-                      "text": "4. 使用useState與useReducer管理狀態變數",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    },
-                    {
-                      "type": "text",
-                      "text": "5. 使用useEffect管理Cookie或Local Storage",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    },
-                    {
-                      "type": "text",
-                      "text": "6. 用use case diagrams說明專案",
-                      "size": "md",
-                      "color": "#111111",
-                      "align": "start",
-                      "wrap": true
-                    }
-                  ],
-                  "spacing": "md",
-                  "margin": "xs"
-                }
-              ]
-            },
-            {
-              "type": "separator",
-              "margin": "xxl"
-            },
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "margin": "lg",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "繳交方式",
-                  "size": "md",
-                  "flex": 0,
-                  "weight": "bold",
-                  "align": "start",
-                  "color": "#aaaaaa"
-                },
-                {
-                  "type": "text",
-                  "text": "於LINE上繳交網站連結",
-                  "size": "md",
-                  "color": "#aaaaaa",
-                  "align": "end"
-                }
-              ]
-            },
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "margin": "lg",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "繳交日期",
-                  "size": "md",
-                  "flex": 0,
-                  "weight": "bold",
-                  "align": "start",
-                  "color": "#aaaaaa"
-                },
-                {
-                  "type": "text",
-                  "text": "2023/04/12",
-                  "size": "md",
-                  "color": "#aaaaaa",
-                  "align": "end"
-                }
-              ]
-            }
-          ]
-        },
-        "styles": {
-          "footer": {
-            "separator": true
-          }
+      "styles": {
+        "footer": {
+          "separator": true
         }
       }
-    ]
-  }
+    },
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "作業 1：繳交企劃書(word)",
+            "weight": "bold",
+            "size": "lg",
+            "margin": "sm",
+            "color": "#1DB446"
+          },
+          {
+            "type": "text",
+            "text": "企劃書內容需包含專案介紹、專案說明、設計概念",
+            "size": "md",
+            "color": "#111111",
+            "align": "start",
+            "wrap": true,
+            "margin": "lg"
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "xxl",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "一、專案介紹",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "專案背景 / 遇到的困難與需求 / 如何解決與改善 / 目標對象 / 使用情境",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "wrap": true
+              },
+              {
+                "type": "text",
+                "text": "二、專案說明",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "網站架構 sitemap / 框架圖 wireframe（以首頁為例即可）",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "wrap": true
+              },
+              {
+                "type": "text",
+                "text": "三、設計概念",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "創作發想描述 / 設計元素：字型、色彩 / 未來規劃",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "wrap": true
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "contents": [
+              {
+                "type": "text",
+                "text": "繳交方式",
+                "size": "md",
+                "flex": 0,
+                "weight": "bold",
+                "align": "start",
+                "color": "#aaaaaa"
+              },
+              {
+                "type": "text",
+                "text": "於LINE上繳交檔案連結",
+                "size": "md",
+                "color": "#aaaaaa",
+                "align": "end"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "contents": [
+              {
+                "type": "text",
+                "text": "繳交日期",
+                "size": "md",
+                "flex": 0,
+                "weight": "bold",
+                "align": "start",
+                "color": "#aaaaaa"
+              },
+              {
+                "type": "text",
+                "text": "2023/03/28",
+                "size": "md",
+                "color": "#aaaaaa",
+                "align": "end"
+              }
+            ]
+          }
+        ]
+      },
+      "styles": {
+        "footer": {
+          "separator": true
+        }
+      }
+    }
+  ]
+}

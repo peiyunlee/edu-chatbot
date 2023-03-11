@@ -9,7 +9,7 @@
         "contents": [
           {
             "type": "text",
-            "text": "任務成果回饋",
+            "text": "工作成果回饋",
             "color": "#1DB446",
             "size": "lg",
             "weight": "bold",
@@ -19,7 +19,7 @@
           },
           {
             "type": "text",
-            "text": "ＸＸ任務",
+            "text": "ＸＸ工作",
             "size": "lg",
             "weight": "bold",
             "align": "center",

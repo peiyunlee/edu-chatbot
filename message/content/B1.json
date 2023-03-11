@@ -6,7 +6,7 @@
     "contents": [
       {
         "type": "text",
-        "text": "作業 1：繳交企劃書(word)",
+        "text": "作業1:專題企劃書",
         "weight": "bold",
         "size": "lg",
         "margin": "sm",
@@ -23,13 +23,13 @@
       },
       {
         "type": "separator",
-        "margin": "xxl"
+        "margin": "lg"
       },
       {
         "type": "box",
         "layout": "vertical",
         "margin": "xxl",
-        "spacing": "sm",
+        "spacing": "md",
         "contents": [
           {
             "type": "box",
@@ -45,15 +45,14 @@
               },
               {
                 "type": "text",
-                "text": "專案背景 / 遇到的困難與需求 / 如何解決與改善 / 目標對象 / 使用情境",
+                "text": "專案背景\n如何解決與改善（產品核心）\n市場分析（2~3個同質性商品）\n目標對象\n使用情境",
                 "size": "md",
                 "color": "#111111",
                 "align": "start",
                 "wrap": true
               }
             ],
-            "spacing": "md",
-            "margin": "xs"
+            "spacing": "sm"
           },
           {
             "type": "box",
@@ -61,7 +60,7 @@
             "contents": [
               {
                 "type": "text",
-                "text": "二、專案說明",
+                "text": "二、專案內容",
                 "size": "md",
                 "color": "#111111",
                 "align": "start",
@@ -69,15 +68,14 @@
               },
               {
                 "type": "text",
-                "text": "網站架構 sitemap / 框架圖 wireframe（以首頁為例即可）",
+                "text": "網站架構\nwireframe（首頁為例）",
                 "size": "md",
                 "color": "#111111",
                 "align": "start",
                 "wrap": true
               }
             ],
-            "spacing": "md",
-            "margin": "lg"
+            "spacing": "sm"
           },
           {
             "type": "box",
@@ -93,21 +91,20 @@
               },
               {
                 "type": "text",
-                "text": "創作發想描述 / 設計元素：字型、色彩 / 未來規劃",
+                "text": "設計理念\n設計元素說明（字型、色彩）",
                 "size": "md",
                 "color": "#111111",
                 "align": "start",
                 "wrap": true
               }
             ],
-            "spacing": "md",
-            "margin": "lg"
+            "spacing": "sm"
           }
         ]
       },
       {
         "type": "separator",
-        "margin": "xxl"
+        "margin": "lg"
       },
       {
         "type": "box",
@@ -125,8 +122,9 @@
           },
           {
             "type": "text",
-            "text": "於LINE上繳交檔案連結",
+            "text": "於FB表單繳交pdf連結",
             "size": "md",
+            "wrap": true,
             "color": "#aaaaaa",
             "align": "end"
           }
@@ -148,7 +146,7 @@
           },
           {
             "type": "text",
-            "text": "2023/03/28",
+            "text": "2023/03/27",
             "size": "md",
             "color": "#aaaaaa",
             "align": "end"
@@ -177,7 +175,7 @@
   },
   "styles": {
     "footer": {
-      "separator": false
+      "separator": true
     }
   }
 }
