@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bubble",
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+                {
+                "type": "text",
+                "text": "你好！我是EMentor，接下來的時間我會幫助你完成期中專題，請多多指教～",
+                "wrap": true
+                },
+                {
+                  "type": "text",
+                  "margin": "lg",
+                  "text": "輸入你的學號、姓名，請依照範例輸入：",
+                  "wrap": true
+                }
+            ]
+        }
+    }
+]

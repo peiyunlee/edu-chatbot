@@ -1,0 +1,184 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "完成工作回報",
+        "weight": "bold",
+        "color": "#1DB446",
+        "size": "sm"
+      },
+      {
+        "type": "text",
+        "text": "ＸＸ工作",
+        "weight": "bold",
+        "size": "xxl",
+        "margin": "md"
+      },
+      {
+        "type": "text",
+        "text": "李大明",
+        "size": "xs",
+        "color": "#aaaaaa",
+        "wrap": true,
+        "margin": "sm"
+      },
+      {
+        "type": "separator",
+        "margin": "lg"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "lg",
+        "spacing": "md",
+        "contents": [
+          {
+            "type": "text",
+            "text": "遇到什麼困難？",
+            "size": "sm",
+            "color": "#555555",
+            "flex": 0,
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "我覺得....",
+            "size": "sm",
+            "color": "#555555",
+            "flex": 0
+          }
+        ]
+      },
+      {
+        "type": "separator",
+        "margin": "lg"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "lg",
+        "spacing": "md",
+        "contents": [
+          {
+            "type": "text",
+            "text": "可以怎麼改善？",
+            "size": "sm",
+            "color": "#555555",
+            "flex": 0,
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "我覺得....",
+            "size": "sm",
+            "color": "#555555",
+            "flex": 0
+          }
+        ]
+      },
+      {
+        "type": "separator",
+        "margin": "lg"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "margin": "lg",
+        "spacing": "none",
+        "contents": [
+          {
+            "type": "text",
+            "text": "執行成果的滿意分數",
+            "size": "sm",
+            "color": "#555555",
+            "flex": 0,
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "8分 / 10分",
+            "size": "sm",
+            "color": "#555555",
+            "align": "end"
+          }
+        ]
+      },
+      {
+        "type": "separator",
+        "margin": "lg"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "margin": "lg",
+        "contents": [
+          {
+            "type": "text",
+            "text": "繳交方式",
+            "size": "xs",
+            "color": "#aaaaaa",
+            "flex": 0
+          },
+          {
+            "type": "text",
+            "text": "雲端 word",
+            "color": "#aaaaaa",
+            "size": "xs",
+            "align": "end"
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "margin": "md",
+        "contents": [
+          {
+            "type": "text",
+            "text": "預計繳交日期",
+            "size": "xs",
+            "color": "#aaaaaa",
+            "flex": 0
+          },
+          {
+            "type": "text",
+            "text": "04/01",
+            "color": "#aaaaaa",
+            "size": "xs",
+            "align": "end"
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "margin": "md",
+        "contents": [
+          {
+            "type": "text",
+            "text": "繳交日期",
+            "size": "xs",
+            "color": "#aaaaaa",
+            "flex": 0
+          },
+          {
+            "type": "text",
+            "text": "04/01",
+            "color": "#aaaaaa",
+            "size": "xs",
+            "align": "end"
+          }
+        ]
+      }
+    ]
+  },
+  "styles": {
+    "footer": {
+      "separator": true
+    }
+  }
+}

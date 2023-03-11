@@ -1,0 +1,39 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "還有工作尚未完成喔！提醒 ："
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "@ＸＸ記得完成ＸＸＸ工作",
+            "margin": "none",
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "@ＸＸ記得完成ＸＸＸ工作",
+            "weight": "bold"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "記得點擊「執行工作」的按鈕，讓組員知道你完成作業囉！",
+        "size": "md",
+        "margin": "xl",
+        "wrap": true,
+        "color": "#1DB446",
+        "weight": "bold"
+      }
+    ]
+  }
+}

@@ -1,0 +1,398 @@
+{
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "作業成果回饋",
+            "color": "#1DB446",
+            "size": "lg",
+            "weight": "bold",
+            "align": "center",
+            "offsetBottom": "none",
+            "flex": 0
+          }
+        ],
+        "justifyContent": "center",
+        "alignItems": "center"
+      }
+    },
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "成員回饋",
+            "weight": "bold",
+            "color": "#1DB446",
+            "size": "sm"
+          },
+          {
+            "type": "text",
+            "text": "李二明",
+            "weight": "bold",
+            "size": "xxl",
+            "margin": "md"
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "作業還有沒有可以改進的地方？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "團隊進行的主要挑戰？應該如何克服？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "下次規劃要注意的是？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得...",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "你有什麼其他的建議呢？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "spacing": "none",
+            "contents": [
+              {
+                "type": "text",
+                "text": "你對團隊的滿意程度？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "80分 / 100分",
+                "size": "sm",
+                "color": "#555555",
+                "align": "end"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "spacing": "none",
+            "contents": [
+              {
+                "type": "text",
+                "text": "作業完成度評分？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "80分 / 100分",
+                "size": "sm",
+                "color": "#555555",
+                "align": "end"
+              }
+            ]
+          }
+        ]
+      },
+      "styles": {
+        "footer": {
+          "separator": true
+        }
+      }
+    },
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "成員回饋",
+            "weight": "bold",
+            "color": "#1DB446",
+            "size": "sm"
+          },
+          {
+            "type": "text",
+            "text": "李二明",
+            "weight": "bold",
+            "size": "xxl",
+            "margin": "md"
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "作業還有沒有可以改進的地方？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "團隊進行的主要挑戰？應該如何克服？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "下次規劃要注意的是？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得...",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "你有什麼其他的建議呢？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "spacing": "none",
+            "contents": [
+              {
+                "type": "text",
+                "text": "你對團隊的滿意程度？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "80分 / 100分",
+                "size": "sm",
+                "color": "#555555",
+                "align": "end"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "spacing": "none",
+            "contents": [
+              {
+                "type": "text",
+                "text": "作業完成度評分？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "80分 / 100分",
+                "size": "sm",
+                "color": "#555555",
+                "align": "end"
+              }
+            ]
+          }
+        ]
+      },
+      "styles": {
+        "footer": {
+          "separator": true
+        }
+      }
+    }
+  ]
+}

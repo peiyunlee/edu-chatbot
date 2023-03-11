@@ -1,0 +1,52 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "style": "normal",
+        "contents": [
+          {
+            "type": "span",
+            "text": "恭喜大家都完成工作了！"
+          }
+        ],
+        "weight": "regular",
+        "wrap": true
+      },
+      {
+        "type": "text",
+        "text": "評估此次團隊作業吧～",
+        "size": "md",
+        "margin": "xl",
+        "wrap": true,
+        "contents": [
+          {
+            "type": "span",
+            "text": "交作業前，",
+            "weight": "regular"
+          },
+          {
+            "type": "span",
+            "text": "請每個成員一起查核作業規範，並填寫作業成果回饋評估此次團隊作業吧～",
+            "color": "#1DB446",
+            "weight": "bold"
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "作業查核與填寫成果回饋",
+          "uri": "https://liff.line.me/1660700459-lWN44Az0"
+        },
+        "style": "primary",
+        "height": "sm",
+        "margin": "xl"
+      }
+    ]
+  }
+}

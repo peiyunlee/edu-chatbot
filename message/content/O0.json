@@ -1,0 +1,34 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "評估此次團隊作業吧～",
+        "size": "md",
+        "margin": "none",
+        "wrap": true,
+        "contents": [
+          {
+            "type": "span",
+            "text": "成功交完第一階段的作業，繼續進行下一階段的作業吧！",
+            "weight": "regular"
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "進行下一階段作業",
+          "text": "進行下一階段作業"
+        },
+        "style": "primary",
+        "height": "sm",
+        "margin": "xl"
+      }
+    ]
+  }
+}

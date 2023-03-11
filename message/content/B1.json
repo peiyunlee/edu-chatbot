@@ -1,0 +1,181 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "作業1:專題企劃書",
+        "weight": "bold",
+        "size": "lg",
+        "margin": "sm",
+        "color": "#1DB446"
+      },
+      {
+        "type": "text",
+        "text": "企劃書內容需包含專案介紹、專案說明、設計概念",
+        "size": "md",
+        "color": "#111111",
+        "align": "start",
+        "wrap": true,
+        "margin": "lg"
+      },
+      {
+        "type": "separator",
+        "margin": "lg"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "xxl",
+        "spacing": "md",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "一、專案介紹",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "專案背景\n如何解決與改善（產品核心）\n市場分析（2~3個同質性商品）\n目標對象\n使用情境",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "wrap": true
+              }
+            ],
+            "spacing": "sm"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "二、專案內容",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "網站架構\nwireframe（首頁為例）",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "wrap": true
+              }
+            ],
+            "spacing": "sm"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "三、設計概念",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "設計理念\n設計元素說明（字型、色彩）",
+                "size": "md",
+                "color": "#111111",
+                "align": "start",
+                "wrap": true
+              }
+            ],
+            "spacing": "sm"
+          }
+        ]
+      },
+      {
+        "type": "separator",
+        "margin": "lg"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "margin": "lg",
+        "contents": [
+          {
+            "type": "text",
+            "text": "繳交方式",
+            "size": "md",
+            "flex": 0,
+            "weight": "bold",
+            "align": "start",
+            "color": "#aaaaaa"
+          },
+          {
+            "type": "text",
+            "text": "於FB表單繳交pdf連結",
+            "size": "md",
+            "wrap": true,
+            "color": "#aaaaaa",
+            "align": "end"
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "margin": "lg",
+        "contents": [
+          {
+            "type": "text",
+            "text": "繳交日期",
+            "size": "md",
+            "flex": 0,
+            "weight": "bold",
+            "align": "start",
+            "color": "#aaaaaa"
+          },
+          {
+            "type": "text",
+            "text": "2023/03/27",
+            "size": "md",
+            "color": "#aaaaaa",
+            "align": "end"
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "button",
+        "style": "primary",
+        "height": "md",
+        "action": {
+          "type": "uri",
+          "label": "規劃工作",
+          "uri": "https://liff.line.me/1660700459-XZKAApq7"
+        },
+        "margin": "none"
+      }
+    ],
+    "margin": "none"
+  },
+  "styles": {
+    "footer": {
+      "separator": true
+    }
+  }
+}

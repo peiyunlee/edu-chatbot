@@ -1,0 +1,32 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "text",
+        "text": "以下是團隊完成此階段的作業需要進行的工作。",
+        "weight": "regular",
+        "size": "md",
+        "contents": [
+          {
+            "type": "span",
+            "text": "以下是團隊討論出完成此階段的作業需要進行的工作，"
+          },
+          {
+            "type": "span",
+            "text": "請大家討論確認每個工作的負責人之後，點擊「我要認領」按鈕認領工作～",
+            "weight": "bold",
+            "color": "#1DB446"
+          },
+          {
+            "type": "span",
+            "text": "確保每個都有人執行喔！"
+          }
+        ],
+        "wrap": true
+      }
+    ]
+  }
+}

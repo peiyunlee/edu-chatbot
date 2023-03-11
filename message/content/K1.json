@@ -1,0 +1,27 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "horizontal",
+    "contents": [
+      {
+        "type": "text",
+        "weight": "regular",
+        "size": "md",
+        "contents": [
+          {
+            "type": "span",
+            "text": "這是團隊工作的反思與建議，"
+          },
+          {
+            "type": "span",
+            "text": "針對有疑問或意見不同的地方，可以提出討論讓大家達成共識喔！",
+            "weight": "bold",
+            "color": "#1DB446"
+          }
+        ],
+        "wrap": true
+      }
+    ]
+  }
+}

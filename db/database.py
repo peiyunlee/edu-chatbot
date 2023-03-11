@@ -1,6 +1,7 @@
 from pymongo import MongoClient
-from config import MONGODB_URL
 import certifi
+
+from config import MONGODB_URL
 
 def get_database():
     
@@ -14,3 +15,5 @@ def get_database():
     return client
 
 client = get_database()
+
+db = client['test']

@@ -1,0 +1,34 @@
+{
+    "type": "bubble",
+    "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+            {
+                "type": "text",
+                "text": "期中專題",
+                "weight": "bold",
+                "size": "xxl"
+            },
+            {
+                "type": "text",
+                "text": "包含三次作業繳交與口頭報告",
+                "size": "md",
+                "wrap": true,
+                "margin": "lg"
+            },
+            {
+                "type": "text",
+                "text": "網站頁數：3~5頁（確保每頁都有其必要性）",
+                "size": "md",
+                "wrap": true,
+                "margin": "md"
+            }
+        ]
+    },
+    "styles": {
+        "footer": {
+            "separator": true
+        }
+    }
+}
