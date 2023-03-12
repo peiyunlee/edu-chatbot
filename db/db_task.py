@@ -25,7 +25,7 @@ def create_task(task: CreateTaskModel, group_id: str):
 
 
 # ----------------------------- claim
-def claim_task(task_id: int, student_id: str):
+def claim_task(task_id: str, student_id: str):
     task = collection_task.update_one({"_id":task_id, "student_id": ''},{"$set": {"student_id": student_id}})
 
     if task is None:
