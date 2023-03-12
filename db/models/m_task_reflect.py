@@ -17,3 +17,14 @@ class TaskReflectModel(BaseModel):
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
+
+
+class CreateTaskReflect(BaseModel):
+    reflect1: str = Field(...)
+    reflect2: str = Field(...)
+    score: int = Field(...)
+    is_self: bool = Field(...)
+
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}

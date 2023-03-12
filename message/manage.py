@@ -88,7 +88,7 @@ def get_messages(id:int):
 
     for idx in range(0,count):
         f = open (f'./message/content/{name}{idx}.json', "r")
-        if name == 'A' or name == 'B' or name == 'F' or name == 'E':
+        if name == 'A' or name == 'B' or name == 'F' or name == 'E' or name == 'J' or name == 'K':
             _messages.append(json.loads(f.read()))
         else:
             _messages.append(

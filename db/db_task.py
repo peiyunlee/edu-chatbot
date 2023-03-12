@@ -33,6 +33,11 @@ def claim_task(task_id: str, student_id: str):
                                 detail=f"此工作已經有人認領")
 
 
+# ----------------------------- complete
+def complete_task(task_id: str, finish_date: str):
+    task = collection_task.update_one({"_id":task_id},{"$set": {"is_finish": True, "finish_date": finish_date}})
+
+
 def get_task_by_task_id(task_id: str):
     task = collection_task.find_one({"_id": task_id})
     return task
