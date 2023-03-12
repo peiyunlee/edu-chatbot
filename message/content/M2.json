@@ -18,7 +18,20 @@
           },
           {
             "type": "span",
-            "text": "，如果需要可以繼續新增工作完成作業喔！",
+            "text": "，如果需要也可以繼續新增工作完成作業喔！",
+            "weight": "regular"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "size": "md",
+        "margin": "lg",
+        "wrap": true,
+        "contents": [
+          {
+            "type": "span",
+            "text": "確定要繳交作業的話，將連結貼至FB作業繳交區，並點擊下面的按鈕",
             "weight": "regular"
           }
         ]
@@ -27,8 +40,8 @@
         "type": "button",
         "action": {
           "type": "message",
-          "label": "繳交此階段作業",
-          "text": "繳交此階段作業"
+          "label": "完成繳交作業",
+          "text": "完成繳交作業"
         },
         "style": "primary",
         "height": "sm",

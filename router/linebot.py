@@ -119,10 +119,6 @@ def get_group_reply_messages(event):
     elif trigger == '繳交作業' or trigger == 'N':
         _messages = get_messages(id=MessageId.N.value)
 
-    # ------------------------------------- 回報團體作業反思 trigger?
-    elif trigger == '回報團體作業反思' or trigger == 'M':
-        _messages = get_messages(id=MessageId.M.value)
-
     # ------------------------------------- 提醒還有未完成的工作 trigger?
     elif trigger == '提醒還有未完成的工作' or trigger == 'P':
         _messages = get_messages(id=MessageId.P.value)
@@ -697,6 +693,48 @@ def manage_L_message(line_uer_id):
     group = db_student.get_group_by_student_line_UID(line_user_id=line_uer_id)
 
     contents[0]['body']['contents'][2]['action']['uri'] = f"{LIFF_REFLECT_HW}/{group['hw_no_now']}"
+
+    _messages = []
+    for content in contents:
+        _messages.append(
+            FlexSendMessage(
+                alt_text="有人完成工作囉!",
+                contents=content
+            )
+        )
+    return _messages
+
+
+def push_M(student_name: str, task_name: str, task_id: str, line_group_id: str):
+    _messages = manage_M_message(student_name=student_name, task_name=task_name, task_id=task_id)
+
+    for item in _messages:
+        line_bot_api.push_message(to=line_group_id, messages=item)
+
+
+def manage_M_message(student_name, task_name, task_id):
+    contents = get_messages(id=MessageId.M.value)
+    contents[0]['contents'][0]['body']['contents'][1]['text'] = task_name
+
+    task_reflects = db_task_reflect.get_task_all_reflect(task_id=task_id)
+
+    for reflect in task_reflects:
+        student = db_student.get_student_by_student_id(student_id=reflect['student_id'])
+        student_name = student['name']
+        if reflect['is_self']:
+            contents[0]['contents'][1]['body']['contents'][0]['text'] = "負責人"
+            contents[0]['contents'][0]['body']['contents'][2]['text'] = f"負責人：{student_name}"
+        else:
+            contents[0]['contents'][1]['body']['contents'][0]['text'] = "成員回饋"
+
+        # 成員回饋
+        contents[0]['contents'][1]['body']['contents'][1]['text'] = student_name
+        contents[0]['contents'][1]['body']['contents'][3]['contents'][1]['text'] = reflect['reflect1']
+        contents[0]['contents'][1]['body']['contents'][5]['contents'][1]['text'] = reflect['reflect2']
+        contents[0]['contents'][1]['body']['contents'][7]['contents'][1]['text'] = f"{reflect['score']}分 / 100分"
+
+        new_content = copy.deepcopy(contents[0]['contents'][1])
+        contents[0]['contents'].append(new_content)
 
     _messages = []
     for content in contents:
