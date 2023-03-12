@@ -72,6 +72,12 @@ def delete_task_by_task_id(task_id: str):
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
+@router.post("/complete/id/{task_id}/date/{month}/{day}", summary="完成任務")
+def complete_task_by_task_id(task_id: str, month: str, day: str):
+    db_task.complete_task(task_id=task_id, finish_date=f"{month}/{day}")
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+
 # ----------------------------------- claim function
 
 def push_claim_task(task_name: str, hw_no: int, student_name: str, group_id: str, line_group_id: str):

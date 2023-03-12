@@ -6,8 +6,8 @@ import json
 
 import copy
 
-from config import CHANNEL_ACCESS_TOKEN, CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN_TEST, CHANNEL_SECRET_TEST, header, LIFF_TASK_TOOL, LIFF_REFLECT_TASK
-from db import db_student, db_task, db_hw
+from config import CHANNEL_ACCESS_TOKEN, CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN_TEST, CHANNEL_SECRET_TEST, header, LIFF_TASK_TOOL, LIFF_REFLECT_TASK, LIFF_REFLECT_HW 
+from db import db_student, db_task, db_hw, db_task_reflect
 from message.manage_other import get_welcome_flex_messages
 from message.manage import get_messages, MessageId
 
@@ -130,16 +130,8 @@ def get_group_reply_messages(event):
         _messages.extend(get_messages(id=MessageId.E.value))
 
     # ------------------------------------- 引導作業查核與反思 trigger?
-    elif trigger == '引導作業查核與反思' or trigger == 'L':
+    elif trigger == '我要繳交作業':
         _messages = get_messages(id=MessageId.L.value)
-
-    # ------------------------------------- 完成團體工作反思回報 trigger?
-    elif trigger == '完成團體工作反思' or trigger == 'K':
-        _messages = get_messages(id=MessageId.K.value)
-
-    # ------------------------------------- 完成工作回報 trigger?
-    elif trigger == '完成工作' or trigger == 'J':
-        _messages = get_messages(id=MessageId.J.value)
 
     # # ------------------------------------- 執行工作回報 trigger?
     # elif trigger == '執行工作' or trigger == 'I':
@@ -519,13 +511,13 @@ def manage_B_message(line_user_id):
     return _messages
 
 
-def push_C(line_group_id: str):
-    _messages = get_messages(id=MessageId.C.value)
-    # 回報工作列表
-    _messages.extend(get_messages(id=MessageId.E.value))
+# def push_C(line_group_id: str):
+#     _messages = get_messages(id=MessageId.C.value)
+#     # 回報工作列表
+#     # _messages.extend(manage_E_message(group_id=group_id))
 
-    for item in _messages:
-        line_bot_api.push_message(to=line_group_id, messages=item)
+#     for item in _messages:
+#         line_bot_api.push_message(to=line_group_id, messages=item)
 
 
 def push_D(line_group_id: str, group_id: str):
@@ -571,6 +563,7 @@ def manage_F_message(student_name, task_name):
             )
         )
     return _messages
+
 
 def manage_E_message(group_id: str):
     contents = get_messages(id=MessageId.E.value)
@@ -626,6 +619,95 @@ def manage_E_message(group_id: str):
         )
     return _messages
     
+
+def push_J(line_group_id: str, task_name: str, student_name: str, reflect1: str, reflect2: str, score: int, hand_over: str, hand_over_date: str, finish_date: str, task_id: str):
+    _messages = manage_J_message(student_name=student_name, task_name=task_name, reflect1=reflect1, reflect2=reflect2, score=score, hand_over=hand_over, hand_over_date=hand_over_date,finish_date=finish_date,task_id=task_id)
+
+    for item in _messages:
+        line_bot_api.push_message(to=line_group_id, messages=item)
+
+def manage_J_message(student_name, task_name, reflect1, reflect2, score, hand_over, hand_over_date, finish_date, task_id):
+    contents = get_messages(id=MessageId.J.value)
+    contents[0]['body']['contents'][1]['text'] = task_name
+    contents[0]['body']['contents'][2]['text'] = student_name
+    contents[0]['body']['contents'][4]['contents'][1]['text'] = reflect1
+    contents[0]['body']['contents'][6]['contents'][1]['text'] = reflect2
+    contents[0]['body']['contents'][8]['contents'][1]['text'] = f"{score}分 / 100分"
+    contents[0]['body']['contents'][10]['contents'][1]['text'] = hand_over
+    contents[0]['body']['contents'][11]['contents'][1]['text'] = hand_over_date
+    contents[0]['body']['contents'][12]['contents'][1]['text'] = finish_date
+
+    contents[1]['body']['contents'][2]['action']['uri'] = f"{LIFF_REFLECT_TASK}/task/{task_id}"
+
+    _messages = []
+    for content in contents:
+        _messages.append(
+            FlexSendMessage(
+                alt_text="有人完成工作囉!",
+                contents=content
+            )
+        )
+    return _messages
+
+def push_K(student_name: str, task_name: str, task_id: str, line_group_id: str):
+    _messages = manage_K_message(student_name=student_name, task_name=task_name, task_id=task_id)
+
+    for item in _messages:
+        line_bot_api.push_message(to=line_group_id, messages=item)
+
+
+def manage_K_message(student_name, task_name, task_id):
+    contents = get_messages(id=MessageId.K.value)
+    contents[0]['contents'][0]['body']['contents'][1]['text'] = task_name
+
+    task_reflects = db_task_reflect.get_task_all_reflect(task_id=task_id)
+
+    for reflect in task_reflects:
+        student = db_student.get_student_by_student_id(student_id=reflect['student_id'])
+        student_name = student['name']
+        if reflect['is_self']:
+            contents[0]['contents'][1]['body']['contents'][0]['text'] = "負責人"
+            contents[0]['contents'][0]['body']['contents'][2]['text'] = f"負責人：{student_name}"
+        else:
+            contents[0]['contents'][1]['body']['contents'][0]['text'] = "成員回饋"
+
+        # 成員回饋
+        contents[0]['contents'][1]['body']['contents'][1]['text'] = student_name
+        contents[0]['contents'][1]['body']['contents'][3]['contents'][1]['text'] = reflect['reflect1']
+        contents[0]['contents'][1]['body']['contents'][5]['contents'][1]['text'] = reflect['reflect2']
+        contents[0]['contents'][1]['body']['contents'][7]['contents'][1]['text'] = f"{reflect['score']}分 / 100分"
+
+        new_content = copy.deepcopy(contents[0]['contents'][1])
+        contents[0]['contents'].append(new_content)
+
+    _messages = []
+    for content in contents:
+        _messages.append(
+            FlexSendMessage(
+                alt_text="有人完成工作囉!",
+                contents=content
+            )
+        )
+    return _messages
+
+
+def manage_L_message(line_uer_id):
+    contents = get_messages(id=MessageId.L.value)
+
+    group = db_student.get_group_by_student_line_UID(line_user_id=line_uer_id)
+
+    contents[0]['body']['contents'][2]['action']['uri'] = f"{LIFF_REFLECT_HW}/{group['hw_no_now']}"
+
+    _messages = []
+    for content in contents:
+        _messages.append(
+            FlexSendMessage(
+                alt_text="有人完成工作囉!",
+                contents=content
+            )
+        )
+    return _messages
+
 
 
 # line_bot_api.reply_message(event.reply_token, TextSendMessage(text=t_group_join))

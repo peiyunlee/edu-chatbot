@@ -25,12 +25,17 @@ def create_task(task: CreateTaskModel, group_id: str):
 
 
 # ----------------------------- claim
-def claim_task(task_id: int, student_id: str):
+def claim_task(task_id: str, student_id: str):
     task = collection_task.update_one({"_id":task_id, "student_id": ''},{"$set": {"student_id": student_id}})
 
     if task is None:
        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail=f"此工作已經有人認領")
+
+
+# ----------------------------- complete
+def complete_task(task_id: str, finish_date: str):
+    task = collection_task.update_one({"_id":task_id},{"$set": {"is_finish": True, "finish_date": finish_date}})
 
 
 def get_task_by_task_id(task_id: str):

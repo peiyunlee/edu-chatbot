@@ -38,7 +38,7 @@
         "contents": [
           {
             "type": "text",
-            "text": "遇到什麼困難？",
+            "text": "我遇到什麼困難？",
             "size": "sm",
             "color": "#555555",
             "flex": 0,
@@ -65,7 +65,7 @@
         "contents": [
           {
             "type": "text",
-            "text": "可以怎麼改善？",
+            "text": "我覺得有哪裡可以改善？",
             "size": "sm",
             "color": "#555555",
             "flex": 0,
@@ -160,7 +160,7 @@
         "contents": [
           {
             "type": "text",
-            "text": "繳交日期",
+            "text": "完成日期",
             "size": "xs",
             "color": "#aaaaaa",
             "flex": 0
