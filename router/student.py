@@ -21,7 +21,6 @@ def get_student_by_LUID(line_user_id: str):
     return JSONResponse(status_code=status.HTTP_200_OK, content=student, headers=header)
 
 
-
 @router.get("/id/{student_id}", summary="取得學生")
 def get_student_by_id(student_id: str):
     student = db_student.get_student_by_student_id(student_id= student_id)

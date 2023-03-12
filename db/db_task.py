@@ -36,7 +36,9 @@ def claim_task(task_id: str, student_id: str):
 # ----------------------------- complete
 def complete_task(task_id: str, finish_date: str):
     task = collection_task.update_one({"_id":task_id},{"$set": {"is_finish": True, "finish_date": finish_date}})
+    task = collection_task.find_one({"_id": task_id})
 
+    return task
 
 def get_task_by_task_id(task_id: str):
     task = collection_task.find_one({"_id": task_id})
@@ -66,6 +68,17 @@ def is_group_all_task_is_all_claimed(group_id: str, hw_no: int):
 
     if len(tasks) == 0:
         # 都認領完
+        return True
+    else:
+        return False
+
+
+def is_group_all_task_is_all_completed(group_id: str, hw_no: int):
+    tasks = collection_task.find({"group_id": group_id, "hw_no": hw_no, "is_finish": False})
+    tasks = list(tasks)
+
+    if len(tasks) == 0:
+        # 都完成了
         return True
     else:
         return False

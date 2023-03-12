@@ -1,0 +1,34 @@
+{
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "操 作 選 單",
+          "align": "center",
+          "size": "xl"
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "uri",
+            "label": "查看工作列表",
+            "uri": "http://linecorp.com/"
+          },
+          "style": "primary"
+        },
+        {
+            "type": "button",
+            "action": {
+              "type": "message",
+              "label": "繳交此階段作業",
+              "text": "我要繳交作業"
+            },
+            "style": "primary"
+        }
+      ],
+      "spacing": "xl"
+    }
+  }

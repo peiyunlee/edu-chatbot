@@ -14,17 +14,11 @@ router = APIRouter(
 
 @router.post("/create/hw_no/{hw_no}/LUID/{line_user_id}", summary="新增作業查核與反思")
 def create_new_reflect(hw_no: int, line_user_id: str, reflect: CreateHWReflect):
-    print(hw_no)
-    print(line_user_id)
-    print(reflect)
     student = db_student.get_student_by_line_UID(line_user_id=line_user_id)
-    # group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
+    group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
     created_reflect = db_hw_reflect.create_hw_reflects(reflect=reflect, hw_no=hw_no, student_id=student['_id'])
     created_check = db_hw_reflect.create_hw_rule_check(check=reflect, hw_no=hw_no, student_id=student['_id'])
-    # if created_reflect['is_self']:
-    #     linebot.push_J(line_group_id=line_group_id, task_name=task_name, student_name=student_name, reflect1=reflect1, reflect2=reflect2, score=score, hand_over=hand_over, hand_over_date=hand_over_date, finish_date=finish_date, task_id=task_id)
-    # else:
-    #     linebot.push_K(line_group_id=line_group_id, task_name=task_name, student_name=student_name, task_id=task_id)
+    linebot.push_M(hw_no=hw_no, line_user_id=line_user_id, line_group_id=group['line_group_id'])
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 

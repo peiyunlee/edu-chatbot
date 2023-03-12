@@ -74,7 +74,8 @@ def delete_task_by_task_id(task_id: str):
 
 @router.post("/complete/id/{task_id}/date/{month}/{day}", summary="完成任務")
 def complete_task_by_task_id(task_id: str, month: str, day: str):
-    db_task.complete_task(task_id=task_id, finish_date=f"{month}/{day}")
+    task = db_task.complete_task(task_id=task_id, finish_date=f"{month}/{day}")
+    student = db_student.get_student_by_student_id(student_id=task['student_id'])
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 

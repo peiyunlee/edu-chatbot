@@ -36,6 +36,18 @@ def get_all_group():
     groups = collection_group.find()
     return groups
 
+def update_group_hw_no_now(group_id:str, hw_no_now: int):
+    group = collection_group.update_one({
+        "_id": group_id
+    },{
+        "$set":{
+            "hw_no_now": hw_no_now + 1 ,
+        }
+    })
+
+    print("update group hwno_now")
+    return group
+
 # ----------------------------- student
 def create_student(line_user_id:str ,student_number:str, student_name:str, line_group_id:str):
     old_student = collection_student.find_one({"line_user_id": line_user_id})
@@ -143,3 +155,10 @@ def get_group_by_student_line_UID(line_user_id: str):
     else:
        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail=f"找不到student")
+
+def update_all_group_hw_no_now(hw_no_now:int):
+    collection_group.update_many({},{
+        "$set":{
+            "hw_no_now":hw_no_now,
+        }
+    })

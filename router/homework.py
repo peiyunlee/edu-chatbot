@@ -36,3 +36,17 @@ def get_all_hw():
     hw = db_hw.get_all_hw()
     print(hw)
     return JSONResponse(status_code=status.HTTP_200_OK, content=hw, headers=header)
+
+@router.post("/update/group/hw_no_now/{hw_no_now}", summary="強制更新新的階段")
+def update_all_group_hw_no_now(hw_no_now: int):
+    db_student.update_all_group_hw_no_now(hw_no_now=hw_no_now)
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+@router.post("/push/hw_no/{hw_no}", summary="推播某階段期中作業規範")
+def push_hw_announcement(hw_no: int):
+    all_groups = db_student.get_all_group()
+    for group in all_groups:
+        if not group['hw_no_now'] == hw_no:
+            linebot.push_B(hw_no_now=hw_no, line_group_id=group['line_group_id'])
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+

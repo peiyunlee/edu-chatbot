@@ -7,7 +7,7 @@ counts = [
     4,2,1,1,1,
     1,1,1,2,2,
     2,1,3,1,1,
-    1
+    1,1
 ]
 
 alt_text = [
@@ -78,6 +78,8 @@ class MessageId(IntEnum):
     O = 14
     #提醒還有未完成的工作
     P = 15
+    #操作選單
+    Q = 16
 
 # --------------------------- convert_to_flex_message
 
@@ -88,7 +90,7 @@ def get_messages(id:int):
 
     for idx in range(0,count):
         f = open (f'./message/content/{name}{idx}.json', "r")
-        if name == 'A' or name == 'B' or name == 'F' or name == 'E' or name == 'J' or name == 'K' or name == 'M':
+        if name == 'A' or name == 'B' or name == 'F' or name == 'E' or name == 'J' or name == 'K' or name == 'M' or name == 'Q' or name == 'L':
             _messages.append(json.loads(f.read()))
         else:
             _messages.append(

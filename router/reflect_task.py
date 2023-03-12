@@ -32,6 +32,10 @@ def create_new_reflect(task_id: str, line_user_id: str, reflect: CreateTaskRefle
         linebot.push_J(line_group_id=line_group_id, task_name=task_name, student_name=student_name, reflect1=reflect1, reflect2=reflect2, score=score, hand_over=hand_over, hand_over_date=hand_over_date, finish_date=finish_date, task_id=task_id)
     else:
         linebot.push_K(line_group_id=line_group_id, task_name=task_name, student_name=student_name, task_id=task_id)
+        is_completed = db_task.is_group_all_task_is_all_completed(group_id=group['_id'],hw_no=task['hw_no'])
+        print(is_completed)
+        if is_completed:
+            linebot.push_L(line_user_id=line_user_id, line_group_id=line_group_id)
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
