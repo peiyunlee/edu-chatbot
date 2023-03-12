@@ -633,7 +633,7 @@ def manage_J_message(student_name, task_name, reflect1, reflect2, score, hand_ov
     contents[0]['body']['contents'][11]['contents'][1]['text'] = hand_over_date
     contents[0]['body']['contents'][12]['contents'][1]['text'] = finish_date
 
-    contents[1]['body']['contents'][2]['action']['uri'] = f"{LIFF_REFLECT_TASK}/task/{task_id}"
+    contents[1]['body']['contents'][2]['action']['uri'] = f"{LIFF_REFLECT_TASK}/{task_id}"
 
     _messages = []
     for content in contents:
