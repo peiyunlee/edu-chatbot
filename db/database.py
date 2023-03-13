@@ -8,7 +8,7 @@ def get_database():
     client = MongoClient(MONGODB_URL, serverSelectionTimeoutMS=5000, tlsCAFile=certifi.where())
     
     try:
-        print(client[DB_NAME])
+        print(client[f'{DB_NAME}'])
     except Exception:
         print("Unable to connect to the server.")
         
@@ -16,4 +16,4 @@ def get_database():
 
 client = get_database()
 
-db = client[DB_NAME]
+db = client[f'{DB_NAME}']
