@@ -144,8 +144,6 @@ def get_group_reply_messages(event):
             # 回報工作列表
             _messages.extend(manage_E_message(group_id=group['_id']))
 
-
-
     # # ------------------------------------- 執行工作回報 trigger?
     # elif trigger == '執行工作' or trigger == 'I':
     #     _messages = get_messages(id=MessageId.I.value)
@@ -157,8 +155,6 @@ def get_group_reply_messages(event):
         _messages =  manage_B_message(hw_no_now=group['hw_no_now'])
     else:
         _messages = None
-
-    print(trigger) 
 
     return _messages
 

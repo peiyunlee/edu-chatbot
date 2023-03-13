@@ -53,12 +53,16 @@ def create_student(line_user_id:str ,student_number:str, student_name:str, line_
     old_student = collection_student.find_one({"line_user_id": line_user_id})
 
     group = get_group_by_line_GID(line_group_id=line_group_id)
+    if not group:
+        group = create_group(line_group_id=line_group_id)
+    
     group_id = group['_id']
     
     if old_student:
         print("student exist")
         # 修改 student資訊
         update_student(line_user_id= line_user_id ,student_number= student_number, student_name= student_name, group_id=group_id)
+
         return old_student
     else:
 
@@ -137,8 +141,7 @@ def get_group_by_line_GID(line_group_id: str):
     if group:
         return group
     else:
-       raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                                detail=f"找不到group")
+        return None
     
 def get_group_by_student_line_UID(line_user_id: str):
     student = collection_student.find_one({"line_user_id": line_user_id})
