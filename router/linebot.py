@@ -6,7 +6,7 @@ import json
 
 import copy
 
-from config import CHANNEL_ACCESS_TOKEN, CHANNEL_SECRET, CHANNEL_ACCESS_TOKEN_TEST, CHANNEL_SECRET_TEST, header, LIFF_TASK_TOOL, LIFF_REFLECT_TASK, LIFF_REFLECT_HW 
+from config import CHANNEL_ACCESS_TOKEN, CHANNEL_SECRET, header, LIFF_TASK_TOOL, LIFF_REFLECT_TASK, LIFF_REFLECT_HW 
 from db import db_student, db_task, db_hw, db_task_reflect, db_hw_reflect
 from message.manage_other import get_welcome_flex_messages
 from message.manage import get_messages, MessageId
