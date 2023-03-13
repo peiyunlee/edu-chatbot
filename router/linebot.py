@@ -50,18 +50,18 @@ def handle_group_reply_message(event):
         pass
 
 
-# ----------------------------- 監聽機器人加入群組事件
-@handler.add(JoinEvent)
-def handle_join_event_reply_message(event):
-    print("機器人加入群組")
+# # ----------------------------- 監聽機器人加入群組事件
+# @handler.add(JoinEvent)
+# def handle_join_event_reply_message(event):
+#     print("機器人加入群組")
 
-    line_group_id = event.source.group_id
+#     line_group_id = event.source.group_id
 
-    #新增群組
-    db_student.create_group(line_group_id=line_group_id)
+#     #新增群組
+#     db_student.create_group(line_group_id=line_group_id)
 
-    line_bot_api.push_message(to=line_group_id,messages=get_welcome_flex_messages(id=0))
-    line_bot_api.push_message(to=line_group_id,messages=TextMessage(text="學號：111034010/姓名：李小明"))
+#     line_bot_api.push_message(to=line_group_id,messages=get_welcome_flex_messages(id=0))
+#     line_bot_api.push_message(to=line_group_id,messages=TextMessage(text="學號：111034010/姓名：李小明"))
 
 
 # ----------------------------- 監聽成員加入群組事件
