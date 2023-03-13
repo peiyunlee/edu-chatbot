@@ -24,4 +24,4 @@ def get_task_reflect(task_id: str, student_id: str):
 
 def get_task_all_reflect(task_id: str):
     reflects = collection_tr.find({"task_id": task_id})
-    return reflects
+    return list(reflects)

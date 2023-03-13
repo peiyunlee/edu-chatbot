@@ -12,8 +12,8 @@ from message.manage_other import get_welcome_flex_messages
 from message.manage import get_messages, MessageId
 
 
-line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN_TEST)
-handler = WebhookHandler(CHANNEL_SECRET_TEST)
+line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
+handler = WebhookHandler(CHANNEL_SECRET)
 
 router = APIRouter(
     prefix='/linebot',
@@ -121,7 +121,7 @@ def get_group_reply_messages(event):
         line_user_id = event.source.user_id
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
         db_student.update_group_hw_no_now(group_id=group['_id'], hw_no_now=group['hw_no_now'])
-        _messages =  manage_B_message(hw_no_now=group['hw_no_now'])
+        _messages =  manage_B_message(hw_no_now=group['hw_no_now']+1)
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '完成繳交作業':
@@ -137,7 +137,7 @@ def get_group_reply_messages(event):
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
         is_all_completed = db_task.is_group_all_task_is_all_completed(group_id=group['_id'],hw_no=group['hw_no_now'])
         if is_all_completed:
-            _messages = get_messages(id=MessageId.L.value)
+            _messages = manage_L_message(line_uer_id=line_user_id)
         else:
             # 提醒還有尚未完成的工作
             _messages = get_messages(id=MessageId.P.value)
@@ -688,6 +688,8 @@ def manage_K_message(student_name, task_name, task_id):
 
     task_reflects = db_task_reflect.get_task_all_reflect(task_id=task_id)
 
+    print(task_reflects)
+
     bubble = new_contents[0]['contents'][1]
 
     temp_bubbles = []
@@ -696,20 +698,21 @@ def manage_K_message(student_name, task_name, task_id):
         student = db_student.get_student_by_student_id(student_id=reflect['student_id'])
         student_name = student['name']
         if reflect['is_self']:
-            bubble['contents'][0]['text'] = "負責人"
+            bubble['body']['contents'][0]['text'] = "負責人"
             new_contents[0]['contents'][0]['body']['contents'][2]['text'] = f"負責人：{student_name}"
         else:
-            bubble['contents'][0]['text'] = "成員回饋"
+            bubble['body']['contents'][0]['text'] = "成員回饋"
 
         # 成員回饋
-        bubble['contents'][1]['text'] = student_name
-        bubble['contents'][3]['contents'][1]['text'] = reflect['reflect1']
-        bubble['contents'][5]['contents'][1]['text'] = reflect['reflect2']
-        bubble['contents'][7]['contents'][1]['text'] = f"{reflect['score']}分 / 100分"
+        bubble['body']['contents'][1]['text'] = student_name
+        bubble['body']['contents'][3]['contents'][1]['text'] = reflect['reflect1']
+        bubble['body']['contents'][5]['contents'][1]['text'] = reflect['reflect2']
+        bubble['body']['contents'][7]['contents'][1]['text'] = f"{reflect['score']}分 / 100分"
 
         temp_bubbles.append(bubble)
 
-    new_contents[0]['contents'] = temp_bubbles
+    print([new_contents[0]['contents'][0]].extend(temp_bubbles))
+    new_contents[0]['contents'] = [new_contents[0]['contents'][0]].extend(temp_bubbles)
 
     _messages = []
     for content in new_contents:
@@ -756,6 +759,7 @@ def push_M(hw_no: int, line_user_id: str, line_group_id:str):
 
 def manage_M_message(hw_no, line_user_id):
     contents = get_messages(id=MessageId.M.value)
+    new_contents = copy.deepcopy(contents)
 
     students = db_student.get_group_members_by_student_line_UID(line_user_id=line_user_id)
     hw = db_hw.get_hw_by_hw_no(hw_no=hw_no)
@@ -831,7 +835,8 @@ def manage_M_message(hw_no, line_user_id):
                         "text": "我覺得....",
                         "size": "sm",
                         "color": "#555555",
-                        "flex": 0
+                        "flex": 0,
+                        "wrap": True
                     },
                     {
                         "type": "separator",
@@ -858,7 +863,8 @@ def manage_M_message(hw_no, line_user_id):
                         "text": "我覺得....",
                         "size": "sm",
                         "color": "#555555",
-                        "flex": 0
+                        "flex": 0,
+                        "wrap": True
                     },
                     {
                         "type": "separator",
@@ -885,7 +891,8 @@ def manage_M_message(hw_no, line_user_id):
                         "text": "我覺得...",
                         "size": "sm",
                         "color": "#555555",
-                        "flex": 0
+                        "flex": 0,
+                        "wrap": True
                     },
                     {
                         "type": "separator",
@@ -912,7 +919,8 @@ def manage_M_message(hw_no, line_user_id):
                         "text": "我覺得....",
                         "size": "sm",
                         "color": "#555555",
-                        "flex": 0
+                        "flex": 0,
+                        "wrap": True
                     },
                     {
                         "type": "separator",
@@ -975,16 +983,32 @@ def manage_M_message(hw_no, line_user_id):
             }
             }
 
+    temp_check_bubbles = []
+    temp_reflect_bubbles = []
+    
     for student in students:
 
         hw_check = db_hw_reflect.get_hw_check(hw_no=hw_no, student_id=student['_id'])
 
+        if not hw_check: break
+
         new_bubble = copy.deepcopy(bubble_m0)
 
-        new_bubble['body']['contents'][0]['text'] = f"{student['name']}的檢查結果"
+        new_bubble['body']['contents'] = [{
+            "type": "text",
+            "text": f"{student['name']}的檢查結果",
+            "weight": "bold",
+            "size": "lg",
+            "margin": "md"
+        },
+        {
+            "type": "separator",
+            "margin": "lg"
+        }]
 
+        trigger = False
         for idx, check in enumerate(hw_check['rule1_checked']):
-            if not check:
+            if not check and not trigger:
                 new_bubble['body']['contents'].append({
                     "type": "text",
                     "text": f"{hw['rule1_title']}",
@@ -994,6 +1018,8 @@ def manage_M_message(hw_no, line_user_id):
                     "weight": "bold",
                     "margin": "lg"
                 })
+                trigger = True
+            if not check:
                 new_bubble['body']['contents'].append({
                     "type": "text",
                     "text": f"{hw['rule1_contents'][idx]}",
@@ -1003,10 +1029,11 @@ def manage_M_message(hw_no, line_user_id):
                     "margin": "md"
                 })
 
-            if hw_no == 1:
-                for idx, check in enumerate(hw_check['rule2_checked']):
-                    if not check:
-                        new_bubble['body']['contents'].append({
+        if hw_no == 1:
+            trigger = False
+            for idx, check in enumerate(hw_check['rule2_checked']):
+                if not check and not trigger:
+                    new_bubble['body']['contents'].append({
                             "type": "text",
                             "text": f"{hw['rule2_title']}",
                             "size": "sm",
@@ -1014,8 +1041,10 @@ def manage_M_message(hw_no, line_user_id):
                             "flex": 0,
                             "weight": "bold",
                             "margin": "lg"
-                        })
-                        new_bubble['body']['contents'].append({
+                    })
+                    trigger = True
+                if not check:
+                    new_bubble['body']['contents'].append({
                             "type": "text",
                             "text": f"{hw['rule2_contents'][idx]}",
                             "size": "sm",
@@ -1024,9 +1053,10 @@ def manage_M_message(hw_no, line_user_id):
                             "margin": "md"
                         })
 
-                for idx, check in enumerate(hw_check['rule3_checked']):
-                    if not check:
-                        new_bubble['body']['contents'].append({
+            trigger = False
+            for idx, check in enumerate(hw_check['rule3_checked']):
+                if not check and not trigger:
+                    new_bubble['body']['contents'].append({
                             "type": "text",
                             "text": f"{hw['rule3_title']}",
                             "size": "sm",
@@ -1034,40 +1064,43 @@ def manage_M_message(hw_no, line_user_id):
                             "flex": 0,
                             "weight": "bold",
                             "margin": "lg"
-                        })
-                        new_bubble['body']['contents'].append({
+                    })
+                    trigger = True
+                if not check:
+                    new_bubble['body']['contents'].append({
                             "type": "text",
                             "text": f"{hw['rule3_contents'][idx]}",
                             "size": "sm",
                             "color": "#555555",
                             "flex": 0,
                             "margin": "md"
-                        })
+                    })
 
-        contents[0]['contents'].append(new_bubble)
+        temp_check_bubbles.append(new_bubble)
 
         # M1
-        hw_reflect = db_hw_reflect.get_hw_reflect(hw_no=hw_no, student_id=student['_id'])
+        reflect = db_hw_reflect.get_hw_reflect(hw_no=hw_no, student_id=student['_id'])
 
         new_bubble = copy.deepcopy(bubble_m1)
+        
+        new_bubble['body']['contents'][1]['text'] = student['name']
+        new_bubble['body']['contents'][3]['contents'][1]['text'] = reflect['reflect1']
+        new_bubble['body']['contents'][4]['contents'][1]['text'] = reflect['reflect2']
+        new_bubble['body']['contents'][5]['contents'][1]['text'] = reflect['reflect3']
+        new_bubble['body']['contents'][6]['contents'][1]['text'] = reflect['reflect4']
+        new_bubble['body']['contents'][7]['contents'][1]['text'] = f"{reflect['group_score']}分 / 100分"
+        new_bubble['body']['contents'][8]['contents'][1]['text'] = f"{reflect['score']}分 / 100分"
 
-        for reflect in hw_reflect:
-            new_bubble['body']['contents'][0]['text'] = student['name']
-            new_bubble['body']['contents'][3]['contents'][1]['text'] = reflect['reflect1']
-            new_bubble['body']['contents'][4]['contents'][1]['text'] = reflect['reflect2']
-            new_bubble['body']['contents'][5]['contents'][1]['text'] = reflect['reflect3']
-            new_bubble['body']['contents'][6]['contents'][1]['text'] = reflect['reflect4']
-            new_bubble['body']['contents'][7]['contents'][1]['text'] = f"{reflect['group_score']}分 / 100分"
-            new_bubble['body']['contents'][8]['contents'][1]['text'] = f"{reflect['score']}分 / 100分"
+        temp_reflect_bubbles.append(new_bubble)
 
-        contents[1]['contents'].append(new_bubble)
-
+    new_contents[0]['contents'].extend(temp_check_bubbles)
+    new_contents[1]['contents'].extend(temp_reflect_bubbles)
 
     _messages = []
-    for content in contents:
+    for content in new_contents:
         _messages.append(
             FlexSendMessage(
-                alt_text="有人完成工作囉!",
+                alt_text="檢查作業與反饋",
                 contents=content
             )
         )

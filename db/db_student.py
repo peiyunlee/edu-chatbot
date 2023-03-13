@@ -162,3 +162,10 @@ def update_all_group_hw_no_now(hw_no_now:int):
             "hw_no_now":hw_no_now,
         }
     })
+
+def update_group_hw_check(group_id:str, hw_no: int):
+    collection_group.update_one({"_id": group_id},{
+        "$set":{
+            f"hw{hw_no}_checked":True,
+        }
+    })

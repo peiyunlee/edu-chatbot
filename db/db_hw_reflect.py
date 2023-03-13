@@ -21,7 +21,7 @@ def create_hw_reflects(reflect: CreateHWReflect, hw_no: int, student_id: str):
     return created_reflect
 
 
-def get_hw_reflect(hw_no: str, student_id: str):
+def get_hw_reflect(hw_no: int, student_id: str):
     reflect = collection_hr.find_one({"hw_no": hw_no, "student_id":student_id})
     
     return reflect
