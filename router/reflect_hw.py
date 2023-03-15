@@ -19,7 +19,9 @@ def create_new_reflect(hw_no: int, line_user_id: str, reflect: CreateHWReflect):
     created_reflect = db_hw_reflect.create_hw_reflects(reflect=reflect, hw_no=hw_no, student_id=student['_id'])
     created_check = db_hw_reflect.create_hw_rule_check(check=reflect, hw_no=hw_no, student_id=student['_id'])
     db_student.update_group_hw_check(group_id=group['_id'], hw_no=hw_no)
-    linebot.push_M(hw_no=hw_no, line_user_id=line_user_id, line_group_id=group['line_group_id'])
+    is_all_completed = db_hw_reflect.is_all_hw_reflect_completed(hw_no=hw_no, line_user_id=line_user_id)
+    if is_all_completed:
+        linebot.push_M(hw_no=hw_no, line_user_id=line_user_id, line_group_id=group['line_group_id'])
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 

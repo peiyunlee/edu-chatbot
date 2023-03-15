@@ -7,7 +7,7 @@ counts = [
     4,2,1,1,1,
     1,1,1,2,2,
     2,1,3,1,1,
-    1,1
+    1,1,1
 ]
 
 alt_text = [
@@ -43,6 +43,10 @@ alt_text = [
     '成功完成此階段的作業了，繼續下一階段的作業吧！',
     #P
     '還有工作尚未完成喔！',
+    #Q
+    '操作選單',
+    #R
+    '編輯/刪除任務',
 ]
 
 class MessageId(IntEnum):
@@ -80,6 +84,8 @@ class MessageId(IntEnum):
     P = 15
     #操作選單
     Q = 16
+    #編輯刪除任務 
+    R = 17
 
 # --------------------------- convert_to_flex_message
 
@@ -90,7 +96,7 @@ def get_messages(id:int):
 
     for idx in range(0,count):
         f = open (f'./message/content/{name}{idx}.json', "r")
-        if name == 'A' or name == 'B' or name == 'F' or name == 'E' or name == 'J' or name == 'K' or name == 'M' or name == 'Q' or name == 'L':
+        if name == 'A' or name == 'B' or name == 'F' or name == 'E' or name == 'J' or name == 'K' or name == 'M' or name == 'Q' or name == 'L' or name == 'R':
             _messages.append(json.loads(f.read()))
         else:
             _messages.append(

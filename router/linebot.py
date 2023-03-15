@@ -203,7 +203,7 @@ def manage_A_message(homeworks):
                             "spacing": "sm"
                         }]
             
-        if hw['hw_no'] == 1:
+        if not hw['rule2_title'] == '':
             rules_contents.append(
                         {
                                 "type": "box",
@@ -229,6 +229,8 @@ def manage_A_message(homeworks):
                                 "spacing": "sm"
                             }
                             )
+            
+        if not hw['rule3_title'] == '':
             rules_contents.append(
                     {
                             "type": "box",
@@ -375,7 +377,7 @@ def manage_B_message(hw_no_now: int):
     # 修改規範內容
     hw = db_hw.get_hw_by_hw_no(hw_no=hw_no_now)
 
-    rules_contents =  [{
+    rules_contents_data =  {
         "type": "box",
         "layout": "vertical",
         "contents": [
@@ -397,7 +399,21 @@ def manage_B_message(hw_no_now: int):
             }
         ],
         "spacing": "sm"
-    }]
+    }
+
+    rules_contents = [rules_contents_data]
+
+    if not hw['rule2_title'] == '':
+        new_rules_contents_data = copy.deepcopy(rules_contents_data)
+        new_rules_contents_data['contents'][0]['text'] = hw['rule2_title']
+        new_rules_contents_data['contents'][1]['text'] = ('\n').join(hw['rule2_contents'])
+        rules_contents.append(new_rules_contents_data)
+
+    if not hw['rule3_title'] == '':
+        new_rules_contents_data = copy.deepcopy(rules_contents_data)
+        new_rules_contents_data['contents'][0]['text'] = hw['rule3_title']
+        new_rules_contents_data['contents'][1]['text'] = ('\n').join(hw['rule3_contents'])
+        rules_contents.append(new_rules_contents_data)
 
     contents[1] = {
         "type": "bubble",
@@ -611,7 +627,8 @@ def manage_E_message(group_id: str):
             new_content['body']['contents'][6]['text'] = task['hand_over']
             new_content['body']['contents'][8]['text'] = f"繳交日期 {task['hand_over_date']}"
             
-            new_content['body']['contents'][9]['action']['uri'] = f"{LIFF_REFLECT_TASK}/{task['_id']}"
+            # new_content['body']['contents'][9]['action']['uri'] = f"{LIFF_REFLECT_TASK}/{task['_id']}"
+            new_content['body']['contents'][9]['action']['uri'] = f"{LIFF_TASK_TOOL}/hw/{task['hw_no']}"
         
         # elif task['is_finish']:
         #     new_content = copy.deepcopy(content_finish)
@@ -770,7 +787,7 @@ def manage_M_message(hw_no, line_user_id):
         "contents": [
           {
             "type": "text",
-            "text": "李大明的檢查結果",
+            "text": "李大明檢查未完成的規範",
             "weight": "bold",
             "size": "lg",
             "margin": "md"
@@ -992,7 +1009,7 @@ def manage_M_message(hw_no, line_user_id):
 
         new_bubble['body']['contents'] = [{
             "type": "text",
-            "text": f"{student['name']}的檢查結果",
+            "text": f"{student['name']}檢查未完成的規範",
             "weight": "bold",
             "size": "lg",
             "margin": "md"
@@ -1025,7 +1042,7 @@ def manage_M_message(hw_no, line_user_id):
                     "margin": "md"
                 })
 
-        if hw_no == 1:
+        if not hw['rule2_title'] == '':
             trigger = False
             for idx, check in enumerate(hw_check['rule2_checked']):
                 if not check and not trigger:
@@ -1049,6 +1066,7 @@ def manage_M_message(hw_no, line_user_id):
                             "margin": "md"
                         })
 
+        if not hw['rule3_title'] == '':
             trigger = False
             for idx, check in enumerate(hw_check['rule3_checked']):
                 if not check and not trigger:
@@ -1109,6 +1127,8 @@ def manage_Q_message(line_user_id):
     group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
 
     contents[0]['body']['contents'][1]['action']['uri'] = f"{LIFF_TASK_TOOL}/hw/{group['hw_no_now']}"
+    # 操作說明
+    # contents[0]['body']['contents'][3]['action']['uri'] = f"{LIFF_TASK_TOOL}/hw/{group['hw_no_now']}"
 
     _messages = []
     for content in contents:
@@ -1120,6 +1140,28 @@ def manage_Q_message(line_user_id):
         )
     return _messages
 
+
+def push_R(line_group_id: str, task_name: str, student_name: str, group_id: str, action: str):
+    _messages = manage_R_message(student_name=student_name, task_name=task_name, action=action)
+    # 回報工作列表
+    _messages.extend(manage_E_message(group_id=group_id))
+
+    for item in _messages:
+        line_bot_api.push_message(to=line_group_id, messages=item)
+
+
+def manage_R_message(student_name:str , task_name: str, action: str):
+    contents = get_messages(id=MessageId.R.value)
+    contents[0]['body']['contents'][0]['text'] = f"{student_name} {action}了「{task_name}」工作！"
+    _messages = []
+    for content in contents:
+        _messages.append(
+            FlexSendMessage(
+                alt_text=f"有人{action}工作囉！",
+                contents=content
+            )
+        )
+    return _messages
 
 
 # line_bot_api.reply_message(event.reply_token, TextSendMessage(text=t_group_join))
