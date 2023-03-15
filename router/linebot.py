@@ -726,6 +726,7 @@ def manage_K_message(student_name, task_name, task_id):
 
         temp_bubbles.append(bubble)
 
+    new_contents[0]['contents'] = [new_contents[0]['contents'][0]]
     new_contents[0]['contents'] = new_contents[0]['contents'].extend(temp_bubbles)
 
     print(new_contents[0])
