@@ -27,6 +27,15 @@
               "text": "我要繳交作業"
             },
             "style": "primary"
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "uri",
+            "label": "聊天機器人操作說明",
+            "uri": "http://linecorp.com/"
+          },
+          "style": "primary"
         }
       ],
       "spacing": "xl"

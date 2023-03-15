@@ -20,7 +20,7 @@ def create_group(line_group_id: str):
         new_group = jsonable_encoder(GroupModel(
             line_group_id=line_group_id,
             group_number=collection_group.count_documents({})+1,
-            isExperimental=False,
+            isExperimental=True,
             hw1_checked=False,
             hw2_checked=False,
             hw3_checked=False,

@@ -59,16 +59,26 @@ def get_task_by_task_id(task_id: str):
     return JSONResponse(status_code=status.HTTP_200_OK, content=task, headers=header)
 
 
-@router.patch("/id/{task_id}", summary="編輯任務")
-def update_task_by_task_id(task_id: str, task: UpdateTaskModel):
+@router.patch("/id/{task_id}/LUID/{line_user_id}", summary="編輯任務")
+def update_task_by_task_id(task_id: str, task: UpdateTaskModel , line_user_id: str):
     task = jsonable_encoder(task)
     db_task.update_task(task_id=task_id, task_name=task['task_name'],plan=task['plan'], hand_over=task['hand_over'], hand_over_date=task['hand_over_date'])
+    student = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
+    group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
+    linebot.push_R(line_group_id=group['line_group_id'],task_name=task['task_name'], student_name=student['name'], group_id=group['_id'], action='編輯')
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
-@router.delete("/id/{task_id}", summary="刪除任務")
-def delete_task_by_task_id(task_id: str):
+@router.delete("/id/{task_id}/LUID/{line_user_id}", summary="刪除任務")
+def delete_task_by_task_id(task_id: str, line_user_id: str):
+    task = db_task.get_task_by_task_id(task_id=task_id)
     db_task.delete_task_by_task_id(task_id=task_id)
+    student = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
+    group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
+    is_completed = db_task.is_group_all_task_is_all_completed(group_id=group['_id'],hw_no=group['hw_no_now'])
+    linebot.push_R(line_group_id=group['line_group_id'],task_name=task['task_name'], student_name=student['name'], group_id=group['_id'], action='刪除')
+    if is_completed:
+        linebot.push_L(line_user_id=line_user_id, line_group_id=group['line_group_id'])
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
