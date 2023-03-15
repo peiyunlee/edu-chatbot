@@ -655,11 +655,14 @@ def manage_E_message(group_id: str):
     return _messages
     
 
-def push_J(line_group_id: str, task_name: str, student_name: str, reflect1: str, reflect2: str, score: int, hand_over: str, hand_over_date: str, finish_date: str, task_id: str):
+def push_J(line_group_id: str, task_name: str, student_name: str, reflect1: str, reflect2: str, score: int, hand_over: str, hand_over_date: str, finish_date: str, task_id: str, isExperimental: bool):
     _messages = manage_J_message(student_name=student_name, task_name=task_name, reflect1=reflect1, reflect2=reflect2, score=score, hand_over=hand_over, hand_over_date=hand_over_date,finish_date=finish_date,task_id=task_id)
 
-    for item in _messages:
-        line_bot_api.push_message(to=line_group_id, messages=item)
+    if isExperimental:
+        for item in _messages:
+            line_bot_api.push_message(to=line_group_id, messages=item)
+    else:
+        line_bot_api.push_message(to=line_group_id, messages=_messages[0])
 
 
 def manage_J_message(student_name, task_name, reflect1, reflect2, score, hand_over, hand_over_date, finish_date, task_id):
@@ -701,22 +704,21 @@ def manage_K_message(student_name, task_name, task_id):
 
     task_reflects = db_task_reflect.get_task_all_reflect(task_id=task_id)
 
-    print(task_reflects)
-
-    bubble = new_contents[0]['contents'][1]
-
     temp_bubbles = []
 
     for reflect in task_reflects:
+
         student = db_student.get_student_by_student_id(student_id=reflect['student_id'])
         student_name = student['name']
+
         if reflect['is_self']:
+            bubble = new_contents[0]['contents'][1]
             bubble['body']['contents'][0]['text'] = "負責人"
             new_contents[0]['contents'][0]['body']['contents'][2]['text'] = f"負責人：{student_name}"
         else:
+            bubble = new_contents[0]['contents'][2]
             bubble['body']['contents'][0]['text'] = "成員回饋"
 
-        # 成員回饋
         bubble['body']['contents'][1]['text'] = student_name
         bubble['body']['contents'][3]['contents'][1]['text'] = reflect['reflect1']
         bubble['body']['contents'][5]['contents'][1]['text'] = reflect['reflect2']
@@ -724,8 +726,9 @@ def manage_K_message(student_name, task_name, task_id):
 
         temp_bubbles.append(bubble)
 
-    print([new_contents[0]['contents'][0]].extend(temp_bubbles))
-    new_contents[0]['contents'] = [new_contents[0]['contents'][0]].extend(temp_bubbles)
+    new_contents[0]['contents'] = new_contents[0]['contents'][0].extend(temp_bubbles)
+
+    print(new_contents[0])
 
     _messages = []
     for content in new_contents:
@@ -748,9 +751,12 @@ def push_L(line_user_id:str, line_group_id: str):
 def manage_L_message(line_uer_id):
     contents = get_messages(id=MessageId.L.value)
 
+    print("push L")
+
     group = db_student.get_group_by_student_line_UID(line_user_id=line_uer_id)
 
     contents[0]['body']['contents'][2]['action']['uri'] = f"{LIFF_REFLECT_HW}/{group['hw_no_now']}"
+    print(f"{LIFF_REFLECT_HW}/{group['hw_no_now']}")
 
     _messages = []
     for content in contents:

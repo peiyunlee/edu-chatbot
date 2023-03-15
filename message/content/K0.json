@@ -51,6 +51,115 @@
         "contents": [
           {
             "type": "text",
+            "text": "負責人",
+            "weight": "bold",
+            "color": "#1DB446",
+            "size": "sm"
+          },
+          {
+            "type": "text",
+            "text": "李二明",
+            "weight": "bold",
+            "size": "xxl",
+            "margin": "md"
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "有遇到什麼困難？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "有哪些可以改進的地方？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "spacing": "none",
+            "contents": [
+              {
+                "type": "text",
+                "text": "對自己執行成果的滿意分數？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": "8分 / 10分",
+                "size": "sm",
+                "color": "#555555",
+                "align": "end"
+              }
+            ]
+          }
+        ]
+      },
+      "styles": {
+        "footer": {
+          "separator": true
+        }
+      }
+    },
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
             "text": "成員回饋",
             "weight": "bold",
             "color": "#1DB446",
