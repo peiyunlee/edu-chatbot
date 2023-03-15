@@ -532,7 +532,7 @@ def manage_B_message(hw_no_now: int):
     for idx, content in enumerate(contents):
         _messages.append(
             FlexSendMessage(
-                alt_text=f"公布期中專題規範",
+                alt_text=f"公布期中作業規範",
                 contents=content
             )
         )
@@ -1141,18 +1141,28 @@ def manage_Q_message(line_user_id):
     return _messages
 
 
-def push_R(line_group_id: str, task_name: str, student_name: str, group_id: str, action: str):
-    _messages = manage_R_message(student_name=student_name, task_name=task_name, action=action)
+def push_R(line_group_id: str, line_user_id: str, task_name: str, student_name: str, group_id: str, action: str, is_all_completed: bool):
+    _messages = manage_R_message(student_name=student_name, task_name=task_name, action=action, is_all_completed=is_all_completed)
+
+    if is_all_completed:
+    # 都完成工作了
+        _messages.extend(manage_L_message(line_uer_id=line_user_id))
+    else:
     # 回報工作列表
-    _messages.extend(manage_E_message(group_id=group_id))
+        _messages.extend(manage_E_message(group_id=group_id))
 
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
 
 
-def manage_R_message(student_name:str , task_name: str, action: str):
+def manage_R_message(student_name:str , task_name: str, action: str, is_all_completed: bool):
     contents = get_messages(id=MessageId.R.value)
     contents[0]['body']['contents'][0]['text'] = f"{student_name} {action}了「{task_name}」工作！"
+    if is_all_completed:
+        contents[0]['body']['contents'][1]['text'] = " "
+    else:
+        contents[0]['body']['contents'][1]['text'] = "以下是團隊完成此階段的作業需要進行的工作"
+
     _messages = []
     for content in contents:
         _messages.append(
