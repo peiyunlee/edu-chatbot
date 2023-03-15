@@ -404,14 +404,16 @@ def manage_B_message(hw_no_now: int):
     rules_contents = [rules_contents_data]
 
     if not hw['rule2_title'] == '':
-        rules_contents_data['contents'][0]['text'] = hw['rule2_title']
-        rules_contents_data['contents'][1]['text'] = ('\n').join(hw['rule2_contents']),
-        rules_contents.append(rules_contents_data)
+        new_rules_contents_data = copy.deepcopy(rules_contents_data)
+        new_rules_contents_data['contents'][0]['text'] = hw['rule2_title']
+        new_rules_contents_data['contents'][1]['text'] = ('\n').join(hw['rule2_contents'])
+        rules_contents.append(new_rules_contents_data)
 
     if not hw['rule3_title'] == '':
-        rules_contents_data['contents'][0]['text'] = hw['rule3_title']
-        rules_contents_data['contents'][1]['text'] = ('\n').join(hw['rule3_contents']),
-        rules_contents.append(rules_contents_data)
+        new_rules_contents_data = copy.deepcopy(rules_contents_data)
+        new_rules_contents_data['contents'][0]['text'] = hw['rule3_title']
+        new_rules_contents_data['contents'][1]['text'] = ('\n').join(hw['rule3_contents'])
+        rules_contents.append(new_rules_contents_data)
 
     contents[1] = {
         "type": "bubble",
