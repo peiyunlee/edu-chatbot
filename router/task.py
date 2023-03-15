@@ -88,6 +88,17 @@ def complete_task_by_task_id(task_id: str, month: str, day: str):
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
+# @router.post("/broadcast1/pause", summary="定時推播")
+# def pause_broadcast1():
+#     scheduler1.pause()
+#     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+# @router.post("/broadcast2/pause", summary="定時推播")
+# def pause_broadcast2():
+#     scheduler2.pause()
+#     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+
 # ----------------------------------- claim function
 
 def push_claim_task(task_name: str, hw_no: int, student_name: str, group_id: str, line_group_id: str):
@@ -98,4 +109,32 @@ def push_claim_task(task_name: str, hw_no: int, student_name: str, group_id: str
     else:
         linebot.push_F(line_group_id=line_group_id,task_name=task_name, student_name=student_name, group_id=group_id)
 
+
+# import time
+# from apscheduler.schedulers.background import BackgroundScheduler
+# from datetime import datetime
+
+
+# def job1():
+#     print(f'工作１啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
+
+# def job2():
+#     print(f'工作2啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
+
+
+# 指定時區（一定要指定，否則會失敗）
+# scheduler1 = BackgroundScheduler(timezone="Asia/Taipei")
+
+# # 每週二到日的下午6點30分執行job4函式
+# scheduler1.add_job(job1, 'interval', seconds=5)
+# # scheduler1.add_job(job1, 'cron', day_of_week='1-6', hour=22, minute=14)
+# scheduler1.start()
+
+# # 指定時區（一定要指定，否則會失敗）
+# scheduler2 = BackgroundScheduler(timezone="Asia/Taipei")
+
+# # 每週二到日的下午6點30分執行job4函式
+# scheduler2.add_job(job2, 'interval', seconds=5)
+# # scheduler1.add_job(job1, 'cron', day_of_week='1-6', hour=22, minute=14)
+# scheduler2.start()
 
