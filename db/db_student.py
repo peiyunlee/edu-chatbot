@@ -6,6 +6,7 @@ from db.models.model import PyObjectId
 
 collection_group = db["groups"]
 collection_student = db["students"]
+collection_step_U = db["step_U"]
 
 
 # ----------------------------- group

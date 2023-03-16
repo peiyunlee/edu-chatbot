@@ -3,13 +3,12 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import *
 from fastapi import APIRouter, HTTPException, Request
 import json
-
 import copy
-
 from config import CHANNEL_ACCESS_TOKEN, CHANNEL_SECRET, header, LIFF_TASK_TOOL, LIFF_REFLECT_TASK, LIFF_REFLECT_HW 
-from db import db_student, db_task, db_hw, db_task_reflect, db_hw_reflect
+from db import db_remind, db_student, db_task, db_hw, db_task_reflect, db_hw_reflect
 from message.manage_other import get_welcome_flex_messages
 from message.manage import get_messages, MessageId
+from router import scheduler
 
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
@@ -97,9 +96,6 @@ def handle_group_reply_message(event):
 def get_group_reply_messages(event):
     trigger = event.message.text
 
-    # 記錄每個小組到哪個id階段，確保某些流程不能重複
-    pass
-
     # ------------------------------------- 輸入學號姓名新增學生資料
     if "學號" in trigger or "姓名" in trigger:
         text = trigger.split('/')
@@ -142,7 +138,7 @@ def get_group_reply_messages(event):
             # 提醒還有尚未完成的工作
             _messages = get_messages(id=MessageId.P.value)
             # 回報工作列表
-            _messages.extend(manage_E_message(group_id=group['_id']))
+            _messages.extend(manage_E_message(group_id=group['_id'], hw_no=group['hw_no_now']))
 
     # # ------------------------------------- 執行工作回報 trigger?
     # elif trigger == '執行工作' or trigger == 'I':
@@ -152,6 +148,9 @@ def get_group_reply_messages(event):
     elif trigger == '我知道期中專題要做什麼了！':
         line_user_id = event.source.user_id
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
+        db_remind.delete_remind_A(line_group_id= group['line_group_id'])
+        db_remind.create_remind_B(line_group_id=group['line_group_id'])
+        scheduler.add_remind_B()
         _messages =  manage_B_message(hw_no_now=group['hw_no_now'])
     else:
         _messages = None
@@ -162,8 +161,11 @@ def get_group_reply_messages(event):
 def push_A(homeworks, all_groups):
     _messages = manage_A_message(homeworks=homeworks)
 
+    _messages.extend(get_messages(id=MessageId.U.value))
+
     for group in all_groups:
         line_group_id = group['line_group_id']
+        db_remind.create_remind_A(line_group_id=line_group_id)
         print(f"公布期中專題到群組:{line_group_id}")
         line_bot_api.push_message(to=line_group_id, messages=_messages)
 
@@ -371,6 +373,14 @@ def push_B(hw_no_now: int, line_group_id: str):
         line_bot_api.push_message(to=line_group_id, messages=item)
 
 
+def push_B_with_remind(hw_no_now: int, line_group_id: str):
+    _messages = [TextMessage(text="小組還沒針對這一階段的作業規劃工作喔！")]
+    _messages.extend(manage_B_message(hw_no_now=hw_no_now))
+
+    for item in _messages:
+        line_bot_api.push_message(to=line_group_id, messages=item)
+
+
 def manage_B_message(hw_no_now: int):
     contents = get_messages(id=MessageId.B.value)
 
@@ -549,32 +559,32 @@ def manage_B_message(hw_no_now: int):
 #         line_bot_api.push_message(to=line_group_id, messages=item)
 
 
-def push_D(line_group_id: str, group_id: str):
+def push_D(line_group_id: str, group_id: str, hw_no: int):
     _messages = get_messages(id=MessageId.D.value)
     # 回報工作列表
-    _messages.extend(manage_E_message(group_id=group_id))
+    _messages.extend(manage_E_message(group_id=group_id, hw_no=hw_no))
 
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
 
 
-def push_G(line_group_id: str, group_id: str):
+def push_G(line_group_id: str, group_id: str, hw_no: int):
     _messages = get_messages(id=MessageId.G.value)
     # 執行工作引導
     _messages.extend(get_messages(id=MessageId.H.value))
     # 回報工作列表
-    _messages.extend(manage_E_message(group_id=group_id))
+    _messages.extend(manage_E_message(group_id=group_id, hw_no=hw_no))
 
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
 
 
-def push_F(line_group_id: str, task_name: str, student_name: str, group_id: str):
+def push_F(line_group_id: str, task_name: str, student_name: str, group_id: str, hw_no: int):
     _messages = manage_F_message(student_name, task_name)
     # 執行工作引導
     _messages.extend(get_messages(id=MessageId.H.value))
     # 回報工作列表
-    _messages.extend(manage_E_message(group_id=group_id))
+    _messages.extend(manage_E_message(group_id=group_id, hw_no=hw_no))
 
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
@@ -594,7 +604,7 @@ def manage_F_message(student_name, task_name):
     return _messages
 
 
-def manage_E_message(group_id: str):
+def manage_E_message(group_id: str, hw_no: int):
     contents = get_messages(id=MessageId.E.value)
     
     new_contents = copy.deepcopy(contents)
@@ -604,7 +614,7 @@ def manage_E_message(group_id: str):
     content_finish = new_contents[0]["contents"][2]
     content_button = new_contents[0]["contents"][3]
 
-    tasks = db_task.get_group_all_task(group_id=group_id)
+    tasks = db_task.get_group_all_task_by_hw_id(group_id=group_id, hw_no=hw_no)
 
     new_contents[0]["contents"] = []
 
@@ -1146,7 +1156,7 @@ def manage_Q_message(line_user_id):
     return _messages
 
 
-def push_R(line_group_id: str, line_user_id: str, task_name: str, student_name: str, group_id: str, action: str, is_all_completed: bool):
+def push_R(line_group_id: str, line_user_id: str, task_name: str, student_name: str, group_id: str, action: str, is_all_completed: bool, hw_no: int):
     _messages = manage_R_message(student_name=student_name, task_name=task_name, action=action, is_all_completed=is_all_completed)
 
     if is_all_completed:
@@ -1154,7 +1164,7 @@ def push_R(line_group_id: str, line_user_id: str, task_name: str, student_name: 
         _messages.extend(manage_L_message(line_uer_id=line_user_id))
     else:
     # 回報工作列表
-        _messages.extend(manage_E_message(group_id=group_id))
+        _messages.extend(manage_E_message(group_id=group_id, hw_no=hw_no))
 
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
@@ -1179,5 +1189,50 @@ def manage_R_message(student_name:str , task_name: str, action: str, is_all_comp
     return _messages
 
 
-# line_bot_api.reply_message(event.reply_token, TextSendMessage(text=t_group_join))
+def push_S(group_id: str, hw_no: int, line_group_id: str):
 
+    is_all_completed = db_task.is_group_all_task_is_all_completed(group_id= group_id, hw_no=hw_no)
+
+    if is_all_completed:
+        return
+    
+    _messages = get_messages(id=MessageId.S.value)
+
+    _messages.extend(manage_E_message(group_id=group_id, hw_no=hw_no))
+
+    # 取得尚未完成的task
+    tasks = db_task.get_group_all_coming_task(group_id=group_id, hw_no=hw_no)
+
+    if not len(tasks) == 0:
+        _messages.extend(manage_T_message(tasks=tasks))
+
+    for item in _messages:
+        line_bot_api.push_message(to=line_group_id, messages=item)
+
+
+def manage_T_message(tasks: list):
+    contents = get_messages(id=MessageId.T.value)
+
+    texts = []
+
+    for task in tasks:
+        student = db_student.get_student_by_student_id(student_id=task['student_id'])
+        texts.append(f"{student['name']} 負責的「{task['task_name']}」任務")
+
+    contents[0]['body']['contents'][1]['text'] = ('\n').join(texts)
+
+    _messages = []
+    for content in contents:
+        _messages.append(
+            FlexSendMessage(
+                alt_text=f"提醒這些工作明天要交喔！",
+                contents=content
+            )
+        )
+    return _messages
+
+
+def push_U(line_group_id: str):
+    _messages = get_messages(id=MessageId.U.value)
+
+    line_bot_api.push_message(to=line_group_id, messages=_messages)

@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi import Body, status
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from db import db_task, db_student
+from db import db_task, db_student, db_remind
 from router import linebot
 from config import header
 from db.models.m_task import CreateTaskModel, UpdateTaskModel
@@ -15,18 +15,17 @@ router = APIRouter(
 @router.post("/create/LUID/{line_user_id}", summary="新增和推播新增任務")
 def create_new_task(line_user_id: str, task: CreateTaskModel):
     student = db_student.get_student_by_line_UID(line_user_id=line_user_id)
+    group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
     created_task = db_task.create_task(task=task, group_id=student['group_id'])
+    db_remind.delete_remind_B(line_group_id=group['line_group_id'])
     push_create_new_task(line_user_id= line_user_id)
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
-# @router.post("/push/create/LUID/{line_user_id}", summary="推播新增任務")
 def push_create_new_task(line_user_id: str):
     group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
     line_group_id = group['line_group_id']
-    linebot.push_D(line_group_id=line_group_id, group_id=group['_id'])
-
-    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+    linebot.push_D(line_group_id=line_group_id, group_id=group['_id'], hw_no=group['hw_no_now'])
 
 # ----------------------------------- claim
 
@@ -66,7 +65,7 @@ def update_task_by_task_id(task_id: str, task: UpdateTaskModel , line_user_id: s
     student = db_student.get_student_by_line_UID(line_user_id=line_user_id)
     group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
     is_all_completed = db_task.is_group_all_task_is_all_completed(group_id=group['_id'],hw_no=group['hw_no_now'])
-    linebot.push_R(line_group_id=group['line_group_id'], line_user_id=line_user_id, task_name=task['task_name'], student_name=student['name'], group_id=group['_id'], action='編輯', is_all_completed=is_all_completed)
+    linebot.push_R(line_group_id=group['line_group_id'], line_user_id=line_user_id, task_name=task['task_name'], student_name=student['name'], group_id=group['_id'], action='編輯', is_all_completed=is_all_completed, hw_no=group['hw_no_now'])
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
@@ -77,7 +76,7 @@ def delete_task_by_task_id(task_id: str, line_user_id: str):
     student = db_student.get_student_by_line_UID(line_user_id=line_user_id)
     group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
     is_all_completed = db_task.is_group_all_task_is_all_completed(group_id=group['_id'],hw_no=group['hw_no_now'])
-    linebot.push_R(line_group_id=group['line_group_id'], line_user_id=line_user_id,task_name=task['task_name'], student_name=student['name'], group_id=group['_id'], action='刪除', is_all_completed=is_all_completed)
+    linebot.push_R(line_group_id=group['line_group_id'], line_user_id=line_user_id,task_name=task['task_name'], student_name=student['name'], group_id=group['_id'], action='刪除', is_all_completed=is_all_completed, hw_no=group['hw_no_now'])
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
@@ -105,36 +104,6 @@ def push_claim_task(task_name: str, hw_no: int, student_name: str, group_id: str
     is_all_claimed = db_task.is_group_all_task_is_all_claimed(group_id=group_id, hw_no=hw_no)
     if is_all_claimed:
         # 全部都認領完
-        linebot.push_G(line_group_id=line_group_id, group_id=group_id)
+        linebot.push_G(line_group_id=line_group_id, group_id=group_id, hw_no=hw_no)
     else:
-        linebot.push_F(line_group_id=line_group_id,task_name=task_name, student_name=student_name, group_id=group_id)
-
-
-# import time
-# from apscheduler.schedulers.background import BackgroundScheduler
-# from datetime import datetime
-
-
-# def job1():
-#     print(f'工作１啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
-
-# def job2():
-#     print(f'工作2啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
-
-
-# 指定時區（一定要指定，否則會失敗）
-# scheduler1 = BackgroundScheduler(timezone="Asia/Taipei")
-
-# # 每週二到日的下午6點30分執行job4函式
-# scheduler1.add_job(job1, 'interval', seconds=5)
-# # scheduler1.add_job(job1, 'cron', day_of_week='1-6', hour=22, minute=14)
-# scheduler1.start()
-
-# # 指定時區（一定要指定，否則會失敗）
-# scheduler2 = BackgroundScheduler(timezone="Asia/Taipei")
-
-# # 每週二到日的下午6點30分執行job4函式
-# scheduler2.add_job(job2, 'interval', seconds=5)
-# # scheduler1.add_job(job1, 'cron', day_of_week='1-6', hour=22, minute=14)
-# scheduler2.start()
-
+        linebot.push_F(line_group_id=line_group_id,task_name=task_name, student_name=student_name, group_id=group_id, hw_no=hw_no)

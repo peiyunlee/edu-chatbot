@@ -4,8 +4,8 @@ from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from db import db_hw, db_student
 from db.models.m_hw import HWModel
-from router import linebot
-from config import header
+from router import linebot, scheduler
+from config import header,DB_NAME
 
 router = APIRouter(
     prefix='/homework',
@@ -17,6 +17,8 @@ def push_all_hw_announcement():
     homeworks = db_hw.get_all_hw()
     all_groups = db_student.get_all_group()
     linebot.push_A(homeworks=homeworks, all_groups=all_groups )
+    scheduler.add_broadcast_task()
+    scheduler.add_remind_A()
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 @router.post("/create/{hw_no}", summary="新增階段作業")

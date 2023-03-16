@@ -1,0 +1,23 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "跟大家回報一下目前大家的進度，今天大家也要記得做作業喔！",
+        "weight": "bold",
+        "style": "normal",
+        "wrap": true,
+        "color": "#1DB446"
+      },
+      {
+        "type": "text",
+        "text": "記得點擊「執行工作」的按鈕，讓組員知道你完成工作囉！",
+        "wrap": true,
+        "margin": "md"
+      }
+    ]
+  }
+}
