@@ -26,11 +26,13 @@ def create_task(task: CreateTaskModel, group_id: str):
 
 # ----------------------------- claim
 def claim_task(task_id: str, student_id: str):
-    task = collection_task.update_one({"_id":task_id, "student_id": ''},{"$set": {"student_id": student_id}})
+    updated_task = collection_task.update_one({"_id":task_id, "student_id": ''},{"$set": {"student_id": student_id}})
 
-    if task is None:
+    if updated_task is None:
        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail=f"此工作已經有人認領")
+    
+    return updated_task
 
 
 # ----------------------------- complete

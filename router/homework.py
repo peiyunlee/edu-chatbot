@@ -47,5 +47,6 @@ def update_all_group_hw_no_now(hw_no_now: int):
     
     for group in updated_groups:
         linebot.to_push_B(line_group_id=group['line_group_id'], hw_no=hw_no_now)
+        linebot.push_B(hw_no_now=hw_no_now, line_group_id=group['line_group_id'])
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 

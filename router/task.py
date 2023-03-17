@@ -34,7 +34,7 @@ def push_create_new_task(line_user_id: str):
 @router.post("/claim/LUID/{line_user_id}/id/{task_id}", summary="認領任務")
 def claim_task(line_user_id: str, task_id: str):
     student = db_student.get_student_by_line_UID(line_user_id=line_user_id)
-    db_task.claim_task(task_id=task_id, student_id=student['_id'])
+    updated_task = db_task.claim_task(task_id=task_id, student_id=student['_id'])
     group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
     task = db_task.get_task_by_task_id(task_id=task_id)
     task_name = task['task_name']

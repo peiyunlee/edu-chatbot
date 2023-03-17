@@ -122,6 +122,7 @@ def get_group_reply_messages(event):
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
         db_student.update_group_hw_no_now(group_id=group['_id'], hw_no_now=group['hw_no_now'])
         to_push_B(line_group_id=group['line_group_id'], hw_no=group['hw_no_now']+1)
+        _messages = manage_B_message(hw_no=group['hw_no_now']+1)
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '完成繳交作業':
@@ -159,6 +160,7 @@ def get_group_reply_messages(event):
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
         db_remind.delete_remind_A(line_group_id= group['line_group_id'])
         to_push_B(line_group_id=group['line_group_id'],hw_no=group['hw_no_now'])
+        _messages = manage_B_message(hw_no=group['hw_no_now'])
     else:
         _messages = None
 
@@ -169,7 +171,6 @@ def to_push_B(line_group_id: str, hw_no: int):
     if hw_no > 3: return
     db_remind.create_remind_B(line_group_id=line_group_id, hw_no=hw_no)
     scheduler.add_remind_B()
-    _messages =  manage_B_message(hw_no_now=hw_no)
 
 
 def push_A(homeworks, all_groups):
