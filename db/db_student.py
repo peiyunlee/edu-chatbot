@@ -161,11 +161,13 @@ def get_group_by_student_line_UID(line_user_id: str):
                                 detail=f"找不到student")
 
 def update_all_group_hw_no_now(hw_no_now:int):
+    updated_groups = collection_group.find({"hw_no_now": {'$lt':hw_no_now}})
     collection_group.update_many({},{
         "$set":{
             "hw_no_now":hw_no_now,
         }
     })
+    return list(updated_groups)
 
 def update_group_hw_check(group_id:str, hw_no: int):
     collection_group.update_one({"_id": group_id},{

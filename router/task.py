@@ -17,7 +17,9 @@ def create_new_task(line_user_id: str, task: CreateTaskModel):
     student = db_student.get_student_by_line_UID(line_user_id=line_user_id)
     group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
     created_task = db_task.create_task(task=task, group_id=student['group_id'])
-    db_remind.delete_remind_B(line_group_id=group['line_group_id'])
+    db_remind.delete_remind_B(line_group_id=group['line_group_id'], hw_no=group['hw_no_now'])
+    db_remind.create_remind_C(line_group_id=group['line_group_id'], hw_no=group['hw_no_now'])
+    db_remind.delete_remind_L(line_group_id=group['line_group_id'], hw_no=group['hw_no_now'])
     push_create_new_task(line_user_id= line_user_id)
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
@@ -40,6 +42,7 @@ def claim_task(line_user_id: str, task_id: str):
     student_name = student['name']
     group_id  = group['_id']
     line_group_id = group['line_group_id']
+    db_remind.delete_remind_C(line_group_id=group['line_group_id'], hw_no=hw_no)
     push_claim_task(task_name=task_name, hw_no=hw_no, student_name=student_name, group_id=group_id, line_group_id=line_group_id)
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
@@ -76,6 +79,8 @@ def delete_task_by_task_id(task_id: str, line_user_id: str):
     student = db_student.get_student_by_line_UID(line_user_id=line_user_id)
     group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
     is_all_completed = db_task.is_group_all_task_is_all_completed(group_id=group['_id'],hw_no=group['hw_no_now'])
+    if is_all_completed:
+        db_remind.delete_remind_C(line_group_id=group['line_group_id'], hw_no=group['hw_no_now'])
     linebot.push_R(line_group_id=group['line_group_id'], line_user_id=line_user_id,task_name=task['task_name'], student_name=student['name'], group_id=group['_id'], action='刪除', is_all_completed=is_all_completed, hw_no=group['hw_no_now'])
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 

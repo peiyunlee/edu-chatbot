@@ -98,6 +98,8 @@ def get_group_reply_messages(event):
 
     # ------------------------------------- 輸入學號姓名新增學生資料
     if "學號" in trigger or "姓名" in trigger:
+        #防止開始後更新學號姓名
+        pass
         text = trigger.split('/')
         student_number = text[0].replace('學號:','').replace('學號：','').strip()
         student_name = text[1].replace('姓名:','').replace('姓名：','').strip()
@@ -114,14 +116,21 @@ def get_group_reply_messages(event):
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '進行下一階段作業':
+        #防止很早就自己輸入
+        pass
         line_user_id = event.source.user_id
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
         db_student.update_group_hw_no_now(group_id=group['_id'], hw_no_now=group['hw_no_now'])
-        _messages =  manage_B_message(hw_no_now=group['hw_no_now']+1)
+        to_push_B(line_group_id=group['line_group_id'], hw_no=group['hw_no_now']+1)
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '完成繳交作業':
-        _messages = get_messages(id=MessageId.O.value)
+        line_user_id = event.source.user_id
+        group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
+        #防止很早就自己輸入
+        pass
+        if group['hw_no_now'] < 3:
+            _messages = get_messages(id=MessageId.O.value)
 
     # # ------------------------------------- 引導作業繳交 trigger?
     # elif trigger == '繳交作業' or trigger == 'N':
@@ -149,13 +158,18 @@ def get_group_reply_messages(event):
         line_user_id = event.source.user_id
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
         db_remind.delete_remind_A(line_group_id= group['line_group_id'])
-        db_remind.create_remind_B(line_group_id=group['line_group_id'])
-        scheduler.add_remind_B()
-        _messages =  manage_B_message(hw_no_now=group['hw_no_now'])
+        to_push_B(line_group_id=group['line_group_id'],hw_no=group['hw_no_now'])
     else:
         _messages = None
 
     return _messages
+
+
+def to_push_B(line_group_id: str, hw_no: int):
+    if hw_no > 3: return
+    db_remind.create_remind_B(line_group_id=line_group_id, hw_no=hw_no)
+    scheduler.add_remind_B()
+    _messages =  manage_B_message(hw_no_now=hw_no)
 
 
 def push_A(homeworks, all_groups):
@@ -550,13 +564,13 @@ def manage_B_message(hw_no_now: int):
     return _messages
 
 
-# def push_C(line_group_id: str):
-#     _messages = get_messages(id=MessageId.C.value)
-#     # 回報工作列表
-#     # _messages.extend(manage_E_message(group_id=group_id))
+def push_C(line_group_id: str, group_id: str, hw_no: int):
+    _messages = get_messages(id=MessageId.C.value)
+    # 回報工作列表
+    _messages.extend(manage_E_message(group_id=group_id, hw_no=hw_no))
 
-#     for item in _messages:
-#         line_bot_api.push_message(to=line_group_id, messages=item)
+    for item in _messages:
+        line_bot_api.push_message(to=line_group_id, messages=item)
 
 
 def push_D(line_group_id: str, group_id: str, hw_no: int):
@@ -760,9 +774,17 @@ def push_L(line_user_id:str, line_group_id: str):
 def manage_L_message(line_uer_id):
     contents = get_messages(id=MessageId.L.value)
 
-    print("push L")
-
     group = db_student.get_group_by_student_line_UID(line_user_id=line_uer_id)
+
+    text = "恭喜大家都完成工作了！"
+    # 檢查有誰還沒填
+    uncompleted_student_names = db_hw_reflect.get_whoes_hw_reflect_uncompleted(hw_no=group['hw_no_now'], line_user_id=line_uer_id)
+    if len(uncompleted_student_names) > 0:
+        text = f"{(' 和 ').join(uncompleted_student_names)} 尚未填寫作業查核與成果回饋喔！"
+    else:
+        text = "恭喜大家都完成工作了！"
+        
+    contents[0]['body']['contents'][0]['contents'][0]['text'] = text
 
     contents[0]['body']['contents'][2]['action']['uri'] = f"{LIFF_REFLECT_HW}/{group['hw_no_now']}"
     print(f"{LIFF_REFLECT_HW}/{group['hw_no_now']}")
@@ -1236,3 +1258,7 @@ def push_U(line_group_id: str):
     _messages = get_messages(id=MessageId.U.value)
 
     line_bot_api.push_message(to=line_group_id, messages=_messages)
+
+
+def push_remind_hw(line_group_id: str, hw_no: int):
+    line_bot_api.push_message(to=line_group_id,messages=TextMessage(text=f"提醒大家明天要繳交第 {hw_no} 階段的作業喔！趕快完成規劃的工作吧！"))

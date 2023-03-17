@@ -77,7 +77,7 @@ def is_group_all_task_is_all_completed(group_id: str, hw_no: int):
 import datetime
 
 def get_group_all_coming_task(group_id: str, hw_no: int):
-    tasks = collection_task.find({"group_id": group_id, "hw_no": hw_no, "is_finish": False, "hand_over_date": (datetime.datetime.now()+datetime.timedelta(days=1)).strftime('%m/%d')})
+    tasks = collection_task.find({"group_id": group_id, "hw_no": hw_no, "is_finish": False, "hand_over_date": {'$lt':(datetime.datetime.now()+datetime.timedelta(days=1)).strftime('%m/%d')}})
     tasks = list(tasks)
     return tasks
 

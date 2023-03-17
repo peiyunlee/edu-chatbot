@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi import Body, status
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from db import db_hw, db_student
+from db import db_hw, db_student, db_remind
 from db.models.m_hw import HWModel
 from router import linebot, scheduler
 from config import header,DB_NAME
@@ -41,14 +41,11 @@ def get_all_hw():
 
 @router.post("/update/group/hw_no_now/{hw_no_now}", summary="強制更新新的階段")
 def update_all_group_hw_no_now(hw_no_now: int):
-    db_student.update_all_group_hw_no_now(hw_no_now=hw_no_now)
-    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
-
-@router.post("/push/hw_no/{hw_no}", summary="推播某階段期中作業規範")
-def push_hw_announcement(hw_no: int):
-    all_groups = db_student.get_all_group()
-    for group in all_groups:
-        if not group['hw_no_now'] == hw_no:
-            linebot.push_B(hw_no_now=hw_no, line_group_id=group['line_group_id'])
+    updated_groups = db_student.update_all_group_hw_no_now(hw_no_now=hw_no_now)
+    
+    db_remind.delete_all_remind(hw_no=hw_no_now-1)
+    
+    for group in updated_groups:
+        linebot.to_push_B(line_group_id=group['line_group_id'], hw_no=hw_no_now)
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 

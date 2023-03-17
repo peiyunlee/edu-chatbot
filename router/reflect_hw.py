@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi import Body, status
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from db import db_hw_reflect, db_student
+from db import db_hw_reflect, db_student, db_remind
 from router import linebot
 from config import header
 from db.models.m_hw_reflect import CreateHWReflect
@@ -21,6 +21,7 @@ def create_new_reflect(hw_no: int, line_user_id: str, reflect: CreateHWReflect):
     db_student.update_group_hw_check(group_id=group['_id'], hw_no=hw_no)
     is_all_completed = db_hw_reflect.is_all_hw_reflect_completed(hw_no=hw_no, line_user_id=line_user_id)
     if is_all_completed:
+        db_remind.delete_remind_L(line_group_id=group['line_group_id'], hw_no=hw_no)
         linebot.push_M(hw_no=hw_no, line_user_id=line_user_id, line_group_id=group['line_group_id'])
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
