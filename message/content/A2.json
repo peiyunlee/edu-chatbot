@@ -33,7 +33,7 @@
           "contents": [
             {
               "type": "text",
-              "text": "繳交日期",
+              "text": "報告日期",
               "size": "md",
               "flex": 0,
               "weight": "bold",
