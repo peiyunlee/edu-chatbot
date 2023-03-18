@@ -14,6 +14,8 @@ DB_USERNAME = os.environ.get("DB_USERNAME")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
 DB_NAME = os.environ.get("DB_NAME")
 
+SCHEDULER_TEST = os.environ.get("SCHEDULER_TEST")
+
 MONGODB_URL=f"mongodb+srv://{DB_USERNAME}:{DB_PASSWORD}@cluster.hv4wqvd.mongodb.net/?retryWrites=true&w=majority"
 
 header = {"content-type": "application/json; charset=UTF-8","Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"*","Access-Control-Allow-Credentials":"true","Access-Control-Allow-Header":"*"}
