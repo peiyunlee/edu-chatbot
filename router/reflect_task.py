@@ -34,7 +34,7 @@ def create_new_reflect(task_id: str, line_user_id: str, reflect: CreateTaskRefle
         linebot.push_K(line_group_id=line_group_id, task_name=task_name, student_name=student_name, task_id=task_id)
     is_all_completed = db_task.is_group_all_task_is_all_completed(group_id=group['_id'],hw_no=task['hw_no'])
     if is_all_completed:
-        linebot.push_L(line_group_id=line_group_id)
+        linebot.push_L(line_group_id=line_group_id, isRemind=False)
         db_remind.create_remind_L(line_group_id=line_group_id, hw_no=group['hw_no_now'])
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 

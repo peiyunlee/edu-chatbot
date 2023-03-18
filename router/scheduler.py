@@ -116,7 +116,7 @@ def remind_L():
     groups_l = db_remind.get_all_remind_L()
 
     for group_l in groups_l:
-        linebot.push_L(line_group_id=group_l['line_group_id'])
+        linebot.push_L(line_group_id=group_l['line_group_id'], isRemind=True)
 
 def remove_remind(type: str):
     if scheduler_remind.get_job(f"remind_{type}"):

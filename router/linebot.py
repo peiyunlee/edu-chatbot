@@ -126,8 +126,8 @@ def get_group_reply_messages(event):
             db_student.update_group_hw_no_now(group_id=group['_id'], hw_no=hw_no_new)
             to_push_B(line_group_id=group['line_group_id'], hw_no=hw_no_new)
             _messages = manage_B_message(hw_no_now=hw_no_new)
-        else:
-            _messages = manage_L_message(line_group_id=group['line_group_id'])
+        elif group['hw_no_now'] < 3:
+            _messages = manage_L_message(line_group_id=group['line_group_id'], isRemind=True)
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '完成繳交作業':
@@ -140,15 +140,15 @@ def get_group_reply_messages(event):
         #防止很早就自己輸入
         if group['hw_no_now'] < 3 and is_all_reflect_completed:
             _messages = get_messages(id=MessageId.O.value)
-        else:
-            _messages = manage_L_message(line_group_id=group['line_group_id'])
+        elif group['hw_no_now'] < 3:
+            _messages = manage_L_message(line_group_id=group['line_group_id'], isRemind=True)
 
     elif trigger == '我要繳交作業':
         line_user_id = event.source.user_id
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
-        is_all_completed = db_task.is_group_all_task_is_all_completed(group_id=group['_id'],hw_no=group['hw_no_now'])
-        if is_all_completed:
-            _messages = manage_L_message(line_uer_id=line_user_id)
+        is_all_task_completed = db_task.is_group_all_task_is_all_completed(group_id=group['_id'],hw_no=group['hw_no_now'])
+        if is_all_task_completed:
+            _messages = manage_L_message(line_uer_id=line_user_id, isRemind=False)
         else:
             # 提醒還有尚未完成的工作
             _messages = get_messages(id=MessageId.P.value)
@@ -789,14 +789,14 @@ def manage_K_message(student_name, task_name, task_id):
     return _messages
 
 
-def push_L(line_group_id: str):
-    _messages = manage_L_message(line_group_id=line_group_id)
+def push_L(line_group_id: str, isRemind: bool = False):
+    _messages = manage_L_message(line_group_id=line_group_id, isRemind=isRemind)
 
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
 
 
-def manage_L_message(line_group_id: str):
+def manage_L_message(line_group_id: str, isRemind: bool = False):
     contents = get_messages(id=MessageId.L.value)
 
     group = db_student.get_group_by_line_GID(line_group_id=line_group_id)
@@ -805,7 +805,7 @@ def manage_L_message(line_group_id: str):
     # 檢查有誰還沒填
     uncompleted_student_names = db_hw_reflect.get_whoes_hw_reflect_uncompleted(hw_no=group['hw_no_now'], line_group_id=line_group_id)
     students = db_student.get_group_members_by_line_GID(line_group_id=line_group_id)
-    if len(uncompleted_student_names) > 0 and len(students) > len(uncompleted_student_names):
+    if len(uncompleted_student_names) > 0 and len(students) > len(uncompleted_student_names) or isRemind:
         text = f"{(' 和 ').join(uncompleted_student_names)} 尚未填寫作業查核與成果回饋喔！填寫完之後就能交作業囉！"
     else:
         text = "恭喜大家都完成工作了！"
@@ -836,7 +836,7 @@ def push_M(hw_no: int, line_user_id: str, line_group_id:str):
         print('M')
         print(len(_messages))
         _messages = _messages[0:2]
-        _messages.extend(manage_L_message(line_group_id=line_group_id))
+        _messages.extend(manage_L_message(line_group_id=line_group_id, isRemind=True))
 
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
@@ -1218,7 +1218,7 @@ def push_R(line_group_id: str, line_user_id: str, task_name: str, student_name: 
 
     if is_all_completed:
     # 都完成工作了
-        _messages.extend(manage_L_message(line_uer_id=line_user_id))
+        _messages.extend(manage_L_message(line_uer_id=line_user_id, isRemind=False))
     else:
     # 回報工作列表
         _messages.extend(manage_E_message(group_id=group_id, hw_no=hw_no))
