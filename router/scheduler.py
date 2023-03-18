@@ -66,9 +66,9 @@ from datetime import timedelta
 def add_remind_A():
     if not scheduler_remind.get_job('remind_A'):
         if SCHEDULER_TEST == 'true':
-            scheduler_remind.add_job(remind_A, 'interval', minutes=2, id='remind_A', start_date=datetime.datetime.now()+datetime.timedelta(minutes=2))
+            scheduler_remind.add_job(remind_A, 'interval', minutes=5, id='remind_A', start_date=datetime.datetime.now()+datetime.timedelta(minutes=5))
         else:
-            scheduler_remind.add_job(remind_A, 'interval', hours=24, id='remind_A', start_date=datetime.datetime.now()+datetime.timedelta(minutes=2))
+            scheduler_remind.add_job(remind_A, 'interval', hours=24, id='remind_A', start_date=datetime.datetime.now()+datetime.timedelta(minutes=5))
 
 def remind_A():
     groups = db_remind.get_all_remind_A()
@@ -79,9 +79,9 @@ def remind_A():
 def add_remind_B():
     if not scheduler_remind.get_job('remind_B'):
         if SCHEDULER_TEST == 'true':
-            scheduler_remind.add_job(remind_B, 'interval', minutes=2, id='remind_B', start_date=datetime.datetime.now()+datetime.timedelta(minutes=2))
+            scheduler_remind.add_job(remind_B, 'interval', minutes=5, id='remind_B', start_date=datetime.datetime.now()+datetime.timedelta(minutes=5))
         else:
-            scheduler_remind.add_job(remind_B, 'interval', hours=24, id='remind_B', start_date=datetime.datetime.now()+datetime.timedelta(minutes=2))
+            scheduler_remind.add_job(remind_B, 'interval', hours=24, id='remind_B', start_date=datetime.datetime.now()+datetime.timedelta(minutes=5))
 
 
 def remind_B():
@@ -94,9 +94,9 @@ def remind_B():
 def add_remind_C():
     if not scheduler_remind.get_job('remind_C'):
         if SCHEDULER_TEST == 'true':
-            scheduler_remind.add_job(remind_C, 'interval', minutes=2, id='remind_C', start_date=datetime.datetime.now()+datetime.timedelta(minutes=2))
+            scheduler_remind.add_job(remind_C, 'interval', minutes=5, id='remind_C', start_date=datetime.datetime.now()+datetime.timedelta(minutes=5))
         else:
-            scheduler_remind.add_job(remind_C, 'interval', hours=24, id='remind_C', start_date=datetime.datetime.now()+datetime.timedelta(minutes=2))
+            scheduler_remind.add_job(remind_C, 'interval', hours=24, id='remind_C', start_date=datetime.datetime.now()+datetime.timedelta(minutes=5))
 
 def remind_C():
     groups_c = db_remind.get_all_remind_C()
@@ -108,9 +108,9 @@ def remind_C():
 def add_remind_L():
     if not scheduler_remind.get_job('remind_L'):
         if SCHEDULER_TEST == 'true':
-            scheduler_remind.add_job(remind_L, 'interval', minutes=2, id='remind_L', start_date=datetime.datetime.now()+datetime.timedelta(minutes=2))
+            scheduler_remind.add_job(remind_L, 'interval', minutes=5, id='remind_L', start_date=datetime.datetime.now()+datetime.timedelta(minutes=5))
         else:
-            scheduler_remind.add_job(remind_L, 'interval', hours=24, id='remind_L', start_date=datetime.datetime.now()+datetime.timedelta(minutes=2))
+            scheduler_remind.add_job(remind_L, 'interval', hours=24, id='remind_L', start_date=datetime.datetime.now()+datetime.timedelta(minutes=5))
 
 def remind_L():
     groups_l = db_remind.get_all_remind_L()

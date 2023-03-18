@@ -127,7 +127,7 @@ def get_group_reply_messages(event):
             to_push_B(line_group_id=group['line_group_id'], hw_no=hw_no_new)
             _messages = manage_B_message(hw_no_now=hw_no_new)
         else:
-            _messages = get_messages(manage_L_message(line_group_id=group['line_group_id']))
+            _messages = manage_L_message(line_group_id=group['line_group_id'])
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '完成繳交作業':
@@ -141,7 +141,7 @@ def get_group_reply_messages(event):
         if group['hw_no_now'] < 3 and is_all_reflect_completed:
             _messages = get_messages(id=MessageId.O.value)
         else:
-            _messages = get_messages(manage_L_message(line_group_id=group['line_group_id']))
+            _messages = manage_L_message(line_group_id=group['line_group_id'])
 
     elif trigger == '我要繳交作業':
         line_user_id = event.source.user_id
@@ -833,6 +833,8 @@ def push_M(hw_no: int, line_user_id: str, line_group_id:str):
     uncompleted_student_names = db_hw_reflect.get_whoes_hw_reflect_uncompleted(hw_no=hw_no, line_group_id=line_group_id)
     students = db_student.get_group_members_by_line_GID(line_group_id=line_group_id)
     if len(uncompleted_student_names) > 0 and len(students) > len(uncompleted_student_names):
+        print('M')
+        print(len(_messages))
         _messages = _messages[0:2]
         _messages.extend(manage_L_message(line_group_id=line_group_id))
 
