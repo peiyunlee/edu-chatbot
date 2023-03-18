@@ -37,16 +37,16 @@ def get_all_group():
     groups = collection_group.find()
     return groups
 
-def update_group_hw_no_now(group_id:str, hw_no_now: int):
+def update_group_hw_no_now(group_id:str, hw_no: int):
     group = collection_group.update_one({
         "_id": group_id
     },{
         "$set":{
-            "hw_no_now": hw_no_now + 1 ,
+            "hw_no_now": hw_no ,
         }
     })
 
-    print("update group hwno_now")
+    print("update group hw_no_now")
     return group
 
 # ----------------------------- student
@@ -124,6 +124,12 @@ def get_group_members_by_student_line_UID(line_user_id: str):
     else:
        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail=f"找不到student")
+    
+def get_group_members_by_line_GID(line_group_id: str):
+    group = get_group_by_line_GID(line_group_id=line_group_id)
+
+    students = collection_student.find({"group_id":group['_id']})
+    return list(students)
 
 
 # ----------------------------- group

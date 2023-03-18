@@ -12,13 +12,15 @@
         "contents": [
           {
             "type": "span",
-            "text": "而當你完成工作的時候，"
+            "text": "而當你完成工作的時候，",
+            "wrap": true
           },
           {
             "type": "span",
             "text": "記得點擊「完成工作」的按鈕，讓組員知道你有做作業囉！",
             "weight": "bold",
-            "color": "#1DB446"
+            "color": "#1DB446",
+            "wrap": true
           }
         ],
         "wrap": true

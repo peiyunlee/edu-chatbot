@@ -14,7 +14,8 @@
             "color": "#ffffff",
             "align": "start",
             "size": "md",
-            "gravity": "center"
+            "gravity": "center",
+            "wrap": true
           }
         ],
         "backgroundColor": "#E46573",
@@ -124,7 +125,8 @@
             "color": "#ffffff",
             "align": "start",
             "size": "md",
-            "gravity": "center"
+            "gravity": "center",
+            "wrap": true
           }
         ],
         "backgroundColor": "#828282",
@@ -234,7 +236,8 @@
             "color": "#ffffff",
             "align": "start",
             "size": "md",
-            "gravity": "center"
+            "gravity": "center",
+            "wrap": true
           }
         ],
         "backgroundColor": "#6477D3",

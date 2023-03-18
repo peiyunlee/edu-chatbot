@@ -11,13 +11,15 @@
         "contents": [
           {
             "type": "span",
-            "text": "這是團隊工作的反思與建議，"
+            "text": "這是團隊工作的反思與建議，",
+            "wrap": true
           },
           {
             "type": "span",
             "text": "針對有疑問或意見不同的地方，可以提出討論讓大家達成共識喔！",
             "weight": "bold",
-            "color": "#1DB446"
+            "color": "#1DB446",
+            "wrap": true
           }
         ],
         "wrap": true

@@ -13,18 +13,21 @@
           {
             "type": "span",
             "text": "請於此貼上",
-            "weight": "regular"
+            "weight": "regular",
+            "wrap": true
           },
           {
             "type": "span",
             "text": "雲端word連結",
             "weight": "bold",
-            "color": "#1DB446"
+            "color": "#1DB446",
+            "wrap": true
           },
           {
             "type": "span",
             "text": "繳交作業",
-            "weight": "regular"
+            "weight": "regular",
+            "wrap": true
           }
         ]
       }

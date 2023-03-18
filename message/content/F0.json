@@ -20,18 +20,21 @@
         "contents": [
           {
             "type": "span",
-            "text": "以下是團隊完成此階段的作業需要進行的工作，"
+            "text": "以下是團隊完成此階段的作業需要進行的工作，",
+            "wrap": true
           },
           {
             "type": "span",
             "text": "但現在還有工作尚未被認領，請大家討論負責人之後",
             "color": "#1DB446",
-            "weight": "bold"
+            "weight": "bold",
+            "wrap": true
           },
           {
             "type": "span",
             "text": "，點擊「我要認領」按鈕認領工作～",
-            "weight": "regular"
+            "weight": "regular",
+            "wrap": true
           }
         ],
         "weight": "regular",

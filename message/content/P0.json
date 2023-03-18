@@ -6,7 +6,8 @@
     "contents": [
       {
         "type": "text",
-        "text": "還有工作尚未完成喔！"
+        "text": "還有工作尚未完成喔！",
+        "wrap": true
       },
       {
         "type": "text",

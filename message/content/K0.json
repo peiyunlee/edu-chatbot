@@ -15,7 +15,8 @@
             "weight": "bold",
             "align": "center",
             "offsetBottom": "none",
-            "flex": 0
+            "flex": 0,
+            "wrap": true
           },
           {
             "type": "text",
@@ -25,7 +26,8 @@
             "align": "center",
             "offsetBottom": "none",
             "flex": 0,
-            "margin": "xl"
+            "margin": "xl",
+            "wrap": true
           },
           {
             "type": "text",
@@ -36,7 +38,8 @@
             "offsetBottom": "none",
             "flex": 0,
             "margin": "xl",
-            "color": "#aaaaaa"
+            "color": "#aaaaaa",
+            "wrap": true
           }
         ],
         "justifyContent": "center",
@@ -54,14 +57,16 @@
             "text": "負責人",
             "weight": "bold",
             "color": "#1DB446",
-            "size": "sm"
+            "size": "sm",
+            "wrap": true
           },
           {
             "type": "text",
             "text": "李二明",
             "weight": "bold",
             "size": "xxl",
-            "margin": "md"
+            "margin": "md",
+            "wrap": true
           },
           {
             "type": "separator",
@@ -79,14 +84,16 @@
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0,
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
                 "text": "我覺得....",
                 "size": "sm",
                 "color": "#555555",
-                "flex": 0
+                "flex": 0,
+                "wrap": true
               }
             ]
           },
@@ -106,14 +113,16 @@
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0,
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
                 "text": "我覺得....",
                 "size": "sm",
                 "color": "#555555",
-                "flex": 0
+                "flex": 0,
+                "wrap": true
               }
             ]
           },
@@ -133,14 +142,16 @@
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0,
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
                 "text": "8分 / 10分",
                 "size": "sm",
                 "color": "#555555",
-                "align": "end"
+                "align": "end",
+                "wrap": true
               }
             ]
           }
@@ -163,14 +174,16 @@
             "text": "成員回饋",
             "weight": "bold",
             "color": "#1DB446",
-            "size": "sm"
+            "size": "sm",
+            "wrap": true
           },
           {
             "type": "text",
             "text": "李二明",
             "weight": "bold",
             "size": "xxl",
-            "margin": "md"
+            "margin": "md",
+            "wrap": true
           },
           {
             "type": "separator",
@@ -188,14 +201,16 @@
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0,
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
                 "text": "我覺得....",
                 "size": "sm",
                 "color": "#555555",
-                "flex": 0
+                "flex": 0,
+                "wrap": true
               }
             ]
           },
@@ -215,14 +230,16 @@
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0,
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
                 "text": "我覺得....",
                 "size": "sm",
                 "color": "#555555",
-                "flex": 0
+                "flex": 0,
+                "wrap": true
               }
             ]
           },
@@ -242,14 +259,16 @@
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0,
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
                 "text": "8分 / 10分",
                 "size": "sm",
                 "color": "#555555",
-                "align": "end"
+                "align": "end",
+                "wrap": true
               }
             ]
           }

@@ -8,7 +8,6 @@ from config import CHANNEL_ACCESS_TOKEN, CHANNEL_SECRET, header, LIFF_TASK_TOOL,
 from db import db_remind, db_student, db_task, db_hw, db_task_reflect, db_hw_reflect
 from message.manage_other import get_welcome_flex_messages
 from message.manage import get_messages, MessageId
-from router import scheduler
 
 
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
@@ -44,9 +43,6 @@ def handle_group_reply_message(event):
     # 在群組內發送
     if event.source.type == "group":
         handle_group_reply_message(event)
-    # 在官方帳號內發送
-    else:
-        pass
 
 
 # # ----------------------------- 監聽機器人加入群組事件
@@ -91,6 +87,7 @@ def handle_group_reply_message(event):
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
 
+import datetime
 
 # ----------------------------- manage message
 def get_group_reply_messages(event):
@@ -99,15 +96,16 @@ def get_group_reply_messages(event):
     # ------------------------------------- 輸入學號姓名新增學生資料
     if "學號" in trigger or "姓名" in trigger:
         #防止開始後更新學號姓名
-        pass
-        text = trigger.split('/')
-        student_number = text[0].replace('學號:','').replace('學號：','').strip()
-        student_name = text[1].replace('姓名:','').replace('姓名：','').strip()
-        _messages = [TextSendMessage(text=f"你的學號是：{student_number}/姓名是：{student_name}，恭喜你成功加入，接下來我們一起努力吧！")]
+        now = datetime.datetime.now().strftime('%m/%d')
+        if now <= '03/23':
+            text = trigger.split('/')
+            student_number = text[0].replace('學號:','').replace('學號：','').strip()
+            student_name = text[1].replace('姓名:','').replace('姓名：','').strip()
+            _messages = [TextSendMessage(text=f"你的學號是：{student_number}/姓名是：{student_name}，恭喜你成功加入，接下來我們一起努力吧！")]
 
-        line_user_id = event.source.user_id
-        line_group_id = event.source.group_id
-        db_student.create_student(line_user_id=line_user_id,student_number=student_number,student_name=student_name,line_group_id=line_group_id)
+            line_user_id = event.source.user_id
+            line_group_id = event.source.group_id
+            db_student.create_student(line_user_id=line_user_id,student_number=student_number,student_name=student_name,line_group_id=line_group_id)
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '操作選單':
@@ -116,21 +114,28 @@ def get_group_reply_messages(event):
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '進行下一階段作業':
-        #防止很早就自己輸入
-        pass
         line_user_id = event.source.user_id
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
-        db_student.update_group_hw_no_now(group_id=group['_id'], hw_no_now=group['hw_no_now'])
-        to_push_B(line_group_id=group['line_group_id'], hw_no=group['hw_no_now']+1)
-        _messages = manage_B_message(hw_no_now=group['hw_no_now']+1)
+
+        #防止很早就自己輸入，要填完作業反思才能交作業
+        is_all_reflect_completed = db_hw_reflect.is_all_hw_reflect_completed(hw_no=group['hw_no_now'], line_user_id=line_user_id)
+
+        if is_all_reflect_completed and group['hw_no_now'] < 3:
+            hw_no_new = group['hw_no_now'] + 1
+            db_student.update_group_hw_no_now(group_id=group['_id'], hw_no=hw_no_new)
+            to_push_B(line_group_id=group['line_group_id'], hw_no=hw_no_new)
+            _messages = manage_B_message(hw_no_now=hw_no_new)
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '完成繳交作業':
         line_user_id = event.source.user_id
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
+
+        #防止很早就自己輸入，要填完作業反思才能交作業
+        is_all_reflect_completed = db_hw_reflect.is_all_hw_reflect_completed(hw_no=group['hw_no_now'], line_user_id=line_user_id)
+
         #防止很早就自己輸入
-        pass
-        if group['hw_no_now'] < 3:
+        if group['hw_no_now'] < 3 and is_all_reflect_completed:
             _messages = get_messages(id=MessageId.O.value)
 
     # # ------------------------------------- 引導作業繳交 trigger?
@@ -170,7 +175,6 @@ def get_group_reply_messages(event):
 def to_push_B(line_group_id: str, hw_no: int):
     if hw_no > 3: return
     db_remind.create_remind_B(line_group_id=line_group_id, hw_no=hw_no)
-    scheduler.add_remind_B()
 
 
 def push_A(homeworks, all_groups):
@@ -633,6 +637,9 @@ def manage_E_message(group_id: str, hw_no: int):
 
     new_contents[0]["contents"] = []
 
+    f_list = []
+    uc_list = []
+
     for idx, task in enumerate(tasks):
         new_content = None
         if idx >= 11:
@@ -645,6 +652,10 @@ def manage_E_message(group_id: str, hw_no: int):
             new_content['body']['contents'][8]['text'] = f"繳交日期 {task['hand_over_date']}"
             
             new_content['body']['contents'][9]['action']['uri'] = f"{LIFF_TASK_TOOL}/hw/{task['hw_no']}"
+
+            if new_content:
+                uc_list.append(new_content)
+
         elif not task['is_finish']:
             new_content = copy.deepcopy(content_undo)
             new_content['body']['contents'][0]['text'] = task['task_name']
@@ -654,6 +665,9 @@ def manage_E_message(group_id: str, hw_no: int):
             
             # new_content['body']['contents'][9]['action']['uri'] = f"{LIFF_REFLECT_TASK}/{task['_id']}"
             new_content['body']['contents'][9]['action']['uri'] = f"{LIFF_TASK_TOOL}/hw/{task['hw_no']}"
+            
+            if new_content:
+                f_list.append(new_content)
         
         # elif task['is_finish']:
         #     new_content = copy.deepcopy(content_finish)
@@ -663,8 +677,9 @@ def manage_E_message(group_id: str, hw_no: int):
         #     new_content['body']['contents'][9]['text'] = f"繳交日期 {task['hand_over_date']}"
         #     new_content['body']['contents'][10]['text'] = f"完成日期 {task['finish_date']}"
 
-        if new_content:
-            new_contents[0]["contents"].append(new_content)
+        
+    new_contents[0]["contents"].extend(f_list)
+    new_contents[0]["contents"].extend(uc_list)
 
     if len(tasks) >= 12:
         new_contents[0]["contents"].append(content_button)
@@ -701,6 +716,7 @@ def manage_J_message(student_name, task_name, reflect1, reflect2, score, hand_ov
     contents[0]['body']['contents'][11]['contents'][1]['text'] = hand_over_date
     contents[0]['body']['contents'][12]['contents'][1]['text'] = finish_date
 
+    contents[1]['body']['contents'][0]['contents'][0]['text'] = f"太棒了！{student_name} 完成「{task_name}」工作囉，"
     contents[1]['body']['contents'][2]['action']['uri'] = f"{LIFF_REFLECT_TASK}/{task_id}"
 
     _messages = []
@@ -765,23 +781,24 @@ def manage_K_message(student_name, task_name, task_id):
     return _messages
 
 
-def push_L(line_user_id:str, line_group_id: str):
-    _messages = manage_L_message(line_uer_id=line_user_id)
+def push_L(line_group_id: str):
+    _messages = manage_L_message(line_group_id=line_group_id)
 
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
 
 
-def manage_L_message(line_uer_id):
+def manage_L_message(line_group_id: str):
     contents = get_messages(id=MessageId.L.value)
 
-    group = db_student.get_group_by_student_line_UID(line_user_id=line_uer_id)
+    group = db_student.get_group_by_line_GID(line_group_id=line_group_id)
 
     text = "恭喜大家都完成工作了！"
     # 檢查有誰還沒填
-    uncompleted_student_names = db_hw_reflect.get_whoes_hw_reflect_uncompleted(hw_no=group['hw_no_now'], line_user_id=line_uer_id)
-    if len(uncompleted_student_names) > 0:
-        text = f"{(' 和 ').join(uncompleted_student_names)} 尚未填寫作業查核與成果回饋喔！"
+    uncompleted_student_names = db_hw_reflect.get_whoes_hw_reflect_uncompleted(hw_no=group['hw_no_now'], line_group_id=line_group_id)
+    students = db_student.get_group_members_by_line_GID(line_group_id=line_group_id)
+    if len(uncompleted_student_names) > 0 and len(students) > len(uncompleted_student_names):
+        text = f"{(' 和 ').join(uncompleted_student_names)} 尚未填寫作業查核與成果回饋喔！填寫完之後就能交作業囉！"
     else:
         text = "恭喜大家都完成工作了！"
         

@@ -26,6 +26,7 @@ def restart_all():
     add_remind_A()
     add_remind_B()
     add_remind_C()
+    add_remind_L()
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
@@ -60,10 +61,11 @@ def remove_broadcast_task():
     if scheduler_broadcast_task.get_job("broadcast_task"):
         scheduler_broadcast_task.remove_job("broadcast_task")
 
-
 def add_remind_A():
     if not scheduler_remind.get_job('remind_A'):
-        scheduler_remind.add_job(remind_A, 'interval', hours=24, id='remind_A')
+        # scheduler_remind.add_job(remind_A, 'interval', hours=24, id='remind_A')
+        # test
+        scheduler_remind.add_job(remind_A, 'interval', minutes=1, id='remind_A')
 
 def remind_A():
     groups = db_remind.get_all_remind_A()
@@ -73,7 +75,9 @@ def remind_A():
 
 def add_remind_B():
     if not scheduler_remind.get_job('remind_B'):
-        scheduler_remind.add_job(remind_B, 'interval', hours=24, id='remind_B')
+        # scheduler_remind.add_job(remind_B, 'interval', hours=24, id='remind_B')
+        # test
+        scheduler_remind.add_job(remind_B, 'interval', minutes=1, id='remind_B')
 
 def remind_B():
     groups_b = db_remind.get_all_remind_B()
@@ -84,7 +88,9 @@ def remind_B():
 
 def add_remind_C():
     if not scheduler_remind.get_job('remind_C'):
-        scheduler_remind.add_job(remind_C, 'interval', hours=24, id='remind_C')
+        # scheduler_remind.add_job(remind_C, 'interval', hours=24, id='remind_C')
+        # test
+        scheduler_remind.add_job(remind_C, 'interval', minutes=1, id='remind_C')
 
 def remind_C():
     groups_c = db_remind.get_all_remind_C()
@@ -92,6 +98,18 @@ def remind_C():
     for group_c in groups_c:
         group = db_student.get_group_by_line_GID(line_group_id=group_c['line_group_id'])
         linebot.push_C(line_group_id= group['line_group_id'], group_id= group['_id'], hw_no= group['hw_no_now'])
+
+def add_remind_L():
+    if not scheduler_remind.get_job('remind_L'):
+        # scheduler_remind.add_job(remind_L, 'interval', hours=24, id='remind_L')
+        # test
+        scheduler_remind.add_job(remind_L, 'interval', minutes=1, id='remind_L')
+
+def remind_L():
+    groups_l = db_remind.get_all_remind_L()
+
+    for group_l in groups_l:
+        linebot.push_L(line_group_id=group_l['line_group_id'])
 
 def remove_remind(type: str):
     if scheduler_remind.get_job(f"remind_{type}"):
@@ -120,6 +138,9 @@ scheduler_broadcast_task = BackgroundScheduler(timezone="Asia/Taipei")
 scheduler_broadcast_task.start()
 
 scheduler_remind = BackgroundScheduler(timezone="Asia/Taipei")
+add_remind_B()
+add_remind_C()
+add_remind_L()
 scheduler_remind.start()
 
 scheduler_broadcast_hw = BackgroundScheduler(timezone="Asia/Taipei")

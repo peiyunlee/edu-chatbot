@@ -14,12 +14,14 @@
             "type": "span",
             "text": "大家可以針對未完成的規範與團隊的回饋進行討論",
             "color": "#1DB446",
-            "weight": "bold"
+            "weight": "bold",
+            "wrap": true
           },
           {
             "type": "span",
             "text": "，如果需要也可以繼續新增工作完成作業喔！",
-            "weight": "regular"
+            "weight": "regular",
+            "wrap": true
           }
         ]
       },
@@ -32,7 +34,8 @@
           {
             "type": "span",
             "text": "確定要繳交作業的話，將連結貼至FB作業繳交區，並點擊下面的按鈕",
-            "weight": "regular"
+            "weight": "regular",
+            "wrap": true
           }
         ]
       },

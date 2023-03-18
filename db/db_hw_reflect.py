@@ -52,8 +52,8 @@ def is_all_hw_reflect_completed(hw_no: int, line_user_id: str):
     return True
 
 
-def get_whoes_hw_reflect_uncompleted(hw_no: int, line_user_id: str):
-    students = db_student.get_group_members_by_student_line_UID(line_user_id=line_user_id)
+def get_whoes_hw_reflect_uncompleted(hw_no: int, line_group_id: str):
+    students = db_student.get_group_members_by_line_GID(line_group_id=line_group_id)
 
     result = []
 

@@ -36,6 +36,12 @@ def get_all_remind_A():
     groups = collection_remind_A.find()
     return groups
 
+
+def get_remind_A(line_group_id: str):
+    remind = collection_remind_A.find_one({'line_group_id': line_group_id})
+
+    return remind
+
 # ------------------------------ B
 
 def create_remind_B(line_group_id: str, hw_no: int):
@@ -67,6 +73,12 @@ def delete_remind_B(hw_no: int, line_group_id: str or None = None):
 def get_all_remind_B():
     groups = collection_remind_B.find()
     return groups
+
+
+def get_remind_B(line_group_id: str, hw_no: int):
+    remind = collection_remind_B.find_one({'line_group_id': line_group_id, 'hw_no': hw_no})
+
+    return remind
 
 # ------------------------------ C
 
@@ -101,6 +113,12 @@ def get_all_remind_C():
     return groups
 
 
+def get_remind_C(line_group_id: str, hw_no: int):
+    remind = collection_remind_C.find_one({'line_group_id': line_group_id, 'hw_no': hw_no})
+
+    return remind
+
+
 # ------------------------------ L
 
 def create_remind_L(line_group_id: str, hw_no: int):
@@ -132,6 +150,12 @@ def delete_remind_L(hw_no: int, line_group_id: str or None = None ):
 def get_all_remind_L():
     groups = collection_remind_L.find()
     return groups
+
+
+def get_remind_L(line_group_id: str, hw_no: int):
+    remind = collection_remind_L.find_one({'line_group_id': line_group_id, 'hw_no': hw_no})
+
+    return remind
 
 def delete_all_remind(hw_no: int):
     delete_remind_L(hw_no=hw_no)

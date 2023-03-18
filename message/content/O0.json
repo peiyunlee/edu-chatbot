@@ -14,7 +14,8 @@
           {
             "type": "span",
             "text": "成功交完第一階段的作業，繼續進行下一階段的作業吧！",
-            "weight": "regular"
+            "weight": "regular",
+            "wrap": true
           }
         ]
       },

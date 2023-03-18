@@ -10,7 +10,8 @@
           "weight": "bold",
           "size": "lg",
           "margin": "sm",
-          "color": "#1DB446"
+          "color": "#1DB446",
+          "wrap": true
         },
         {
           "type": "text",
@@ -37,14 +38,16 @@
               "flex": 0,
               "weight": "bold",
               "align": "start",
-              "color": "#aaaaaa"
+              "color": "#aaaaaa",
+              "wrap": true
             },
             {
               "type": "text",
               "text": "2023/03/28",
               "size": "md",
               "color": "#aaaaaa",
-              "align": "end"
+              "align": "end",
+              "wrap": true
             }
           ]
         }
