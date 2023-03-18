@@ -61,10 +61,12 @@ def remove_broadcast_task():
     if scheduler_broadcast_task.get_job("broadcast_task"):
         scheduler_broadcast_task.remove_job("broadcast_task")
 
+from datetime import timedelta
+
 def add_remind_A():
     if not scheduler_remind.get_job('remind_A'):
         if SCHEDULER_TEST == 'true':
-            scheduler_remind.add_job(remind_A, 'interval', minutes=2, id='remind_A')
+            scheduler_remind.add_job(remind_A, 'interval', minutes=2, id='remind_A', initial_delay=timedelta(minutes=2))
         else:
             scheduler_remind.add_job(remind_A, 'interval', hours=24, id='remind_A')
 

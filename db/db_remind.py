@@ -45,7 +45,7 @@ def get_remind_A(line_group_id: str):
 # ------------------------------ B
 
 def create_remind_B(line_group_id: str, hw_no: int):
-    old_remind = collection_remind_B.find_one({"line_group_id": line_group_id})
+    old_remind = collection_remind_B.find_one({"line_group_id": line_group_id, 'hw_no': hw_no})
 
     if old_remind:
         print("remind exist")
@@ -83,7 +83,7 @@ def get_remind_B(line_group_id: str, hw_no: int):
 # ------------------------------ C
 
 def create_remind_C(line_group_id: str, hw_no: int):
-    old_remind = collection_remind_C.find_one({"line_group_id": line_group_id})
+    old_remind = collection_remind_C.find_one({"line_group_id": line_group_id, 'hw_no': hw_no})
 
     if old_remind:
         print("remind exist")
@@ -122,7 +122,7 @@ def get_remind_C(line_group_id: str, hw_no: int):
 # ------------------------------ L
 
 def create_remind_L(line_group_id: str, hw_no: int):
-    old_remind = collection_remind_L.find_one({"line_group_id": line_group_id})
+    old_remind = collection_remind_L.find_one({"line_group_id": line_group_id, 'hw_no': hw_no})
 
     if old_remind:
         print("remind exist")

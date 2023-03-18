@@ -147,6 +147,14 @@
             "weight": "bold"
           },
           {
+            "type": "text",
+            "text": "負責人：李佩芸",
+            "color": "#8C8C8C",
+            "size": "sm",
+            "wrap": true,
+            "weight": "bold"
+          },
+          {
             "type": "separator",
             "margin": "md"
           },
@@ -254,6 +262,14 @@
             "text": "寫企劃",
             "color": "#8C8C8C",
             "size": "lg",
+            "wrap": true,
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "負責人：李佩芸",
+            "color": "#8C8C8C",
+            "size": "sm",
             "wrap": true,
             "weight": "bold"
           },

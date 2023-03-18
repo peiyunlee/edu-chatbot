@@ -92,6 +92,7 @@ import datetime
 # ----------------------------- manage message
 def get_group_reply_messages(event):
     trigger = event.message.text
+    _messages = None
 
     # ------------------------------------- 輸入學號姓名新增學生資料
     if "學號" in trigger or "姓名" in trigger:
@@ -125,6 +126,8 @@ def get_group_reply_messages(event):
             db_student.update_group_hw_no_now(group_id=group['_id'], hw_no=hw_no_new)
             to_push_B(line_group_id=group['line_group_id'], hw_no=hw_no_new)
             _messages = manage_B_message(hw_no_now=hw_no_new)
+        else:
+            _messages = get_messages(manage_L_message(line_group_id=group['line_group_id']))
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '完成繳交作業':
@@ -137,12 +140,9 @@ def get_group_reply_messages(event):
         #防止很早就自己輸入
         if group['hw_no_now'] < 3 and is_all_reflect_completed:
             _messages = get_messages(id=MessageId.O.value)
+        else:
+            _messages = get_messages(manage_L_message(line_group_id=group['line_group_id']))
 
-    # # ------------------------------------- 引導作業繳交 trigger?
-    # elif trigger == '繳交作業' or trigger == 'N':
-    #     _messages = get_messages(id=MessageId.N.value)
-
-    # ------------------------------------- 引導作業查核與反思 trigger?
     elif trigger == '我要繳交作業':
         line_user_id = event.source.user_id
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
@@ -154,12 +154,6 @@ def get_group_reply_messages(event):
             _messages = get_messages(id=MessageId.P.value)
             # 回報工作列表
             _messages.extend(manage_E_message(group_id=group['_id'], hw_no=group['hw_no_now']))
-
-    # # ------------------------------------- 執行工作回報 trigger?
-    # elif trigger == '執行工作' or trigger == 'I':
-    #     _messages = get_messages(id=MessageId.I.value)
-
-    # ------------------------------------- 規劃工作
     elif trigger == '我知道期中專題要做什麼了！':
         line_user_id = event.source.user_id
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
@@ -168,6 +162,18 @@ def get_group_reply_messages(event):
         _messages = manage_B_message(hw_no_now=group['hw_no_now'])
     else:
         _messages = None
+
+    # # ------------------------------------- 引導作業繳交 trigger?
+    # elif trigger == '繳交作業' or trigger == 'N':
+    #     _messages = get_messages(id=MessageId.N.value)
+
+    # ------------------------------------- 引導作業查核與反思 trigger?
+
+    # # ------------------------------------- 執行工作回報 trigger?
+    # elif trigger == '執行工作' or trigger == 'I':
+    #     _messages = get_messages(id=MessageId.I.value)
+
+    # ------------------------------------- 規劃工作
 
     return _messages
 
@@ -420,7 +426,7 @@ def manage_B_message(hw_no_now: int):
             },
             {
                 "type": "text",
-                "text": ('\n').join(hw['rule1_contents']),
+                "text": ('\n\n').join(hw['rule1_contents']),
                 "size": "md",
                 "color": "#111111",
                 "align": "start",
@@ -435,13 +441,13 @@ def manage_B_message(hw_no_now: int):
     if not hw['rule2_title'] == '':
         new_rules_contents_data = copy.deepcopy(rules_contents_data)
         new_rules_contents_data['contents'][0]['text'] = hw['rule2_title']
-        new_rules_contents_data['contents'][1]['text'] = ('\n').join(hw['rule2_contents'])
+        new_rules_contents_data['contents'][1]['text'] = ('\n\n').join(hw['rule2_contents'])
         rules_contents.append(new_rules_contents_data)
 
     if not hw['rule3_title'] == '':
         new_rules_contents_data = copy.deepcopy(rules_contents_data)
         new_rules_contents_data['contents'][0]['text'] = hw['rule3_title']
-        new_rules_contents_data['contents'][1]['text'] = ('\n').join(hw['rule3_contents'])
+        new_rules_contents_data['contents'][1]['text'] = ('\n\n').join(hw['rule3_contents'])
         rules_contents.append(new_rules_contents_data)
 
     contents[1] = {
@@ -657,11 +663,13 @@ def manage_E_message(group_id: str, hw_no: int):
                 uc_list.append(new_content)
 
         elif not task['is_finish']:
+            student = db_student.get_student_by_student_id(student_id=task['student_id'])
             new_content = copy.deepcopy(content_undo)
             new_content['body']['contents'][0]['text'] = task['task_name']
-            new_content['body']['contents'][3]['text'] = task['plan']
-            new_content['body']['contents'][6]['text'] = task['hand_over']
-            new_content['body']['contents'][8]['text'] = f"繳交日期 {task['hand_over_date']}"
+            new_content['body']['contents'][1]['text'] = f"負責人：{student['name']}"
+            new_content['body']['contents'][4]['text'] = task['plan']
+            new_content['body']['contents'][7]['text'] = task['hand_over']
+            new_content['body']['contents'][9]['text'] = f"繳交日期 {task['hand_over_date']}"
             
             # new_content['body']['contents'][9]['action']['uri'] = f"{LIFF_REFLECT_TASK}/{task['_id']}"
             new_content['body']['contents'][9]['action']['uri'] = f"{LIFF_TASK_TOOL}/hw/{task['hw_no']}"
@@ -678,8 +686,8 @@ def manage_E_message(group_id: str, hw_no: int):
         #     new_content['body']['contents'][10]['text'] = f"完成日期 {task['finish_date']}"
 
         
-    new_contents[0]["contents"].extend(f_list)
     new_contents[0]["contents"].extend(uc_list)
+    new_contents[0]["contents"].extend(f_list)
 
     if len(tasks) >= 12:
         new_contents[0]["contents"].append(content_button)
@@ -820,6 +828,13 @@ def manage_L_message(line_group_id: str):
 
 def push_M(hw_no: int, line_user_id: str, line_group_id:str):
     _messages = manage_M_message(hw_no, line_user_id)
+
+    # 檢查有誰還沒填
+    uncompleted_student_names = db_hw_reflect.get_whoes_hw_reflect_uncompleted(hw_no=hw_no, line_group_id=line_group_id)
+    students = db_student.get_group_members_by_line_GID(line_group_id=line_group_id)
+    if len(uncompleted_student_names) > 0 and len(students) > len(uncompleted_student_names):
+        _messages = _messages[0:2]
+        _messages.extend(manage_L_message(line_group_id=line_group_id))
 
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
