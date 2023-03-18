@@ -120,14 +120,18 @@ def get_group_reply_messages(event):
 
         #防止很早就自己輸入，要填完作業反思才能交作業
         is_all_reflect_completed = db_hw_reflect.is_all_hw_reflect_completed(hw_no=group['hw_no_now'], line_user_id=line_user_id)
+        isA = db_remind.get_remind_A(line_group_id=group['line_group_id'])
+        isB = db_remind.get_remind_B(line_group_id=group['line_group_id'],hw_no=group['hw_no_now'])
+        is_all_task_completed = db_task.is_group_all_task_is_all_completed(group_id=group['_id'],hw_no=group['hw_no_now'])
 
-        if is_all_reflect_completed and group['hw_no_now'] < 3:
-            hw_no_new = group['hw_no_now'] + 1
-            db_student.update_group_hw_no_now(group_id=group['_id'], hw_no=hw_no_new)
-            to_push_B(line_group_id=group['line_group_id'], hw_no=hw_no_new)
-            _messages = manage_B_message(hw_no_now=hw_no_new)
-        elif group['hw_no_now'] < 3:
-            _messages = manage_L_message(line_group_id=group['line_group_id'], isRemind=True)
+        if group['hw_no_now'] < 3 and not isA and not isB and is_all_task_completed:
+            if is_all_reflect_completed:
+                hw_no_new = group['hw_no_now'] + 1
+                db_student.update_group_hw_no_now(group_id=group['_id'], hw_no=hw_no_new)
+                to_push_B(line_group_id=group['line_group_id'], hw_no=hw_no_new)
+                _messages = manage_B_message(hw_no_now=hw_no_new)
+            else:
+                _messages = manage_L_message(line_group_id=group['line_group_id'], isRemind=True)
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '完成繳交作業':
@@ -136,12 +140,16 @@ def get_group_reply_messages(event):
 
         #防止很早就自己輸入，要填完作業反思才能交作業
         is_all_reflect_completed = db_hw_reflect.is_all_hw_reflect_completed(hw_no=group['hw_no_now'], line_user_id=line_user_id)
+        isA = db_remind.get_remind_A(line_group_id=group['line_group_id'])
+        isB = db_remind.get_remind_B(line_group_id=group['line_group_id'],hw_no=group['hw_no_now'])
+        is_all_task_completed = db_task.is_group_all_task_is_all_completed(group_id=group['_id'],hw_no=group['hw_no_now'])
 
         #防止很早就自己輸入
-        if group['hw_no_now'] < 3 and is_all_reflect_completed:
-            _messages = get_messages(id=MessageId.O.value)
-        elif group['hw_no_now'] < 3:
-            _messages = manage_L_message(line_group_id=group['line_group_id'], isRemind=True)
+        if group['hw_no_now'] < 3 and not isA and not isB and is_all_task_completed:
+            if is_all_reflect_completed:
+                _messages = get_messages(id=MessageId.O.value)
+            else:
+                _messages = manage_L_message(line_group_id=group['line_group_id'], isRemind=True)
 
     elif trigger == '我要繳交作業':
         line_user_id = event.source.user_id
