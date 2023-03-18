@@ -220,7 +220,7 @@ def manage_A_message(homeworks):
                             },
                             {
                                 "type": "text",
-                                "text": ('\n').join(hw['rule1_contents']),
+                                "text": ('\n').join([f"{i+1}. {value}" for i, value in hw['rule1_contents']]),
                                 "size": "md",
                                 "color": "#111111",
                                 "align": "start",
@@ -246,7 +246,7 @@ def manage_A_message(homeworks):
                                 },
                                 {
                                     "type": "text",
-                                    "text": ('\n').join(hw['rule2_contents']),
+                                    "text": ('\n').join([f"{i+1}. {value}" for i, value in hw['rule2_contents']]),
                                     "size": "md",
                                     "color": "#111111",
                                     "align": "start",
@@ -273,7 +273,7 @@ def manage_A_message(homeworks):
                             },
                             {
                                 "type": "text",
-                                "text": ('\n').join(hw['rule3_contents']),
+                                "text": ('\n').join([f"{i+1}. {value}" for i, value in hw['rule3_contents']]),
                                 "size": "md",
                                 "color": "#111111",
                                 "align": "start",
@@ -426,7 +426,7 @@ def manage_B_message(hw_no_now: int):
             },
             {
                 "type": "text",
-                "text": ('\n\n').join(hw['rule1_contents']),
+                "text": ('\n').join([f"{i+1}. {value}" for i, value in hw['rule1_contents']]),
                 "size": "md",
                 "color": "#111111",
                 "align": "start",
@@ -441,13 +441,13 @@ def manage_B_message(hw_no_now: int):
     if not hw['rule2_title'] == '':
         new_rules_contents_data = copy.deepcopy(rules_contents_data)
         new_rules_contents_data['contents'][0]['text'] = hw['rule2_title']
-        new_rules_contents_data['contents'][1]['text'] = ('\n\n').join(hw['rule2_contents'])
+        new_rules_contents_data['contents'][1]['text'] = ('\n').join([f"{i+1}. {value}" for i, value in hw['rule2_contents']])
         rules_contents.append(new_rules_contents_data)
 
     if not hw['rule3_title'] == '':
         new_rules_contents_data = copy.deepcopy(rules_contents_data)
         new_rules_contents_data['contents'][0]['text'] = hw['rule3_title']
-        new_rules_contents_data['contents'][1]['text'] = ('\n\n').join(hw['rule3_contents'])
+        new_rules_contents_data['contents'][1]['text'] = ('\n').join([f"{i+1}. {value}" for i, value in hw['rule3_contents']])
         rules_contents.append(new_rules_contents_data)
 
     contents[1] = {
@@ -672,7 +672,7 @@ def manage_E_message(group_id: str, hw_no: int):
             new_content['body']['contents'][9]['text'] = f"繳交日期 {task['hand_over_date']}"
             
             # new_content['body']['contents'][9]['action']['uri'] = f"{LIFF_REFLECT_TASK}/{task['_id']}"
-            new_content['body']['contents'][9]['action']['uri'] = f"{LIFF_TASK_TOOL}/hw/{task['hw_no']}"
+            new_content['body']['contents'][10]['action']['uri'] = f"{LIFF_TASK_TOOL}/hw/{task['hw_no']}"
             
             if new_content:
                 f_list.append(new_content)
