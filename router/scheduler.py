@@ -91,6 +91,7 @@ def add_remind_C():
 
 def remind_C():
     groups_c = db_remind.get_all_remind_C()
+    print("remind C")
 
     for group_c in groups_c:
         group = db_student.get_group_by_line_GID(line_group_id=group_c['line_group_id'])
