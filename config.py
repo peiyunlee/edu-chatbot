@@ -16,6 +16,8 @@ DB_NAME = os.environ.get("DB_NAME")
 
 HOUR = os.environ.get("HOUR")
 HOUR_REMIND = os.environ.get("HOUR_REMIND")
+MINUTES = os.environ.get("MINUTES")
+MINUTES_REMIND = os.environ.get("MINUTES_REMIND")
 
 SCHEDULER_TEST = os.environ.get("SCHEDULER_TEST")
 
