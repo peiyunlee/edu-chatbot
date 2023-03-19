@@ -14,6 +14,9 @@ DB_USERNAME = os.environ.get("DB_USERNAME")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
 DB_NAME = os.environ.get("DB_NAME")
 
+HOUR = os.environ.get("HOUR")
+HOUR_REMIND = os.environ.get("HOUR_REMIND")
+
 SCHEDULER_TEST = os.environ.get("SCHEDULER_TEST")
 
 MONGODB_URL=f"mongodb+srv://{DB_USERNAME}:{DB_PASSWORD}@cluster.hv4wqvd.mongodb.net/?retryWrites=true&w=majority"
