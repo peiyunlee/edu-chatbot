@@ -24,10 +24,6 @@ app.include_router(reflect_task.router)
 app.include_router(reflect_hw.router)
 app.include_router(linebot.router)
 
-# scheduler.add_jobstore(job_stores[f'{DB_NAME}-broadcast'])
-# scheduler.add_job(job1, 'interval', seconds=5, args=['cc'])
-# scheduler.add_job(broadcast_task, 'interval', seconds=5, id='broadcast_task')
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

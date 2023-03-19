@@ -17,6 +17,7 @@ def push_all_hw_announcement():
     homeworks = db_hw.get_all_hw()
     all_groups = db_student.get_all_group()
     linebot.push_A(homeworks=homeworks, all_groups=all_groups )
+    scheduler.init_scheduler()
     scheduler.add_broadcast_task()
     scheduler.add_remind_A()
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
