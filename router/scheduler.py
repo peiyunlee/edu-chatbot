@@ -3,7 +3,7 @@ from apscheduler.jobstores.mongodb import MongoDBJobStore
 from db.database import client
 from db import db_student, db_remind, db_hw
 from router import linebot
-from config import DB_NAME, SCHEDULER_TEST
+from config import DB_NAME, SCHEDULER_TEST, HOUR, HOUR_REMIND
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from fastapi import status
@@ -49,7 +49,7 @@ def pause_remind():
 
 def add_broadcast_task():
     if not scheduler_broadcast_task.get_job('broadcast_task'):
-        scheduler_broadcast_task.add_job(broadcast_task, 'cron', day_of_week='0-6', hour=9, minute=0, id='broadcast_task')
+        scheduler_broadcast_task.add_job(broadcast_task, 'cron', day_of_week='0-6', hour=int(HOUR), minute=0, id='broadcast_task')
 
 def broadcast_task():
     groups = db_student.get_all_group()
@@ -65,7 +65,7 @@ from datetime import timedelta
 
 def add_remind_A():
     if not scheduler_remind.get_job('remind_A'):
-        scheduler_remind.add_job(remind_A, 'cron', day_of_week='0-6', hour=10, minute=0, id='remind_A')
+        scheduler_remind.add_job(remind_A, 'cron', day_of_week='0-6', hour=int(HOUR_REMIND), minute=0, id='remind_A')
 
 def remind_A():
     groups = db_remind.get_all_remind_A()
@@ -75,7 +75,7 @@ def remind_A():
 
 def add_remind_B():
     if not scheduler_remind.get_job('remind_B'):
-       scheduler_remind.add_job(remind_B, 'cron', day_of_week='0-6', hour=10, minute=0, id='remind_B')
+       scheduler_remind.add_job(remind_B, 'cron', day_of_week='0-6', hour=int(HOUR_REMIND), minute=0, id='remind_B')
 
 
 def remind_B():
@@ -87,7 +87,7 @@ def remind_B():
 
 def add_remind_C():
     if not scheduler_remind.get_job('remind_C'):
-        scheduler_remind.add_job(remind_C, 'cron', day_of_week='0-6', hour=10, minute=0, id='remind_C')
+        scheduler_remind.add_job(remind_C, 'cron', day_of_week='0-6', hour=int(HOUR_REMIND), minute=0, id='remind_C')
 
 def remind_C():
     groups_c = db_remind.get_all_remind_C()
@@ -98,7 +98,7 @@ def remind_C():
 
 def add_remind_L():
     if not scheduler_remind.get_job('remind_L'):
-        scheduler_remind.add_job(remind_L, 'cron', day_of_week='0-6', hour=10, minute=0, id='remind_L')
+        scheduler_remind.add_job(remind_L, 'cron', day_of_week='0-6', hour=int(HOUR_REMIND), minute=0, id='remind_L')
 
 def remind_L():
     groups_l = db_remind.get_all_remind_L()
