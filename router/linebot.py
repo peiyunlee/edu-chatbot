@@ -1084,7 +1084,7 @@ def manage_M_message(hw_no, line_user_id):
 
         hw_check = db_hw_reflect.get_hw_check(hw_no=hw_no, student_id=student['_id'])
 
-        if not hw_check: break
+        if not hw_check: continue
 
         new_bubble = copy.deepcopy(bubble_m0)
 
