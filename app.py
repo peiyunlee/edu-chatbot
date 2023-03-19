@@ -15,12 +15,12 @@ origins = [
     "*",
 ]
 
+app.include_router(scheduler.router)
 app.include_router(homework.router)
 app.include_router(task.router)
 app.include_router(student.router)
 app.include_router(reflect_task.router)
 app.include_router(reflect_hw.router)
-app.include_router(scheduler.router)
 app.include_router(linebot.router)
 
 app.add_middleware(
