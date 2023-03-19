@@ -8,7 +8,7 @@ counts = [
     1,1,1,2,2,
     2,1,3,1,1,
     1,1,1,1,1,
-    1
+    1,1
 ]
 
 alt_text = [
@@ -54,6 +54,8 @@ alt_text = [
     '推播提醒執行任務',
     #U
     '大家知道期中專題要做什麼了嗎？',
+    #V
+    '操作說明',
 ]
 
 class MessageId(IntEnum):
@@ -99,6 +101,8 @@ class MessageId(IntEnum):
     T = 19
     #知道期中專題按鈕
     U = 20
+    #操作說明
+    V = 21
 
 # --------------------------- convert_to_flex_message
 
