@@ -192,8 +192,8 @@ def to_push_B(line_group_id: str, hw_no: int):
 
 
 def push_A(homeworks, all_groups):
-    _messages = manage_A_message(homeworks=homeworks)
-
+    _messages = get_messages(id=MessageId.V.value)
+    _messages.extend(manage_A_message(homeworks=homeworks))
     _messages.extend(get_messages(id=MessageId.U.value))
 
     for group in all_groups:
