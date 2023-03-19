@@ -584,6 +584,7 @@ def manage_B_message(hw_no_now: int):
 
 
 def push_C(line_group_id: str, group_id: str, hw_no: int):
+    print("push C")
     _messages = get_messages(id=MessageId.C.value)
     # 回報工作列表
     _messages.extend(manage_E_message(group_id=group_id, hw_no=hw_no))
