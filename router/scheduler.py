@@ -1,4 +1,3 @@
-from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.mongodb import MongoDBJobStore
 from db.database import client
 from db import db_student, db_remind, db_hw
@@ -8,6 +7,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from fastapi import status
 from config import header
+from app import scheduler_broadcast_task, scheduler_broadcast_hw, scheduler_remind
 
 
 router = APIRouter(
@@ -129,23 +129,3 @@ def broadcast_hw(hw_no):
         if group['hw_no_now'] == hw_no:
             linebot.push_remind_hw(line_group_id=group['line_group_id'], hw_no=hw_no)
 
-
-scheduler_broadcast_task = BackgroundScheduler(timezone="Asia/Taipei")
-scheduler_broadcast_task.start()
-
-scheduler_remind = BackgroundScheduler(timezone="Asia/Taipei")
-remove_remind('B')
-remove_remind('C')
-remove_remind('L')
-add_remind_B()
-add_remind_C()
-add_remind_L()
-scheduler_remind.start()
-
-scheduler_broadcast_hw = BackgroundScheduler(timezone="Asia/Taipei")
-add_broadcast_hw()
-scheduler_broadcast_hw.start()
-
-# scheduler.add_jobstore(job_stores[f'{DB_NAME}-broadcast'])
-# scheduler.add_job(job1, 'interval', seconds=5, args=['cc'])
-# scheduler.add_job(broadcast_task, 'interval', seconds=5, id='broadcast_task')

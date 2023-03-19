@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from router import homework, linebot, task, student, reflect_task, reflect_hw, scheduler
 from db import database
+from apscheduler.schedulers.background import BackgroundScheduler
+
 
 
 app = FastAPI(
@@ -22,6 +24,24 @@ app.include_router(student.router)
 app.include_router(reflect_task.router)
 app.include_router(reflect_hw.router)
 app.include_router(linebot.router)
+
+
+scheduler_broadcast_task = BackgroundScheduler(timezone="Asia/Taipei")
+scheduler_broadcast_task.start()
+
+scheduler_remind = BackgroundScheduler(timezone="Asia/Taipei")
+scheduler.add_remind_B()
+scheduler.add_remind_C()
+scheduler.add_remind_L()
+scheduler_remind.start()
+
+scheduler_broadcast_hw = BackgroundScheduler(timezone="Asia/Taipei")
+scheduler.add_broadcast_hw()
+scheduler_broadcast_hw.start()
+
+# scheduler.add_jobstore(job_stores[f'{DB_NAME}-broadcast'])
+# scheduler.add_job(job1, 'interval', seconds=5, args=['cc'])
+# scheduler.add_job(broadcast_task, 'interval', seconds=5, id='broadcast_task')
 
 app.add_middleware(
     CORSMiddleware,
