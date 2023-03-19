@@ -1,0 +1,25 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "請先閱讀操作說明再開始操作",
+        "align": "center",
+        "size": "md"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "聊天機器人操作說明",
+          "uri": "https://drive.google.com/file/d/1dSV79XKmpzf7gOh8hMzP_jXLchM_hMkq/view?usp=share_link"
+        },
+        "style": "primary"
+      }
+    ],
+    "spacing": "xl"
+  }
+}
