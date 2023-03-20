@@ -136,6 +136,7 @@ def broadcast_hw(hw_no):
 
 
 def init_scheduler():
+    add_broadcast_task()
     scheduler_broadcast_task.start()
 
     add_remind_B()
