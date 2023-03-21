@@ -82,16 +82,47 @@ async def enforce_push_B(line_group_id: str, hw_no: int):
         line_bot_api.push_message(to=line_group_id, messages=item)
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
-@router.post('/push/L', summary="我要繳交作業的回應")
-async def enforce_push_L(line_group_id: str, hw_no: int, group_id: str, line_user_id: str):
+@router.post('/push/O', summary="完成繳交作業的回應")
+async def enforce_push_O(line_group_id: str, hw_no: int, group_id: str, line_user_id: str):
+    #防止很早就自己輸入，要填完作業反思才能交作業
+    is_all_reflect_completed = db_hw_reflect.is_all_hw_reflect_completed(hw_no=hw_no, line_user_id=line_user_id)
+    isA = db_remind.get_remind_A(line_group_id=line_group_id)
+    isB = db_remind.get_remind_B(line_group_id=line_group_id,hw_no=hw_no)
     is_all_task_completed = db_task.is_group_all_task_is_all_completed(group_id=group_id,hw_no=hw_no)
-    if is_all_task_completed:
-        _messages = manage_L_message(line_uer_id=line_user_id, isRemind=False)
-    else:
-        # 提醒還有尚未完成的工作
-        _messages = get_messages(id=MessageId.P.value)
-        # 回報工作列表
-        _messages.extend(manage_E_message(group_id=group_id, hw_no=hw_no))
+
+    #防止很早就自己輸入
+    if hw_no < 3 and not isA and not isB and is_all_task_completed:
+        if is_all_reflect_completed:
+            _messages = get_messages(id=MessageId.O.value)
+        else:
+            _messages = manage_L_message(line_group_id=line_group_id, isRemind=True)
+    for item in _messages:
+        line_bot_api.push_message(to=line_group_id, messages=item)
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+@router.post('/push/Q', summary="操作選單")
+async def enforce_push_O(line_group_id: str, line_user_id: str):
+    _messages =  manage_Q_message(line_user_id=line_user_id)
+    for item in _messages:
+        line_bot_api.push_message(to=line_group_id, messages=item)
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+@router.post('/push/Q', summary="進行下一階段的回應")
+async def enforce_push_Q(line_group_id: str, hw_no_now: int, group_id: int, line_user_id: str):
+    #防止很早就自己輸入，要填完作業反思才能交作業
+    is_all_reflect_completed = db_hw_reflect.is_all_hw_reflect_completed(hw_no=hw_no_now, line_user_id=line_user_id)
+    isA = db_remind.get_remind_A(line_group_id=line_group_id)
+    isB = db_remind.get_remind_B(line_group_id=line_group_id,hw_no=hw_no_now)
+    is_all_task_completed = db_task.is_group_all_task_is_all_completed(group_id=group_id,hw_no=hw_no_now)
+
+    if hw_no_now < 3 and not isA and not isB and is_all_task_completed:
+        if is_all_reflect_completed:
+            hw_no_new = hw_no_now + 1
+            db_student.update_group_hw_no_now(group_id=group_id, hw_no=hw_no_new)
+            to_push_B(line_group_id=line_group_id, hw_no=hw_no_new)
+            _messages = manage_B_message(hw_no_now=hw_no_new)
+        else:
+            _messages = manage_L_message(line_group_id=line_group_id, isRemind=True)
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
@@ -187,12 +218,14 @@ def get_group_reply_messages(event):
             _messages = get_messages(id=MessageId.P.value)
             # 回報工作列表
             _messages.extend(manage_E_message(group_id=group['_id'], hw_no=group['hw_no_now']))
+    
     elif trigger == '我知道期中專題要做什麼了！':
         line_user_id = event.source.user_id
         group = db_student.get_group_by_student_line_UID(line_user_id=line_user_id)
         db_remind.delete_remind_A(line_group_id= group['line_group_id'])
         to_push_B(line_group_id=group['line_group_id'],hw_no=group['hw_no_now'])
         _messages = manage_B_message(hw_no_now=group['hw_no_now'])
+    
     else:
         _messages = None
 
