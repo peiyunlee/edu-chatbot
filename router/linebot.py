@@ -78,6 +78,8 @@ async def enforce_push_B(line_group_id: str, hw_no: int):
     db_remind.delete_remind_A(line_group_id= line_group_id)
     to_push_B(line_group_id=line_group_id,hw_no=hw_no)
     _messages = manage_B_message(hw_no_now=hw_no)
+    for item in _messages:
+        line_bot_api.push_message(to=line_group_id, messages=item)
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 @router.post('/push/L', summary="我要繳交作業的回應")
@@ -90,6 +92,8 @@ async def enforce_push_L(line_group_id: str, hw_no: int, group_id: str, line_use
         _messages = get_messages(id=MessageId.P.value)
         # 回報工作列表
         _messages.extend(manage_E_message(group_id=group_id, hw_no=hw_no))
+    for item in _messages:
+        line_bot_api.push_message(to=line_group_id, messages=item)
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
