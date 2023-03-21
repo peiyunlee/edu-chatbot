@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_f9adf11603aa4ef0890b30cfb3859cbf }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_aff382b682a244da87d53b8248885896 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_654a6a36e9e3495483039adb5416544c }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_69be7d93e9df4a038a4744fd4e90123f }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_f9adf11603aa4ef0890b30cfb3859cbf }}/edu-chatbot:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_654a6a36e9e3495483039adb5416544c }}/edu-chatbot:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'edu-chatbot-server'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_ec8dbb7a340c4c99a4ed0d5b2bc302db }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_f9adf11603aa4ef0890b30cfb3859cbf }}/edu-chatbot:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_4b7b56118dd448fa90c727a1ef4f876d }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_654a6a36e9e3495483039adb5416544c }}/edu-chatbot:${{ github.sha }}'
