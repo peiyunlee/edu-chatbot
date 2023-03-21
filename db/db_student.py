@@ -61,12 +61,9 @@ def create_student(line_user_id:str ,student_number:str, student_name:str, line_
     group_id = group['_id']
     
     if old_student:
-        # print("student exist")
+        print("student exist")
 
-        # now = datetime.datetime.now().strftime('%m/%d')
-        # if now <= '03/23':
-            # 修改 student資訊
-            # update_student(line_user_id= line_user_id ,student_number= student_number, student_name= student_name, group_id=group_id)
+        update_student(line_user_id= line_user_id ,student_number= student_number, student_name= student_name, group_id=group_id)
 
         return old_student
     else:
