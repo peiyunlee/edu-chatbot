@@ -10,13 +10,15 @@
         "contents": [
           {
             "type": "span",
-            "text": "太棒了！有人完成工作囉，"
+            "text": "太棒了！有人完成工作囉，",
+            "wrap": true
           },
           {
             "type": "span",
             "text": "大家可以到繳交的地方去查看工作成果！",
             "color": "#1DB446",
-            "weight": "bold"
+            "weight": "bold",
+            "wrap": true
           }
         ],
         "weight": "regular",

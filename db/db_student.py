@@ -3,9 +3,11 @@ from db.database import db
 from fastapi.encoders import jsonable_encoder
 from fastapi import HTTPException, status
 from db.models.model import PyObjectId
+import datetime
 
 collection_group = db["groups"]
 collection_student = db["students"]
+collection_step_U = db["step_U"]
 
 
 # ----------------------------- group
@@ -36,16 +38,16 @@ def get_all_group():
     groups = collection_group.find()
     return groups
 
-def update_group_hw_no_now(group_id:str, hw_no_now: int):
+def update_group_hw_no_now(group_id:str, hw_no: int):
     group = collection_group.update_one({
         "_id": group_id
     },{
         "$set":{
-            "hw_no_now": hw_no_now + 1 ,
+            "hw_no_now": hw_no ,
         }
     })
 
-    print("update group hwno_now")
+    print("update group hw_no_now")
     return group
 
 # ----------------------------- student
@@ -59,9 +61,12 @@ def create_student(line_user_id:str ,student_number:str, student_name:str, line_
     group_id = group['_id']
     
     if old_student:
-        print("student exist")
-        # 修改 student資訊
-        update_student(line_user_id= line_user_id ,student_number= student_number, student_name= student_name, group_id=group_id)
+        # print("student exist")
+
+        # now = datetime.datetime.now().strftime('%m/%d')
+        # if now <= '03/23':
+            # 修改 student資訊
+            # update_student(line_user_id= line_user_id ,student_number= student_number, student_name= student_name, group_id=group_id)
 
         return old_student
     else:
@@ -123,6 +128,12 @@ def get_group_members_by_student_line_UID(line_user_id: str):
     else:
        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail=f"找不到student")
+    
+def get_group_members_by_line_GID(line_group_id: str):
+    group = get_group_by_line_GID(line_group_id=line_group_id)
+
+    students = collection_student.find({"group_id":group['_id']})
+    return list(students)
 
 
 # ----------------------------- group
@@ -160,11 +171,13 @@ def get_group_by_student_line_UID(line_user_id: str):
                                 detail=f"找不到student")
 
 def update_all_group_hw_no_now(hw_no_now:int):
+    updated_groups = collection_group.find({"hw_no_now": {'$lt':hw_no_now}})
     collection_group.update_many({},{
         "$set":{
             "hw_no_now":hw_no_now,
         }
     })
+    return list(updated_groups)
 
 def update_group_hw_check(group_id:str, hw_no: int):
     collection_group.update_one({"_id": group_id},{

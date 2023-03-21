@@ -26,11 +26,13 @@ def create_task(task: CreateTaskModel, group_id: str):
 
 # ----------------------------- claim
 def claim_task(task_id: str, student_id: str):
-    task = collection_task.update_one({"_id":task_id, "student_id": ''},{"$set": {"student_id": student_id}})
+    updated_task = collection_task.update_one({"_id":task_id, "student_id": ''},{"$set": {"student_id": student_id}})
 
-    if task is None:
+    if updated_task is None:
        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail=f"此工作已經有人認領")
+    
+    return updated_task
 
 
 # ----------------------------- complete
@@ -40,20 +42,10 @@ def complete_task(task_id: str, finish_date: str):
 
     return task
 
+
 def get_task_by_task_id(task_id: str):
     task = collection_task.find_one({"_id": task_id})
     return task
-
-
-def get_group_all_task(group_id: str):
-    tasks = collection_task.find({"group_id": group_id})
-    tasks = list(tasks)
-
-    def get_student_id(e):
-        return e['student_id']
-    
-    tasks.sort(key=get_student_id)
-    return tasks
 
 
 def get_group_all_task_by_hw_id(group_id: str, hw_no: int):
@@ -82,6 +74,14 @@ def is_group_all_task_is_all_completed(group_id: str, hw_no: int):
         return True
     else:
         return False
+
+
+import datetime
+
+def get_group_all_coming_task(group_id: str, hw_no: int):
+    tasks = collection_task.find({"group_id": group_id, "hw_no": hw_no, "is_finish": False, "hand_over_date": {'$lt':(datetime.datetime.now()+datetime.timedelta(days=1)).strftime('%m/%d')}})
+    tasks = list(tasks)
+    return tasks
 
 
 def update_task(task_id:str ,task_name: str, hand_over: str, plan: str, hand_over_date: str):

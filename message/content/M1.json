@@ -15,7 +15,8 @@
             "weight": "bold",
             "align": "center",
             "offsetBottom": "none",
-            "flex": 0
+            "flex": 0,
+            "wrap": true
           }
         ],
         "justifyContent": "center",

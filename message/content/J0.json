@@ -9,14 +9,16 @@
         "text": "完成工作回報",
         "weight": "bold",
         "color": "#1DB446",
-        "size": "sm"
+        "size": "sm",
+        "wrap": true
       },
       {
         "type": "text",
         "text": "ＸＸ工作",
         "weight": "bold",
         "size": "xxl",
-        "margin": "md"
+        "margin": "md",
+        "wrap": true
       },
       {
         "type": "text",
@@ -42,14 +44,16 @@
             "size": "sm",
             "color": "#555555",
             "flex": 0,
-            "weight": "bold"
+            "weight": "bold",
+            "wrap": true
           },
           {
             "type": "text",
             "text": "我覺得....",
             "size": "sm",
             "color": "#555555",
-            "flex": 0
+            "flex": 0,
+            "wrap": true
           }
         ]
       },
@@ -69,14 +73,16 @@
             "size": "sm",
             "color": "#555555",
             "flex": 0,
-            "weight": "bold"
+            "weight": "bold",
+            "wrap": true
           },
           {
             "type": "text",
             "text": "我覺得....",
             "size": "sm",
             "color": "#555555",
-            "flex": 0
+            "flex": 0,
+            "wrap": true
           }
         ]
       },
@@ -96,14 +102,16 @@
             "size": "sm",
             "color": "#555555",
             "flex": 0,
-            "weight": "bold"
+            "weight": "bold",
+            "wrap": true
           },
           {
             "type": "text",
             "text": "8分 / 10分",
             "size": "sm",
             "color": "#555555",
-            "align": "end"
+            "align": "end",
+            "wrap": true
           }
         ]
       },
@@ -121,14 +129,16 @@
             "text": "繳交方式",
             "size": "xs",
             "color": "#aaaaaa",
-            "flex": 0
+            "flex": 0,
+            "wrap": true
           },
           {
             "type": "text",
             "text": "雲端 word",
             "color": "#aaaaaa",
             "size": "xs",
-            "align": "end"
+            "align": "end",
+            "wrap": true
           }
         ]
       },
@@ -142,14 +152,16 @@
             "text": "預計繳交日期",
             "size": "xs",
             "color": "#aaaaaa",
-            "flex": 0
+            "flex": 0,
+            "wrap": true
           },
           {
             "type": "text",
             "text": "04/01",
             "color": "#aaaaaa",
             "size": "xs",
-            "align": "end"
+            "align": "end",
+            "wrap": true
           }
         ]
       },
@@ -163,14 +175,16 @@
             "text": "完成日期",
             "size": "xs",
             "color": "#aaaaaa",
-            "flex": 0
+            "flex": 0,
+            "wrap": true
           },
           {
             "type": "text",
             "text": "04/01",
             "color": "#aaaaaa",
             "size": "xs",
-            "align": "end"
+            "align": "end",
+            "wrap": true
           }
         ]
       }

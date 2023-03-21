@@ -15,7 +15,8 @@
             "weight": "bold",
             "align": "center",
             "offsetBottom": "none",
-            "flex": 0
+            "flex": 0,
+            "wrap": true
           },
           {
             "type": "text",
@@ -25,7 +26,8 @@
             "align": "center",
             "offsetBottom": "none",
             "flex": 0,
-            "margin": "xl"
+            "margin": "xl",
+            "wrap": true
           },
           {
             "type": "text",
@@ -36,7 +38,8 @@
             "offsetBottom": "none",
             "flex": 0,
             "margin": "xl",
-            "color": "#aaaaaa"
+            "color": "#aaaaaa",
+            "wrap": true
           }
         ],
         "justifyContent": "center",
@@ -51,17 +54,136 @@
         "contents": [
           {
             "type": "text",
-            "text": "成員回饋",
+            "text": "負責人",
             "weight": "bold",
             "color": "#1DB446",
-            "size": "sm"
+            "size": "sm",
+            "wrap": true
           },
           {
             "type": "text",
             "text": "李二明",
             "weight": "bold",
             "size": "xxl",
-            "margin": "md"
+            "margin": "md",
+            "wrap": true
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "有遇到什麼困難？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold",
+                "wrap": true
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "wrap": true
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "有哪些可以改進的地方？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold",
+                "wrap": true
+              },
+              {
+                "type": "text",
+                "text": "我覺得....",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "wrap": true
+              }
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "lg",
+            "spacing": "none",
+            "contents": [
+              {
+                "type": "text",
+                "text": "對自己執行成果的滿意分數？",
+                "size": "sm",
+                "color": "#555555",
+                "flex": 0,
+                "weight": "bold",
+                "wrap": true
+              },
+              {
+                "type": "text",
+                "text": "8分 / 10分",
+                "size": "sm",
+                "color": "#555555",
+                "align": "end",
+                "wrap": true
+              }
+            ]
+          }
+        ]
+      },
+      "styles": {
+        "footer": {
+          "separator": true
+        }
+      }
+    },
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "成員回饋",
+            "weight": "bold",
+            "color": "#1DB446",
+            "size": "sm",
+            "wrap": true
+          },
+          {
+            "type": "text",
+            "text": "李二明",
+            "weight": "bold",
+            "size": "xxl",
+            "margin": "md",
+            "wrap": true
           },
           {
             "type": "separator",
@@ -79,14 +201,16 @@
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0,
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
                 "text": "我覺得....",
                 "size": "sm",
                 "color": "#555555",
-                "flex": 0
+                "flex": 0,
+                "wrap": true
               }
             ]
           },
@@ -106,14 +230,16 @@
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0,
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
                 "text": "我覺得....",
                 "size": "sm",
                 "color": "#555555",
-                "flex": 0
+                "flex": 0,
+                "wrap": true
               }
             ]
           },
@@ -133,14 +259,16 @@
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0,
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
                 "text": "8分 / 10分",
                 "size": "sm",
                 "color": "#555555",
-                "align": "end"
+                "align": "end",
+                "wrap": true
               }
             ]
           }

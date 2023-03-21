@@ -10,7 +10,8 @@
         "contents": [
           {
             "type": "span",
-            "text": "恭喜大家都完成工作了！"
+            "text": "恭喜大家都完成工作了！",
+            "wrap": true
           }
         ],
         "weight": "regular",
@@ -25,14 +26,16 @@
         "contents": [
           {
             "type": "span",
-            "text": "交作業前，",
-            "weight": "regular"
+            "text": "如果確定沒有工作要進行的話，在交作業之前，",
+            "weight": "regular",
+            "wrap": true
           },
           {
             "type": "span",
             "text": "請每個成員一起查核作業規範，並填寫作業成果回饋評估此次團隊作業吧～",
             "color": "#1DB446",
-            "weight": "bold"
+            "weight": "bold",
+            "wrap": true
           }
         ]
       },

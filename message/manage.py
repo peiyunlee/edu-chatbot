@@ -4,10 +4,11 @@ from linebot.models import *
 from enum import IntEnum
 
 counts = [
-    4,2,1,1,1,
+    3,2,1,1,1,
     1,1,1,2,2,
     2,1,3,1,1,
-    1,1,1
+    1,1,1,1,1,
+    1,1
 ]
 
 alt_text = [
@@ -47,6 +48,14 @@ alt_text = [
     '操作選單',
     #R
     '編輯/刪除任務',
+    #S
+    '推播任務',
+    #T
+    '推播提醒執行任務',
+    #U
+    '大家知道期中專題要做什麼了嗎？',
+    #V
+    '操作說明',
 ]
 
 class MessageId(IntEnum):
@@ -86,6 +95,14 @@ class MessageId(IntEnum):
     Q = 16
     #編輯刪除任務 
     R = 17
+    #推播
+    S = 18
+    #推播提醒執行任務
+    T = 19
+    #知道期中專題按鈕
+    U = 20
+    #操作說明
+    V = 21
 
 # --------------------------- convert_to_flex_message
 
@@ -96,7 +113,7 @@ def get_messages(id:int):
 
     for idx in range(0,count):
         f = open (f'./message/content/{name}{idx}.json', "r")
-        if name == 'A' or name == 'B' or name == 'F' or name == 'E' or name == 'J' or name == 'K' or name == 'M' or name == 'Q' or name == 'L' or name == 'R':
+        if name == 'A' or name == 'B' or name == 'F' or name == 'E' or name == 'J' or name == 'K' or name == 'M' or name == 'Q' or name == 'L' or name == 'R' or name == 'T':
             _messages.append(json.loads(f.read()))
         else:
             _messages.append(

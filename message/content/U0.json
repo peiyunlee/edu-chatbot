@@ -2,8 +2,13 @@
   "type": "bubble",
   "body": {
     "type": "box",
-    "layout": "horizontal",
+    "layout": "vertical",
     "contents": [
+      {
+        "type": "text",
+        "text": "大家清楚期中專題要做什麼了嗎？",
+        "wrap": true
+      },
       {
         "type": "button",
         "action": {
@@ -11,7 +16,7 @@
           "label": "我知道期中專題要做什麼了！",
           "text": "我知道期中專題要做什麼了！"
         },
-        "margin": "none",
+        "margin": "lg",
         "height": "sm",
         "style": "primary",
         "gravity": "center"

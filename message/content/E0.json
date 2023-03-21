@@ -14,7 +14,8 @@
             "color": "#ffffff",
             "align": "start",
             "size": "md",
-            "gravity": "center"
+            "gravity": "center",
+            "wrap": true
           }
         ],
         "backgroundColor": "#E46573",
@@ -124,7 +125,8 @@
             "color": "#ffffff",
             "align": "start",
             "size": "md",
-            "gravity": "center"
+            "gravity": "center",
+            "wrap": true
           }
         ],
         "backgroundColor": "#828282",
@@ -141,6 +143,14 @@
             "text": "寫企劃",
             "color": "#8C8C8C",
             "size": "lg",
+            "wrap": true,
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "負責人：李佩芸",
+            "color": "#8C8C8C",
+            "size": "sm",
             "wrap": true,
             "weight": "bold"
           },
@@ -234,7 +244,8 @@
             "color": "#ffffff",
             "align": "start",
             "size": "md",
-            "gravity": "center"
+            "gravity": "center",
+            "wrap": true
           }
         ],
         "backgroundColor": "#6477D3",
@@ -251,6 +262,14 @@
             "text": "寫企劃",
             "color": "#8C8C8C",
             "size": "lg",
+            "wrap": true,
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "負責人：李佩芸",
+            "color": "#8C8C8C",
+            "size": "sm",
             "wrap": true,
             "weight": "bold"
           },

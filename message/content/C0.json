@@ -12,17 +12,20 @@
         "contents": [
           {
             "type": "span",
-            "text": "以下是團隊討論出完成此階段的作業需要進行的工作，"
+            "text": "以下是團隊討論出完成此階段的作業需要進行的工作，",
+            "wrap": true
           },
           {
             "type": "span",
             "text": "請大家討論確認每個工作的負責人之後，點擊「我要認領」按鈕認領工作～",
             "weight": "bold",
-            "color": "#1DB446"
+            "color": "#1DB446",
+            "wrap": true
           },
           {
             "type": "span",
-            "text": "確保每個都有人執行喔！"
+            "text": "確保每個工作都有人執行喔！",
+            "wrap": true
           }
         ],
         "wrap": true

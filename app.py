@@ -1,8 +1,9 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from router import homework, linebot, task, student, reflect_task, reflect_hw
+from router import homework, linebot, task, student, reflect_task, reflect_hw, scheduler
 from db import database
+
 
 
 app = FastAPI(
@@ -15,6 +16,7 @@ origins = [
     "*",
 ]
 
+app.include_router(scheduler.router)
 app.include_router(homework.router)
 app.include_router(task.router)
 app.include_router(student.router)

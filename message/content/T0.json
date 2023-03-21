@@ -1,0 +1,30 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "以下是臨近繳交期限的工作：",
+        "style": "normal",
+        "wrap": true
+      },
+      {
+        "type": "text",
+        "text": "＠XXX 負責的「寫企劃」工作",
+        "wrap": true,
+        "margin": "md",
+        "weight": "bold",
+        "color": "#1DB446"
+      },
+      {
+        "type": "text",
+        "text": "你執行的過程中遇到什麼困難了嗎？",
+        "wrap": true,
+        "margin": "md",
+        "weight": "bold"
+      }
+    ]
+  }
+}

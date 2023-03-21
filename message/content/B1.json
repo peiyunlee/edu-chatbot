@@ -10,7 +10,8 @@
         "weight": "bold",
         "size": "lg",
         "margin": "sm",
-        "color": "#1DB446"
+        "color": "#1DB446",
+        "wrap": true
       },
       {
         "type": "text",
@@ -41,7 +42,8 @@
                 "size": "md",
                 "color": "#111111",
                 "align": "start",
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
@@ -64,7 +66,8 @@
                 "size": "md",
                 "color": "#111111",
                 "align": "start",
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
@@ -87,7 +90,8 @@
                 "size": "md",
                 "color": "#111111",
                 "align": "start",
-                "weight": "bold"
+                "weight": "bold",
+                "wrap": true
               },
               {
                 "type": "text",
@@ -118,7 +122,8 @@
             "flex": 0,
             "weight": "bold",
             "align": "start",
-            "color": "#aaaaaa"
+            "color": "#aaaaaa",
+            "wrap": true
           },
           {
             "type": "text",
@@ -142,14 +147,16 @@
             "flex": 0,
             "weight": "bold",
             "align": "start",
-            "color": "#aaaaaa"
+            "color": "#aaaaaa",
+            "wrap": true
           },
           {
             "type": "text",
             "text": "2023/03/27",
             "size": "md",
             "color": "#aaaaaa",
-            "align": "end"
+            "align": "end",
+            "wrap": true
           }
         ]
       }

@@ -20,20 +20,11 @@
           "style": "primary"
         },
         {
-            "type": "button",
-            "action": {
-              "type": "message",
-              "label": "繳交此階段作業",
-              "text": "我要繳交作業"
-            },
-            "style": "primary"
-        },
-        {
           "type": "button",
           "action": {
             "type": "uri",
             "label": "聊天機器人操作說明",
-            "uri": "http://linecorp.com/"
+            "uri": "https://drive.google.com/file/d/1dSV79XKmpzf7gOh8hMzP_jXLchM_hMkq/view?usp=share_link"
           },
           "style": "primary"
         }
