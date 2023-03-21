@@ -3,6 +3,7 @@ from db.database import db
 from fastapi.encoders import jsonable_encoder
 from fastapi import HTTPException, status
 from db.models.model import PyObjectId
+import datetime
 
 collection_group = db["groups"]
 collection_student = db["students"]
@@ -60,9 +61,12 @@ def create_student(line_user_id:str ,student_number:str, student_name:str, line_
     group_id = group['_id']
     
     if old_student:
-        print("student exist")
-        # 修改 student資訊
-        update_student(line_user_id= line_user_id ,student_number= student_number, student_name= student_name, group_id=group_id)
+        # print("student exist")
+
+        # now = datetime.datetime.now().strftime('%m/%d')
+        # if now <= '03/23':
+            # 修改 student資訊
+            # update_student(line_user_id= line_user_id ,student_number= student_number, student_name= student_name, group_id=group_id)
 
         return old_student
     else:
