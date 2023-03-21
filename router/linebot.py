@@ -1,7 +1,8 @@
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import *
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request, status
+from fastapi.responses import JSONResponse
 import json
 import copy
 from config import CHANNEL_ACCESS_TOKEN, CHANNEL_SECRET, header, LIFF_TASK_TOOL, LIFF_REFLECT_TASK, LIFF_REFLECT_HW 
@@ -68,6 +69,29 @@ def handle_join_event_reply_message(event):
 
     line_bot_api.push_message(to=line_group_id,messages=get_welcome_flex_messages(id=0))
     line_bot_api.push_message(to=line_group_id,messages=TextMessage(text="學號：111034010/姓名：李小明"))
+
+
+
+# ---------------------------------------------------------- 強制
+@router.post('/push/B', summary="我知道期中專題要做什麼了!的回應")
+async def enforce_push_B(line_group_id: str, hw_no: int):
+    db_remind.delete_remind_A(line_group_id= line_group_id)
+    to_push_B(line_group_id=line_group_id,hw_no=hw_no)
+    _messages = manage_B_message(hw_no_now=hw_no)
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+@router.post('/push/L', summary="我要繳交作業的回應")
+async def enforce_push_B(line_group_id: str, hw_no: int, group_id: str, line_user_id: str):
+    is_all_task_completed = db_task.is_group_all_task_is_all_completed(group_id=group_id,hw_no=hw_no)
+    if is_all_task_completed:
+        _messages = manage_L_message(line_uer_id=line_user_id, isRemind=False)
+    else:
+        # 提醒還有尚未完成的工作
+        _messages = get_messages(id=MessageId.P.value)
+        # 回報工作列表
+        _messages.extend(manage_E_message(group_id=group_id, hw_no=hw_no))
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
 
 
 # ---------------------------------------------------------- 群組
