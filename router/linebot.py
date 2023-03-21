@@ -81,7 +81,7 @@ async def enforce_push_B(line_group_id: str, hw_no: int):
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 @router.post('/push/L', summary="我要繳交作業的回應")
-async def enforce_push_B(line_group_id: str, hw_no: int, group_id: str, line_user_id: str):
+async def enforce_push_L(line_group_id: str, hw_no: int, group_id: str, line_user_id: str):
     is_all_task_completed = db_task.is_group_all_task_is_all_completed(group_id=group_id,hw_no=hw_no)
     if is_all_task_completed:
         _messages = manage_L_message(line_uer_id=line_user_id, isRemind=False)
