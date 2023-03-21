@@ -87,7 +87,6 @@ def handle_group_reply_message(event):
     for item in _messages:
         line_bot_api.push_message(to=line_group_id, messages=item)
 
-import datetime
 
 # ----------------------------- manage message
 def get_group_reply_messages(event):
@@ -97,16 +96,14 @@ def get_group_reply_messages(event):
     # ------------------------------------- 輸入學號姓名新增學生資料
     if "學號" in trigger or "姓名" in trigger:
         #防止開始後更新學號姓名
-        now = datetime.datetime.now().strftime('%m/%d')
-        if now <= '03/23':
-            text = trigger.split('/')
-            student_number = text[0].replace('學號:','').replace('學號：','').strip()
-            student_name = text[1].replace('姓名:','').replace('姓名：','').strip()
-            _messages = [TextSendMessage(text=f"你的學號是：{student_number}/姓名是：{student_name}，恭喜你成功加入，接下來我們一起努力吧！")]
+        text = trigger.split('/')
+        student_number = text[0].replace('學號:','').replace('學號：','').strip()
+        student_name = text[1].replace('姓名:','').replace('姓名：','').strip()
+        _messages = [TextSendMessage(text=f"你的學號是：{student_number}/姓名是：{student_name}，恭喜你成功加入，接下來我們一起努力吧！")]
 
-            line_user_id = event.source.user_id
-            line_group_id = event.source.group_id
-            db_student.create_student(line_user_id=line_user_id,student_number=student_number,student_name=student_name,line_group_id=line_group_id)
+        line_user_id = event.source.user_id
+        line_group_id = event.source.group_id
+        db_student.create_student(line_user_id=line_user_id,student_number=student_number,student_name=student_name,line_group_id=line_group_id)
 
     # ------------------------------------- 完成作業繳交 trigger?
     elif trigger == '操作選單':
