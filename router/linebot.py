@@ -130,7 +130,7 @@ async def enforce_push_Q(line_group_id: str, hw_no_now: int, group_id: int, line
 
 @router.post('/push/message/{line_user_id}', summary="傳送任意訊息給指定用戶")
 async def enforce_push_message(line_user_id: str, text: str):
-    line_bot_api.push_message(to=line_user_id, messages=TextMessage(text))
+    line_bot_api.push_message(to=line_user_id, messages=TextMessage(text=text))
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
