@@ -26,6 +26,46 @@ def init_all():
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
+@router.post("/init/task", summary="init_broadcast_task")
+def init_broadcast_task():
+    add_broadcast_task()
+    scheduler_broadcast_task.start()
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+@router.post("/init/hw", summary="init_broadcast_hw")
+def init_broadcast_hw():
+    add_broadcast_hw()
+    scheduler_broadcast_hw.start()
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+@router.post("/init/remind", summary="init_remind")
+def init_remind():
+    add_remind_A()
+    add_remind_B()
+    add_remind_C()
+    add_remind_L()
+    scheduler_remind.start()
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+@router.post("/enforce/broadcast/task", summary="enforce_broadcast_task")
+def enforce_broadcast_task():
+    broadcast_task()
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+@router.post("/enforce/broadcast/hw", summary="enforce_broadcast_hw")
+def enforce_broadcast_hw():
+    broadcast_hw()
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+@router.post("/enforce/remind/all", summary="enforce_remind")
+def enforce_remind():
+    remind_A()
+    remind_B()
+    remind_C()
+    remind_L()
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+
 @router.post("/restart/all", summary="更新程式的話重啟每日提醒")
 def restart_all():
     add_broadcast_task()
@@ -33,6 +73,7 @@ def restart_all():
     add_remind_B()
     add_remind_C()
     add_remind_L()
+    add_broadcast_hw()
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
