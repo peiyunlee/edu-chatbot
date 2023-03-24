@@ -107,12 +107,11 @@ def get_student_by_line_UID(line_user_id: str):
     
 def get_student_by_student_id(student_id: str):
     student = collection_student.find_one({"_id": student_id})
+    print(student_id)
 
     if student:
         return student
-    else:
-       raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                                detail=f"找不到student")
+    return None
 
 def get_group_members_by_student_line_UID(line_user_id: str):
     student = collection_student.find_one({"line_user_id": line_user_id})

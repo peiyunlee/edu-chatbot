@@ -1347,7 +1347,10 @@ def manage_T_message(tasks: list):
 
     for task in tasks:
         student = db_student.get_student_by_student_id(student_id=task['student_id'])
-        texts.append(f"{student['name']} 負責的「{task['task_name']}」任務")
+        if student:
+            texts.append(f"{student['name']} 負責的「{task['task_name']}」任務")
+        else:
+            texts.append(f"尚未有人負責的「{task['task_name']}」任務")
 
     contents[0]['body']['contents'][1]['text'] = ('\n').join(texts)
 
