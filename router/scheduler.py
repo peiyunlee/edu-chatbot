@@ -165,7 +165,7 @@ def add_broadcast_hw():
     for hw in homeworks:
         date = hw['hand_over_date'].split('/')
         if not scheduler_broadcast_hw.get_job(f"broadcast_hw_{hw['hw_no']}"):
-            scheduler_broadcast_hw.add_job(broadcast_hw, 'date', run_date=datetime.date(2023,int(date[0]), int(date[1]),), id=f"broadcast_hw_{hw['hw_no']}", args=[hw['hw_no']])
+            scheduler_broadcast_hw.add_job(broadcast_hw, 'date', run_date=datetime.date(2023,int(date[0]), (int(date[1])-1),), id=f"broadcast_hw_{hw['hw_no']}", args=[hw['hw_no']])
 
 
 def broadcast_hw(hw_no):
