@@ -51,3 +51,17 @@ def update_all_group_hw_no_now(hw_no_now: int):
         linebot.push_B(hw_no_now=hw_no_now, line_group_id=group['line_group_id'])
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
+
+
+@router.post("/enforce/push/{hw_no}", summary="強制推播新的作業到群組")
+def enforce_push_hw(hw_no: int, no_group_numbers: list[int]):
+    groups = db_student.get_all_group()
+    
+    for group in groups:
+        print(group['group_number'])
+        if group['group_number'] in no_group_numbers:
+            print("not push")
+        else:
+            linebot.to_push_B(line_group_id=group['line_group_id'], hw_no=hw_no)
+            linebot.push_B(hw_no_now=hw_no, line_group_id=group['line_group_id'])
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
