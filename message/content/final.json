@@ -1,0 +1,34 @@
+{
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "各位同學好！ ",
+          "weight": "regular",
+          "size": "md",
+          "wrap": true
+        },
+        {
+          "type": "text",
+          "text": " 感謝您參加並完成本實驗，最後要請每位同學填寫後測問卷，填寫完成即可參加7-11禮卷抽獎活動喔！非常感謝您的協助～",
+          "weight": "regular",
+          "size": "md",
+          "wrap": true,
+          "margin": "sm"
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "uri",
+            "label": "填寫後測問卷",
+            "uri": "https://www.surveycake.com/s/AP9wB"
+          },
+          "style": "primary",
+          "margin": "lg"
+        }
+      ]
+    }
+  }
