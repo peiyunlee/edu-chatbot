@@ -16,12 +16,3 @@ def get_welcome_flex_messages(id:int):
                 alt_text=alt_text,
                 contents=message[id]
             )
-
-f_final = open (f'./message/content/final.json', "r")
-message_final = json.loads(f.read())
-
-def get_final_flex_messages():
-    return FlexSendMessage(
-                alt_text="填寫後測問卷",
-                contents=message_final
-            )

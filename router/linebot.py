@@ -7,7 +7,7 @@ import json
 import copy
 from config import CHANNEL_ACCESS_TOKEN, CHANNEL_SECRET, header, LIFF_TASK_TOOL, LIFF_REFLECT_TASK, LIFF_REFLECT_HW 
 from db import db_remind, db_student, db_task, db_hw, db_task_reflect, db_hw_reflect
-from message.manage_other import get_welcome_flex_messages, get_final_flex_messages
+from message.manage_other import get_welcome_flex_messages
 from message.manage import get_messages, MessageId
 
 
@@ -48,20 +48,20 @@ def handle_group_reply_message(event):
 
 # # ----------------------------- 監聽機器人加入群組事件
 # @handler.add(JoinEvent)
-def handle_join_event_reply_message(event):
-    print("機器人加入群組")
+# def handle_join_event_reply_message(event):
+#     print("機器人加入群組")
 
-    line_group_id = event.source.group_id
+#     line_group_id = event.source.group_id
 
-    #新增群組
-    db_student.create_group(line_group_id=line_group_id)
+#     #新增群組
+#     db_student.create_group(line_group_id=line_group_id)
 
-    line_bot_api.push_message(to=line_group_id,messages=get_welcome_flex_messages(id=0))
-    line_bot_api.push_message(to=line_group_id,messages=TextMessage(text="學號：111034010/姓名：李小明"))
+#     line_bot_api.push_message(to=line_group_id,messages=get_welcome_flex_messages(id=0))
+#     line_bot_api.push_message(to=line_group_id,messages=TextMessage(text="學號：111034010/姓名：李小明"))
 
 
 # ----------------------------- 監聽成員加入群組事件
-# @handler.add(MemberJoinedEvent)
+@handler.add(MemberJoinedEvent)
 def handle_join_event_reply_message(event):
     print("成員加入群組事件")
 
@@ -131,21 +131,6 @@ async def enforce_push_Q(line_group_id: str, hw_no_now: int, group_id: int, line
 @router.post('/push/message/{line_user_id}', summary="傳送任意訊息給指定用戶")
 async def enforce_push_message(line_user_id: str, text: str):
     line_bot_api.push_message(to=line_user_id, messages=TextMessage(text=text))
-    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
-
-
-@router.post('/push/final', summary="傳送後測問卷")
-async def push_final_message():
-    groups = db_student.get_all_group()
-
-    for group in groups:
-        push_final(line_group_id= group['line_group_id'])
-    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
-
-
-@router.post('/push/final/{line_group_id}', summary="傳送後測問卷給特定群組")
-async def push_final_message(line_group_id: str):
-    push_final(line_group_id= line_group_id)
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 
@@ -263,12 +248,6 @@ def get_group_reply_messages(event):
     # ------------------------------------- 規劃工作
 
     return _messages
-
-
-def push_final(line_group_id: str):
-    _messages = get_final_flex_messages()
-
-    line_bot_api.push_message(to=line_group_id, messages=_messages)
 
 
 def to_push_B(line_group_id: str, hw_no: int):
