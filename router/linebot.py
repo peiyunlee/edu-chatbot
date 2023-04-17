@@ -129,8 +129,13 @@ async def enforce_push_Q(line_group_id: str, hw_no_now: int, group_id: int, line
 
 
 @router.post('/push/message/{line_user_id}', summary="傳送任意訊息給指定用戶")
-async def enforce_push_message(line_user_id: str, text: str):
+async def enforce_push_message_to_user(line_user_id: str, text: str):
     line_bot_api.push_message(to=line_user_id, messages=TextMessage(text=text))
+    return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
+
+@router.post('/push/message/{line_group_id}', summary="傳送任意訊息給指定群組")
+async def enforce_push_message_to_group(line_group_id: str, text: str):
+    line_bot_api.push_message(to=line_group_id, messages=TextMessage(text=text))
     return JSONResponse(status_code=status.HTTP_200_OK, content="success", headers=header)
 
 @router.post('/push/final', summary="傳送後測問卷")
